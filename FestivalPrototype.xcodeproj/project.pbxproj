@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21A118FD03B64A379CD96734 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E8610407C64277B970245C /* libPods.a */; };
+		27CD017E18587CBA008E034E /* blind_willie.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 27CD017A18587CBA008E034E /* blind_willie.mp3 */; };
+		27CD017F18587CBA008E034E /* come_thou_fount.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 27CD017B18587CBA008E034E /* come_thou_fount.mp3 */; };
+		27CD018018587CBA008E034E /* first_noel.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 27CD017C18587CBA008E034E /* first_noel.mp3 */; };
+		27CD018118587CBA008E034E /* wayfaring_stranger.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 27CD017D18587CBA008E034E /* wayfaring_stranger.mp3 */; };
 		27E86B6018585F1B00A8E88B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E86B5F18585F1B00A8E88B /* Foundation.framework */; };
 		27E86B6218585F1B00A8E88B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E86B6118585F1B00A8E88B /* CoreGraphics.framework */; };
 		27E86B6418585F1B00A8E88B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E86B6318585F1B00A8E88B /* UIKit.framework */; };
@@ -35,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		27CD017A18587CBA008E034E /* blind_willie.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = blind_willie.mp3; sourceTree = "<group>"; };
+		27CD017B18587CBA008E034E /* come_thou_fount.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = come_thou_fount.mp3; sourceTree = "<group>"; };
+		27CD017C18587CBA008E034E /* first_noel.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = first_noel.mp3; sourceTree = "<group>"; };
+		27CD017D18587CBA008E034E /* wayfaring_stranger.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wayfaring_stranger.mp3; sourceTree = "<group>"; };
 		27E86B5C18585F1B00A8E88B /* FestivalPrototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FestivalPrototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27E86B5F18585F1B00A8E88B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		27E86B6118585F1B00A8E88B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -55,6 +64,8 @@
 		27E86B8918585F1B00A8E88B /* FestivalPrototypeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FestivalPrototypeTests-Info.plist"; sourceTree = "<group>"; };
 		27E86B8B18585F1B00A8E88B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		27E86B8D18585F1B00A8E88B /* FestivalPrototypeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FestivalPrototypeTests.m; sourceTree = "<group>"; };
+		74E8610407C64277B970245C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B08A6521211741BC89EA34F0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +76,7 @@
 				27E86B6218585F1B00A8E88B /* CoreGraphics.framework in Frameworks */,
 				27E86B6418585F1B00A8E88B /* UIKit.framework in Frameworks */,
 				27E86B6018585F1B00A8E88B /* Foundation.framework in Frameworks */,
+				21A118FD03B64A379CD96734 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +93,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27CD017618587CBA008E034E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				27CD017718587CBA008E034E /* Images */,
+				27CD017918587CBA008E034E /* Music */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		27CD017718587CBA008E034E /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				27CD017818587CBA008E034E /* Faces */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		27CD017818587CBA008E034E /* Faces */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Faces;
+			sourceTree = "<group>";
+		};
+		27CD017918587CBA008E034E /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				27CD017A18587CBA008E034E /* blind_willie.mp3 */,
+				27CD017B18587CBA008E034E /* come_thou_fount.mp3 */,
+				27CD017C18587CBA008E034E /* first_noel.mp3 */,
+				27CD017D18587CBA008E034E /* wayfaring_stranger.mp3 */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
 		27E86B5318585F1B00A8E88B = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +135,7 @@
 				27E86B8718585F1B00A8E88B /* FestivalPrototypeTests */,
 				27E86B5E18585F1B00A8E88B /* Frameworks */,
 				27E86B5D18585F1B00A8E88B /* Products */,
+				B08A6521211741BC89EA34F0 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,6 +155,7 @@
 				27E86B6118585F1B00A8E88B /* CoreGraphics.framework */,
 				27E86B6318585F1B00A8E88B /* UIKit.framework */,
 				27E86B8118585F1B00A8E88B /* XCTest.framework */,
+				74E8610407C64277B970245C /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -114,6 +163,7 @@
 		27E86B6518585F1B00A8E88B /* FestivalPrototype */ = {
 			isa = PBXGroup;
 			children = (
+				27CD017618587CBA008E034E /* Resources */,
 				27E86B6E18585F1B00A8E88B /* AppDelegate.h */,
 				27E86B6F18585F1B00A8E88B /* AppDelegate.m */,
 				27E86B7118585F1B00A8E88B /* Main_iPhone.storyboard */,
@@ -162,9 +212,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 27E86B9118585F1B00A8E88B /* Build configuration list for PBXNativeTarget "FestivalPrototype" */;
 			buildPhases = (
+				6C239A49E17A46D19B874C4A /* Check Pods Manifest.lock */,
 				27E86B5818585F1B00A8E88B /* Sources */,
 				27E86B5918585F1B00A8E88B /* Frameworks */,
 				27E86B5A18585F1B00A8E88B /* Resources */,
+				65F2EE118F9143CA94E1FDBB /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -232,9 +284,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				27E86B7618585F1B00A8E88B /* Main_iPad.storyboard in Resources */,
+				27CD018118587CBA008E034E /* wayfaring_stranger.mp3 in Resources */,
+				27CD017F18587CBA008E034E /* come_thou_fount.mp3 in Resources */,
 				27E86B7B18585F1B00A8E88B /* Images.xcassets in Resources */,
 				27E86B7318585F1B00A8E88B /* Main_iPhone.storyboard in Resources */,
+				27CD017E18587CBA008E034E /* blind_willie.mp3 in Resources */,
 				27E86B6A18585F1B00A8E88B /* InfoPlist.strings in Resources */,
+				27CD018018587CBA008E034E /* first_noel.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +303,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		65F2EE118F9143CA94E1FDBB /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6C239A49E17A46D19B874C4A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		27E86B5818585F1B00A8E88B /* Sources */ = {
@@ -389,6 +478,7 @@
 		};
 		27E86B9218585F1B00A8E88B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B08A6521211741BC89EA34F0 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -402,6 +492,7 @@
 		};
 		27E86B9318585F1B00A8E88B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B08A6521211741BC89EA34F0 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -474,6 +565,7 @@
 				27E86B9318585F1B00A8E88B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		27E86B9418585F1B00A8E88B /* Build configuration list for PBXNativeTarget "FestivalPrototypeTests" */ = {
 			isa = XCConfigurationList;
@@ -482,6 +574,7 @@
 				27E86B9618585F1B00A8E88B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
