@@ -13,8 +13,9 @@
 @interface ViewController ()
 @property (nonatomic, strong) AEAudioController *audioController;
 @property (nonatomic, strong) NSArray *trackFiles;
-@property (nonatomic, strong) NSArray *filesForPlayer;
+@property (nonatomic, strong) NSMutableArray *filesForPlayer;
 @property (nonatomic) AEChannelGroupRef group;
+@property (nonatomic) BOOL isPlaying;
 @end
 
 @implementation ViewController
@@ -25,7 +26,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     [self loadTracks];
     [self configurePlayer];
-//    [self play];
+    [self play];
 }
 
 
@@ -45,27 +46,26 @@
     
     _audioController.preferredBufferDuration = 0.093;
     _audioController.allowMixingWithOtherApps = NO;
+    _filesForPlayer = [NSMutableArray new];
     
-    NSMutableArray *tempFilesForPlayer = [NSMutableArray new];
-    
-   // LOOP THROUGH TO SET UP EACH AEAUDIOUNITFILEPLAYER
+    // LOOP THROUGH TO SET UP EACH AEAUDIOUNITFILEPLAYER
     for(NSDictionary *track in _trackFiles) {
-        NSURL *file = [[NSBundle mainBundle] URLForResource:track[@"filename"] withExtension:track[@"type"]];
         
-        AEAudioFilePlayer *fileForPlayer = [AEAudioFilePlayer audioFilePlayerWithURL:file
+        NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:track[@"filename"] ofType:track[@"type"] inDirectory:@"Resources/Music"]];
+        
+        AEAudioFilePlayer *fileForPlayer = [AEAudioFilePlayer audioFilePlayerWithURL:fileURL
                                                                  audioController:_audioController
                                                                            error:NULL];
         fileForPlayer.volume = 0.75;
         fileForPlayer.currentTime = 0; // set it to the time already elapsed on the user's track
-        [tempFilesForPlayer addObject:fileForPlayer];
+        [_filesForPlayer addObject:fileForPlayer];
     }
     
-    _filesForPlayer = [[NSArray alloc] initWithArray:tempFilesForPlayer];
     
   //  _group = [_audioController createChannelGroup];
 //    [_audioController addChannels:_filesForPlayer toChannelGroup:_group];
     [_audioController addChannels:_filesForPlayer];
-    [_audioController setVolume:0.75 forChannelGroup:_group];
+//    [_audioController setVolume:0.75 forChannelGroup:_group];
     
     // LOOP TO SET EACH AEAUDIOUNITFILEPLAYER URL
 //    [_trackFiles enumerateObjectsUsingBlock:^(id track, NSUInteger idx, BOOL *stop) {
@@ -77,9 +77,12 @@
 
 - (void)play
 {
-    [self.audioController playingThroughDeviceSpeaker];
+    
+    // Start the audio engine.
+    [_audioController start:NULL];
+    
+    _isPlaying = YES;
 }
-
 
 
 - (void)adjustVolumeTo:(CGFloat)volume forChannel:(NSUInteger)channelNumber
