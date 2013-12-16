@@ -176,7 +176,7 @@
 
 - (void)play
 {
-    [_audioController start:nil];
+    [self.audioController start:nil];
 }
 
 - (void)adjustChannels
