@@ -187,7 +187,8 @@
 - (CGFloat)volumeForUser:(User *)user
 {
     // TODO: compute the volume properly (http://sengpielaudio.com/calculator-distance.htm)
-    CGFloat volume = abs(self.scene.frame.size.width/2 - [self.mainUser distanceFrom:user]) / self.scene.frame.size.width;
+    CGFloat volume = ( self.scene.frame.size.width/2 - [self.mainUser distanceFrom:user] ) / self.scene.frame.size.width;
+    volume = volume < 0 ? 0 : volume;
     NSLog (@"Volume for %@ is %f", user.name, volume);
     return volume;
 }
