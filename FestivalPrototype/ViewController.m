@@ -75,6 +75,11 @@
                                    playlist:@[@"4"]
                                    position:CGPointMake(400.0f, 100.0f)];
     [self.users addObject:michal];
+    
+    User *dustin = [[User alloc] initWithName:@"Dustin"
+                                     playlist:@[@"4"]
+                                     position:CGPointMake(500.0f, 500.0f)];
+    [self.users addObject:dustin];
 }
 
 #pragma mark - Drawing
