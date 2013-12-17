@@ -23,7 +23,8 @@
 
 - (id)initWithName:(NSString *)name
           playlist:(NSArray *)playlist
-          position:(CGPoint)position;
+          position:(CGPoint)position
+          mainUser:(BOOL)mainUser;
 
 - (CGFloat)distanceFrom:(User *)user;
 - (CGFloat)xPosFrom:(User *)user;
