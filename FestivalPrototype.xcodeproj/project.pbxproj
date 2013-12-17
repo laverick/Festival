@@ -34,6 +34,7 @@
 		8387F6C318607D0B003FD39F /* 2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6BF18607D0B003FD39F /* 2.m4a */; };
 		8387F6C418607D0B003FD39F /* 3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6C018607D0B003FD39F /* 3.m4a */; };
 		8387F6C518607D0B003FD39F /* 4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6C118607D0B003FD39F /* 4.m4a */; };
+		8387F6CB18609105003FD39F /* nico.png in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6CA18609105003FD39F /* nico.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,16 +70,17 @@
 		27E86B8918585F1B00A8E88B /* FestivalPrototypeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FestivalPrototypeTests-Info.plist"; sourceTree = "<group>"; };
 		27E86B8B18585F1B00A8E88B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		27E86B8D18585F1B00A8E88B /* FestivalPrototypeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FestivalPrototypeTests.m; sourceTree = "<group>"; };
-		521C61D5186080D90083D2CC /* 813379.mp3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 813379.mp3; sourceTree = "<group>"; };
-		521C61D6186080D90083D2CC /* 1430886.mp3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1430886.mp3; sourceTree = "<group>"; };
-		521C61D7186080D90083D2CC /* 1476784.mp3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1476784.mp3; sourceTree = "<group>"; };
-		521C61D8186080D90083D2CC /* 3455247.mp3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3455247.mp3; sourceTree = "<group>"; };
-		521C61D9186080D90083D2CC /* 3710048.mp3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3710048.mp3; sourceTree = "<group>"; };
+		521C61D5186080D90083D2CC /* 813379.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 813379.mp3; sourceTree = "<group>"; };
+		521C61D6186080D90083D2CC /* 1430886.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 1430886.mp3; sourceTree = "<group>"; };
+		521C61D7186080D90083D2CC /* 1476784.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 1476784.mp3; sourceTree = "<group>"; };
+		521C61D8186080D90083D2CC /* 3455247.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 3455247.mp3; sourceTree = "<group>"; };
+		521C61D9186080D90083D2CC /* 3710048.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 3710048.mp3; sourceTree = "<group>"; };
 		74E8610407C64277B970245C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8387F6BE18607D0B003FD39F /* 1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.m4a; sourceTree = "<group>"; };
 		8387F6BF18607D0B003FD39F /* 2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2.m4a; sourceTree = "<group>"; };
 		8387F6C018607D0B003FD39F /* 3.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3.m4a; sourceTree = "<group>"; };
 		8387F6C118607D0B003FD39F /* 4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 4.m4a; sourceTree = "<group>"; };
+		8387F6CA18609105003FD39F /* nico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nico.png; path = FestivalPrototype/Resources/Images/nico.png; sourceTree = SOURCE_ROOT; };
 		B08A6521211741BC89EA34F0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +129,7 @@
 		27CD017818587CBA008E034E /* Faces */ = {
 			isa = PBXGroup;
 			children = (
+				8387F6CA18609105003FD39F /* nico.png */,
 			);
 			path = Faces;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 			files = (
 				27E86B7618585F1B00A8E88B /* Main_iPad.storyboard in Resources */,
 				8387F6C518607D0B003FD39F /* 4.m4a in Resources */,
+				8387F6CB18609105003FD39F /* nico.png in Resources */,
 				27E86B7B18585F1B00A8E88B /* Images.xcassets in Resources */,
 				521C61DD186080D90083D2CC /* 1430886.mp3 in Resources */,
 				8387F6C218607D0B003FD39F /* 1.m4a in Resources */,
