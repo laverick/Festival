@@ -18,9 +18,6 @@
 
 // Audio Engine
 @property (nonatomic, strong) AEAudioController *audioController;
-@property (nonatomic, strong) NSMutableArray *filePlayers;
-@property (nonatomic) AEAudioUnitFilter *reverb;
-@property (nonatomic) AEAudioUnitFilter *lpf;
 
 // Users
 @property (nonatomic, strong) NSMutableArray *users;
@@ -77,6 +74,7 @@
         if (userToUpdate) {
             [userToUpdate fillStage];
             [userToUpdate animateBandmates];
+            [self playTrackFromUser:userToUpdate withTrackID:track];
         }
     };
     
@@ -99,6 +97,7 @@
         if (userToUpdate){
             [userToUpdate clearStage];
             [userToUpdate stopAnimatingBandmates];
+            [self stopTracksFromUser:userToUpdate];
         }
     };
     
@@ -109,8 +108,6 @@
     [self updateUI];
     
     [self configurePlayer];
-    
-    [self play];
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1f
                                                   target:self
@@ -282,92 +279,43 @@
 - (void)configurePlayer
 {
     self.audioController = [[AEAudioController alloc]
-                           initWithAudioDescription:[AEAudioController interleaved16BitStereoAudioDescription]
-                           inputEnabled:NO];
+                            initWithAudioDescription:[AEAudioController interleaved16BitStereoAudioDescription]
+                            inputEnabled:NO];
     
     self.audioController.preferredBufferDuration = 0.093;
     self.audioController.allowMixingWithOtherApps = NO;
-    self.filePlayers = [NSMutableArray new];
     
-    for (User *user in self.users) {
-        
-        NSURL *fileURL = user.currentTrack;
-        
-        // TODO: give each user its AEAudioFilePlayer
-        AEAudioFilePlayer *filePlayer = [AEAudioFilePlayer audioFilePlayerWithURL:fileURL
-                                                                 audioController:_audioController
-                                                                           error:NULL];
-        filePlayer.volume = [self volumeForUser:user];
-        filePlayer.pan = [self panForUser:user];
-        filePlayer.currentTime = 0; // set it to the time already elapsed on the user's track
-                                    // for real time listening
-        
-        [self.filePlayers addObject:filePlayer];
-    }
-    [self.audioController addChannels:self.filePlayers];
-    
-    { // Add reverb and a low-pass filter to the audio controller.
-        AudioComponentDescription reverbComp = AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple,
-                                                                               kAudioUnitType_Effect,
-                                                                               kAudioUnitSubType_Reverb2);
-        
-        AudioComponentDescription lpfComp = AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple,
-                                                                            kAudioUnitType_Effect,
-                                                                            kAudioUnitSubType_LowPassFilter);
-        
-        self.reverb = [[AEAudioUnitFilter alloc] initWithComponentDescription:reverbComp
-                                                              audioController:self.audioController
-                                                                        error:nil];
-        
-        self.lpf = [[AEAudioUnitFilter alloc] initWithComponentDescription:lpfComp
-                                                           audioController:self.audioController
-                                                                     error:nil];
-        
-        AudioUnitSetParameter(self.reverb.audioUnit, kReverb2Param_DryWetMix, kAudioUnitScope_Global, 0, 5, 0);
-        AudioUnitSetParameter(self.lpf.audioUnit, kLowPassParam_CutoffFrequency, kAudioUnitScope_Global, 0, 20000, 0);
-        
-        [self.audioController addFilter:self.reverb];
-        [self.audioController addFilter:self.lpf];
-    }
+    [self.audioController start:nil];
 }
 
-- (void)play
+- (void)playTrackFromUser:(User *)user withTrackID:(NSString *)trackID
 {
-    [self.audioController start:nil];
+    [user playTrackID:trackID
+    inAudioController:self.audioController
+           withVolume:[self volumeForUser:user]
+                  pan:[self panForUser:user]];
+}
+
+- (void)stopTracksFromUser:(User *)user
+{
+    [user stopTracksInAudioController:self.audioController];
 }
 
 - (void)adjustChannels
 {
-    for (NSUInteger index = 0; index < [self.users count]; index++) {
-        AEAudioFilePlayer *player = self.filePlayers[index];
-        User *user = self.users[index];
-        player.volume = [self volumeForUser:user];
-        player.pan = [self panForUser:user];
-        [self adjustReverbForUser:user];
-        [self adjustLPFForUser:user];
+    for (User *user in self.users) {
+        [user.player setVolume:[self volumeForUser:user]];
+        [user.player setPan:[self panForUser:user]];
     }
 }
 
 #pragma - Audio Effects
-
-- (void)adjustReverbForUser:(User *)user
-{
-    CGFloat reverb = [self reverbForUser:user];
-    AudioUnitSetParameter(self.reverb.audioUnit, kReverb2Param_DryWetMix, kAudioUnitScope_Global, 0, reverb, 0);
-}
-
-- (void)adjustLPFForUser:(User *)user
-{
-    CGFloat lpf = [self lowPassFilterForUser:user];
-    AudioUnitSetParameter(self.lpf.audioUnit, kLowPassParam_CutoffFrequency, kAudioUnitScope_Global, 0, lpf, 0);
-}
 
 - (CGFloat)volumeForUser:(User *)user
 {
     CGFloat volume = 100 / [self.mainUser distanceFrom:user];
     volume = volume < 0 ? 0 : volume;
     volume = volume > 1 ? 1 : volume;
-//    NSLog (@"Volume for %@ is %f", user.name, volume);
     return volume;
 }
 
@@ -377,17 +325,6 @@
     pan = pan < -1 ? -1 : pan;
     pan = pan > 1 ? 1 : pan;
     return pan;
-}
-
-- (CGFloat)reverbForUser:(User *)user
-{
-    return (100 / [self.mainUser distanceFrom:user]) + 30;
-}
-
-- (CGFloat)lowPassFilterForUser:(User *)user
-{
-    // TO-DO: Implement me!
-    return 20000.0f;
 }
 
 #pragma mark - Moving Around

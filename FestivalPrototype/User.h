@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#import "AEAudioController.h"
+#import "AEAudioFilePlayer.h"
+#import "AEAudioUnitFilter.h"
+
 @interface User : NSObject
 
 @property (nonatomic, strong) NSString *name;
@@ -17,6 +21,7 @@
 @property (nonatomic) UIImageView *bandmate1;
 @property (nonatomic) UIImageView *bandmate2;
 @property (nonatomic) UIImageView *bandmate3;
+@property (nonatomic, strong) AEAudioFilePlayer *player;
 @property (nonatomic) CGPoint position;
 
 @property (nonatomic, strong) UIImageView *stageImageView;
@@ -29,8 +34,15 @@
 - (CGFloat)distanceFrom:(User *)user;
 - (CGFloat)xPosFrom:(User *)user;
 
-- (NSURL *)currentTrack;
-- (void)nextTrack;
+- (void)playTrackID:(NSString *)trackID
+  inAudioController:(AEAudioController *)controller
+         withVolume:(CGFloat)volume
+                pan:(CGFloat)pan;
+
+- (void)stopTracksInAudioController:(AEAudioController *)controller;
+
+- (void)setVolume:(CGFloat)volume;
+- (void)setPan:(CGFloat)pan;
 
 - (void)animateBandmates;
 - (void)stopAnimatingBandmates;
