@@ -31,6 +31,12 @@
 @property (nonatomic) NSTimer *timer;
 @property (nonatomic) CGPoint destination;
 
+// Crowd
+@property (nonatomic, strong) UIDynamicAnimator *animator;
+@property (nonatomic, strong) UICollisionBehavior *collision;
+@property (strong, nonatomic) NSMutableArray *pushers;
+@property (strong, nonatomic) UIDynamicItemBehavior *usersBehavior;
+
 @end
 
 @implementation ViewController
@@ -38,6 +44,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+        
+    [self createCrowd];
     
     TracksClient *tracksClient = [TracksClient sharedClient];
 
@@ -126,9 +134,15 @@
         
         self.destination = self.mainUser.view.center;
         
+        self.usersBehavior = [[UIDynamicItemBehavior alloc] init];
+        self.usersBehavior.density = 1000.0;
+        self.usersBehavior.resistance = 1000.0;
         for (User *user in self.users) {
             [self.scene addSubview:user.view];
+            [self.collision addItem:user.view];
+            [self.usersBehavior addItem:user.view];
         }
+        [self.animator addBehavior:self.usersBehavior];
         
         User *user1 = self.users[0]; // Sven, Lower-Left
         user1.view.transform = CGAffineTransformMakeRotation(6);
@@ -138,6 +152,41 @@
         user3.view.transform = CGAffineTransformMakeRotation(0.25);
         User *user4 = self.users[3]; // Michal, Upper-Right
         user4.view.transform = CGAffineTransformMakeRotation(0.25);
+    }
+}
+
+- (void)createCrowd
+{
+    self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
+    
+    self.collision = [[UICollisionBehavior alloc] init];
+    self.collision.translatesReferenceBoundsIntoBoundary = YES;
+    
+    self.pushers = [NSMutableArray array];
+    for (int i = 0; i< 20; i++) {
+        UIView *person = [[UIView alloc] initWithFrame:CGRectMake(150 + i * 20, 150 + i * 20, 15, 15)];
+        person.backgroundColor = [UIColor blueColor];
+        
+        [self.view addSubview:person];
+        [self.collision addItem:person];
+        
+        UIPushBehavior *pushBehavior = [[UIPushBehavior alloc] initWithItems:@[person] mode:UIPushBehaviorModeContinuous];
+        pushBehavior.angle = 0.0;
+        pushBehavior.magnitude = 0.01;
+        [self.animator addBehavior:pushBehavior];
+        [self.pushers addObject:pushBehavior];
+    }
+    
+    [self.animator addBehavior:self.collision];
+    
+    [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(moveCrowd) userInfo:nil repeats:YES];
+}
+
+- (void)moveCrowd
+{
+    int i = 0;
+    for (UIPushBehavior *pusher in self.pushers) {
+        pusher.angle += 0.1 + i++;
     }
 }
 
