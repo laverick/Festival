@@ -52,6 +52,7 @@
 		8387F6C518607D0B003FD39F /* 4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6C118607D0B003FD39F /* 4.m4a */; };
 		8387F6CB18609105003FD39F /* nico.png in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6CA18609105003FD39F /* nico.png */; };
 		8387F6CD186092E1003FD39F /* stage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6CC186092E1003FD39F /* stage.png */; };
+		DA57F87C186069FE00DCC187 /* TracksClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DA57F87B186069FE00DCC187 /* TracksClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,8 @@
 		DA57F8741860686100DCC187 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DA57F876186068CF00DCC187 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		DA57F8781860699800DCC187 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		DA57F87A186069FE00DCC187 /* TracksClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksClient.h; sourceTree = "<group>"; };
+		DA57F87B186069FE00DCC187 /* TracksClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +246,8 @@
 				27E86B7418585F1B00A8E88B /* Main_iPad.storyboard */,
 				27E86B7718585F1B00A8E88B /* ViewController.h */,
 				27E86B7818585F1B00A8E88B /* ViewController.m */,
+				DA57F87A186069FE00DCC187 /* TracksClient.h */,
+				DA57F87B186069FE00DCC187 /* TracksClient.m */,
 				27E86B7A18585F1B00A8E88B /* Images.xcassets */,
 				27E86B6618585F1B00A8E88B /* Supporting Files */,
 				03970C71185F9ED6007DA998 /* User.h */,
@@ -440,6 +445,7 @@
 				03970C73185F9ED6007DA998 /* User.m in Sources */,
 				27E86B7918585F1B00A8E88B /* ViewController.m in Sources */,
 				27E86B7018585F1B00A8E88B /* AppDelegate.m in Sources */,
+				DA57F87C186069FE00DCC187 /* TracksClient.m in Sources */,
 				27E86B6C18585F1B00A8E88B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,7 +10,7 @@
 #import "AEAudioController.h"
 #import "AEAudioFilePlayer.h"
 #import "User.h"
-
+#import "TracksClient.h"
 
 @interface ViewController ()
 
@@ -36,6 +36,21 @@
 {
     [super viewDidLoad];
     
+    TracksClient *tracksClient = [TracksClient sharedClient];
+
+    tracksClient.updateBlock = ^(NSString *user, NSString *track){
+        // Start new track for user
+        // If track is nil, stop current track
+        NSLog(@"Update %@ \t%@", user, track);
+    };
+    
+    tracksClient.exitBlock = ^(NSString *user){
+        // remove user from stage
+        NSLog(@"Exit %@", user);
+    };
+    
+    
+    
     [self createUsers];
     
     [self updateUI];
@@ -49,6 +64,8 @@
                                                 selector:@selector(updateUser)
                                                 userInfo:nil
                                                  repeats:YES];
+    
+
 }
 
 #pragma mark - Users
@@ -164,7 +181,7 @@
     CGFloat volume = 100 / [self.mainUser distanceFrom:user];
     volume = volume < 0 ? 0 : volume;
     volume = volume > 1 ? 1 : volume;
-    NSLog (@"Volume for %@ is %f", user.name, volume);
+//    NSLog (@"Volume for %@ is %f", user.name, volume);
     return volume;
 }
 
