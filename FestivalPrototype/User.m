@@ -32,11 +32,12 @@ static const CGFloat UserSize = 130.0f;
         _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 130, 100)];
 
         _nameLabel.text = name;
+        _nameLabel.font = [UIFont boldSystemFontOfSize:20];
         _nameLabel.textColor = [UIColor blackColor];
         _nameLabel.textAlignment = NSTextAlignmentCenter;
         
         _stageImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"stage"]];
-        _stageImageView.frame = CGRectMake(0, 0, 130, 80);
+        _stageImageView.frame = CGRectMake(0, 0, 130, 65);
         
         [self.view addSubview:self.stageImageView];
         [self.view addSubview:self.nameLabel];
