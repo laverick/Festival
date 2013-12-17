@@ -121,11 +121,25 @@
 
 - (void)updateUI
 {
+    CGPoint position = self.mainUser.position;
+    
+    if (fabsf(self.mainUser.position.x - self.destination.x) < 0.0001 &&
+        fabsf(self.mainUser.position.y - self.destination.y) < 0.0001) {
+        // stationary
+        
+        static int direction = 1;
+        
+        if ([self isCloseToAStage:position]) {
+            direction = -direction;
+            position.x += direction * 3;
+        }
+    }
+    
     [UIView animateWithDuration:0.1f
                           delay:0
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
-                         self.mainUser.view.center = self.mainUser.position;
+                         self.mainUser.view.center = position;
                      }
                      completion:nil];
 }
@@ -267,10 +281,10 @@
     CGFloat deltaY = fabsf(bigDeltaY) > 0.0001 ? distance / sqrtf( powf(bigDeltaX / bigDeltaY, 2) + 1 ) : 0;
 
     // no wiggling
-//    if (powf(bigDeltaX, 2) + powf(bigDeltaY, 2) < powf(distance, 2)) {
-//        deltaX = fabsf(bigDeltaX);
-//        deltaY = fabsf(bigDeltaY);
-//    }
+    if (powf(bigDeltaX, 2) + powf(bigDeltaY, 2) < powf(distance, 2)) {
+        deltaX = fabsf(bigDeltaX);
+        deltaY = fabsf(bigDeltaY);
+    }
 
     deltaX = bigDeltaX > 0 ? deltaX : -deltaX;
     deltaY = bigDeltaY > 0 ? deltaY : -deltaY;
@@ -280,6 +294,26 @@
 //                                       currentPosition.y +  (self.destination.y - currentPosition.y) / 10);
     
     [self moveUserToPosition:nextPosition];
+}
+
+- (BOOL)isCloseToAStage:(CGPoint)location
+{
+    const CGFloat max = 300;
+    
+    return
+    [self distanceBetween:CGPointMake(0, 0) and:location] < max
+    ||
+    [self distanceBetween:CGPointMake(0, self.view.frame.size.width) and:location] < max
+    ||
+    [self distanceBetween:CGPointMake(self.view.frame.size.height, 0) and:location] < max
+    ||
+    [self distanceBetween:CGPointMake(self.view.frame.size.height, self.view.frame.size.width) and:location] < max
+    ;
+}
+
+- (CGFloat)distanceBetween:(CGPoint)p1 and:(CGPoint)p2
+{
+    return sqrtf(powf(p1.x - p2.x, 2) + powf(p1.y - p2.y, 2));
 }
 
 - (void)moveUserToPosition:(CGPoint)position
