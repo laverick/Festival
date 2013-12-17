@@ -12,6 +12,7 @@
 #import "AEAudioUnitFilter.h"
 #import "User.h"
 #import "TracksClient.h"
+#import "CrowdMember.h"
 
 @interface ViewController ()
 
@@ -36,6 +37,7 @@
 @property (nonatomic, strong) UICollisionBehavior *collision;
 @property (strong, nonatomic) NSMutableArray *pushers;
 @property (strong, nonatomic) UIDynamicItemBehavior *usersBehavior;
+@property (strong, nonatomic) UIDynamicItemBehavior *crowdBehavior;
 
 @end
 
@@ -44,7 +46,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
+    
+
+//    // Guide
+//    UIView *dot = [[UIView alloc] initWithFrame:CGRectMake(200, 200, 5, 5)];
+//    dot.backgroundColor = [UIColor orangeColor];
+//    [self.view addSubview:dot];
+    
     [self createCrowd];
     
     TracksClient *tracksClient = [TracksClient sharedClient];
@@ -188,6 +196,7 @@
 
 - (void)createCrowd
 {
+    
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
     
     self.collision = [[UICollisionBehavior alloc] init];
@@ -195,14 +204,29 @@
     
     self.pushers = [NSMutableArray array];
     for (int i = 0; i< 20; i++) {
-        UIView *person = [[UIView alloc] initWithFrame:CGRectMake(150 + i * 20, 150 + i * 20, 15, 15)];
+        CrowdMember *person = [[CrowdMember alloc] initWithFrame:CGRectMake(250 + i * 20, 250 + i * 20, 15, 15)];
         person.backgroundColor = [UIColor blueColor];
+        
+        switch (i%4) {
+            case 0:
+                person.targetLoc = CGPointMake(200, 200);
+                break;
+            case 1:
+                person.targetLoc = CGPointMake(200, 500);
+                break;
+            case 2:
+                person.targetLoc = CGPointMake(800, 200);
+                break;
+            default:
+                person.targetLoc = CGPointMake(800, 500);
+                break;
+        }
         
         [self.view addSubview:person];
         [self.collision addItem:person];
         
         UIPushBehavior *pushBehavior = [[UIPushBehavior alloc] initWithItems:@[person] mode:UIPushBehaviorModeContinuous];
-        pushBehavior.angle = 0.0;
+//        pushBehavior.angle = 0.0;
         pushBehavior.magnitude = 0.01;
         [self.animator addBehavior:pushBehavior];
         [self.pushers addObject:pushBehavior];
@@ -210,14 +234,18 @@
     
     [self.animator addBehavior:self.collision];
     
-    [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(moveCrowd) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(moveCrowd) userInfo:nil repeats:YES];
 }
 
 - (void)moveCrowd
 {
-    int i = 0;
     for (UIPushBehavior *pusher in self.pushers) {
-        pusher.angle += 0.1 + i++;
+        CrowdMember *person = (CrowdMember *)[pusher.items firstObject];
+        CGVector diff = CGVectorMake(person.targetLoc.x - person.center.x, person.targetLoc.y - person.center.y);
+        pusher.magnitude = 0;
+        pusher.pushDirection = diff;
+        CGFloat multiplier = sqrtf(diff.dx * diff.dx)+(diff.dy * diff.dy);
+        pusher.magnitude /= 10000 + multiplier;   // distance away &
     }
 }
 
