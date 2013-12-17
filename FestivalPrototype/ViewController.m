@@ -253,6 +253,7 @@
 
 - (CGFloat)lowPassFilterForUser:(User *)user
 {
+    // TO-DO: Implement me!
     return 20000.0f;
 }
 
