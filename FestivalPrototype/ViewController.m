@@ -119,6 +119,8 @@
         nameLabel.textAlignment = NSTextAlignmentCenter;
         nameLabel.text = [self.mainUser.name uppercaseString];
         
+        self.destination = self.mainUserView.center;
+        
         [self.mainUserView addSubview:nameLabel];
         [self.scene addSubview:self.mainUserView];
     }
@@ -223,11 +225,20 @@
 {
     CGPoint currentPosition = self.mainUser.position;
     
-    CGPoint nextPosition = CGPointMake((((currentPosition.x + self.destination.x) / 2 + currentPosition.x) / 2 + currentPosition.x) / 2,
-                                       (((currentPosition.y + self.destination.y) / 2 + currentPosition.y) / 2 + currentPosition.y) / 2);
+    CGFloat distance = 10.f;
+    
+    CGFloat bigDeltaX = self.destination.x - currentPosition.x;
+    CGFloat bigDeltaY = self.destination.y - currentPosition.y;
+    
+    CGFloat deltaX = fabsf(bigDeltaX) > 0.0001 ? distance / sqrtf( powf(bigDeltaY / bigDeltaX, 2) + 1 ) : 0;
+    CGFloat deltaY = fabsf(bigDeltaY) > 0.0001 ? distance / sqrtf( powf(bigDeltaX / bigDeltaY, 2) + 1 ) : 0;
 
-//    CGPoint nextPosition = CGPointMake(,
-//    );
+    deltaX = bigDeltaX > 0 ? deltaX : -deltaX;
+    deltaY = bigDeltaY > 0 ? deltaY : -deltaY;
+
+    CGPoint nextPosition = CGPointMake(currentPosition.x + deltaX, currentPosition.y + deltaY);
+//    CGPoint nextPosition = CGPointMake(currentPosition.x + (self.destination.x - currentPosition.x) / 10,
+//                                       currentPosition.y +  (self.destination.y - currentPosition.y) / 10);
     
     [self moveUserToPosition:nextPosition];
 }
