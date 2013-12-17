@@ -31,7 +31,7 @@ static const CGFloat UserSize = 130.0f;
         _view = [[UIView alloc] initWithFrame:CGRectMake(self.position.x - UserSize / 2, self.position.y - UserSize / 2, UserSize, UserSize)];
         _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 130, 100)];
 
-        _nameLabel.text = name;
+        _nameLabel.text = [NSString stringWithFormat:@"%@ Stage", name];
         _nameLabel.font = [UIFont boldSystemFontOfSize:20];
         _nameLabel.textColor = [UIColor blackColor];
         _nameLabel.textAlignment = NSTextAlignmentCenter;
@@ -39,8 +39,15 @@ static const CGFloat UserSize = 130.0f;
         _stageImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"stage"]];
         _stageImageView.frame = CGRectMake(0, 0, 130, 65);
         
+        _avatarImageView =
+        [[UIImageView alloc] initWithImage:[UIImage imageNamed:[name lowercaseString]]];
+        
+        CGRect avatarFrame = CGRectMake(0, 0, 50, 50);
+        _avatarImageView.frame = avatarFrame;
+    
         [self.view addSubview:self.stageImageView];
         [self.view addSubview:self.nameLabel];
+        [self.view addSubview:self.avatarImageView];
     }
     return self;
 }
@@ -69,7 +76,5 @@ static const CGFloat UserSize = 130.0f;
         self.currentTrackIndex++;
     }
 }
-
-
 
 @end

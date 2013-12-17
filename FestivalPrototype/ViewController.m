@@ -45,6 +45,9 @@
         // Start new track for user
         // If track is nil, stop current track
         NSLog(@"Update %@ \t%@", user, track);
+        
+        
+        
     };
     
     tracksClient.exitBlock = ^(NSString *user){
@@ -97,19 +100,19 @@
     { // Create and add Stages
         self.users = [@[] mutableCopy];
         
-        User *sven   = [[User alloc] initWithName:@"Sven Stage"
+        User *sven   = [[User alloc] initWithName:@"Sven"
                                          playlist:@[@"1"]
                                          position:CGPointMake(100.0f, 668.0f)];
         
-        User *luke   = [[User alloc] initWithName:@"Luke Stage"
+        User *luke   = [[User alloc] initWithName:@"Luke"
                                          playlist:@[@"2"]
                                          position:CGPointMake(100.0f, 100.0f)];
         
-        User *maciej = [[User alloc] initWithName:@"Maciej Stage"
+        User *maciej = [[User alloc] initWithName:@"Maciej"
                                          playlist:@[@"3"]
                                          position:CGPointMake(924.0f, 668.0f)];
         
-        User *michal = [[User alloc] initWithName:@"Michal Stage"
+        User *michal = [[User alloc] initWithName:@"Michal"
                                          playlist:@[@"4"]
                                          position:CGPointMake(924.0f, 100.0f)];
         
@@ -149,6 +152,7 @@
         
         if ([self isCloseToAStage:position]) {
             direction = -direction;
+           // position.y += direction * 3;
             position.x += direction * 3;
         }
     }

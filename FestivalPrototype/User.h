@@ -17,6 +17,7 @@
 @property (nonatomic) CGPoint position;
 
 @property (nonatomic, strong) UIImageView *stageImageView;
+@property (nonatomic) UIImageView *avatarImageView;
 
 - (id)initWithName:(NSString *)name
           playlist:(NSArray *)playlist
