@@ -105,6 +105,15 @@
         for (User *user in self.users) {
             [self.scene addSubview:user.view];
         }
+        
+        User *user1 = self.users[0]; // Sven, Lower-Left
+        user1.view.transform = CGAffineTransformMakeRotation(6);
+        User *user2 = self.users[1]; // Luke, Upper-Left
+        user2.view.transform = CGAffineTransformMakeRotation(6);
+        User *user3 = self.users[2]; // Maciej, Lower-Right
+        user3.view.transform = CGAffineTransformMakeRotation(0.25);
+        User *user4 = self.users[3]; // Michal, Upper-Right
+        user4.view.transform = CGAffineTransformMakeRotation(0.25);
     }
 }
 
