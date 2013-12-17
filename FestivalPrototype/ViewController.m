@@ -86,7 +86,7 @@
     { // Create Listener
         self.mainUser = [[User alloc] initWithName:@"Nico"
                                           playlist:nil
-                                          position:CGPointMake(250.0f, 250.0f)];
+                                          position:CGPointMake(650.0f, 370.0f)];
         
         UIImageView *mainUserImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nico"]];
         mainUserImage.frame = CGRectMake(0, 0, 80, 80);
@@ -338,7 +338,7 @@
 
 - (BOOL)isCloseToAStage:(CGPoint)location
 {
-    const CGFloat max = 300;
+    const CGFloat max = 400;
     
     return
     [self distanceBetween:CGPointMake(0, 0) and:location] < max

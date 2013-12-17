@@ -32,10 +32,10 @@ static const CGFloat UserHeight = 135.0f;
         _currentTrackIndex = 0;
         
         _view = [[UIView alloc] initWithFrame:CGRectMake(self.position.x - UserWidth / 2, self.position.y - UserHeight / 2, UserWidth, UserHeight)];
-        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, UserWidth, UserHeight)];
+        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, -10, UserWidth, UserHeight)];
 
         _nameLabel.text = [NSString stringWithFormat:@"%@ Stage", name];
-        _nameLabel.font = [UIFont boldSystemFontOfSize:20];
+        _nameLabel.font = [UIFont boldSystemFontOfSize:18];
         _nameLabel.textColor = [UIColor blackColor];
         _nameLabel.textAlignment = NSTextAlignmentCenter;
         
@@ -43,25 +43,18 @@ static const CGFloat UserHeight = 135.0f;
         _stageImageView.frame = CGRectMake(0, 0, UserWidth, UserHeight);
         
         _bandmate1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bandmate"]];
-        _bandmate2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bandmate"]];
+        _bandmate2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[name lowercaseString]]];
         _bandmate3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bandmate"]];
         
         _bandmate1.frame = CGRectMake(20, 80, 40, 40);
-        _bandmate2.frame = CGRectMake(88, 68, 40, 40);
+        _bandmate2.frame = CGRectMake(88, 68, 60, 60);
         _bandmate3.frame = CGRectMake(160, 80, 40, 40);
-        
-        _avatarImageView =
-        [[UIImageView alloc] initWithImage:[UIImage imageNamed:[name lowercaseString]]];
-        
-        CGRect avatarFrame = CGRectMake(0, 0, 50, 50);
-        _avatarImageView.frame = avatarFrame;
-    
+           
         [self.view addSubview:self.stageImageView];
+        [self.view addSubview:self.nameLabel];
         [self.view addSubview:_bandmate1];
         [self.view addSubview:_bandmate2];
         [self.view addSubview:_bandmate3];
-        [self.view addSubview:self.nameLabel];
-        [self.view addSubview:self.avatarImageView];
     }
     return self;
 }
