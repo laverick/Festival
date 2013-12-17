@@ -57,7 +57,7 @@ static const CGFloat UserHeight = 135.0f;
             [self.view addSubview:_bandmate1];
             [self.view addSubview:_bandmate2];
             [self.view addSubview:_bandmate3];
-            [self animateBandmates];
+            [self clearStage];
         }
     }
     return self;
@@ -106,7 +106,26 @@ static const CGFloat UserHeight = 135.0f;
 
 - (void)stopAnimatingBandmates
 {
-    
+    NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
+    for (UIView *bandmate in bandmates) {
+        [bandmate.layer removeAllAnimations];
+    }
+}
+
+- (void)clearStage
+{
+    NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
+    for (UIView *bandmate in bandmates) {
+        bandmate.hidden = YES;
+    }
+}
+
+- (void)fillStage
+{
+    NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
+    for (UIView *bandmate in bandmates) {
+        bandmate.hidden = NO;
+    }
 }
 
 @end
