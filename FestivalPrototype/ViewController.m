@@ -185,14 +185,18 @@
 {
     UITouch *touch = [[event allTouches] anyObject];
     self.destination = [touch locationInView:self.view];
-    //[self moveUserToPosition:location];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [[event allTouches] anyObject];
     self.destination = [touch locationInView:self.view];
-    //[self moveUserToPosition:location];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    // stop moving when finger lifted
+//    self.destination = self.mainUser.position;
 }
 
 - (void)updateUser
@@ -206,6 +210,12 @@
     
     CGFloat deltaX = fabsf(bigDeltaX) > 0.0001 ? distance / sqrtf( powf(bigDeltaY / bigDeltaX, 2) + 1 ) : 0;
     CGFloat deltaY = fabsf(bigDeltaY) > 0.0001 ? distance / sqrtf( powf(bigDeltaX / bigDeltaY, 2) + 1 ) : 0;
+
+    // no wiggling
+//    if (powf(bigDeltaX, 2) + powf(bigDeltaY, 2) < powf(distance, 2)) {
+//        deltaX = fabsf(bigDeltaX);
+//        deltaY = fabsf(bigDeltaY);
+//    }
 
     deltaX = bigDeltaX > 0 ? deltaX : -deltaX;
     deltaY = bigDeltaY > 0 ? deltaY : -deltaY;
