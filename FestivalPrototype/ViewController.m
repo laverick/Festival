@@ -9,14 +9,17 @@
 #import "ViewController.h"
 #import "AEAudioController.h"
 #import "AEAudioFilePlayer.h"
+#import "AEAudioUnitFilter.h"
 #import "User.h"
 
 
 @interface ViewController ()
 
-//Audio Engine
+// Audio Engine
 @property (nonatomic, strong) AEAudioController *audioController;
 @property (nonatomic, strong) NSMutableArray *filePlayers;
+@property (nonatomic) AEAudioUnitFilter *reverb;
+@property (nonatomic) AEAudioUnitFilter *lpf;
 
 // Users
 @property (nonatomic, strong) NSMutableArray *users;
@@ -44,11 +47,16 @@
     
     [self play];
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1f
                                                   target:self
                                                 selector:@selector(updateUser)
                                                 userInfo:nil
                                                  repeats:YES];
+}
+
+- (BOOL) prefersStatusBarHidden
+{
+    return YES;
 }
 
 #pragma mark - Users
@@ -141,6 +149,30 @@
         [self.filePlayers addObject:filePlayer];
     }
     [self.audioController addChannels:self.filePlayers];
+    
+    { // Add reverb and a low-pass filter to the audio controller.
+        AudioComponentDescription reverbComp = AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple,
+                                                                               kAudioUnitType_Effect,
+                                                                               kAudioUnitSubType_Reverb2);
+        
+        AudioComponentDescription lpfComp = AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple,
+                                                                            kAudioUnitType_Effect,
+                                                                            kAudioUnitSubType_LowPassFilter);
+        
+        self.reverb = [[AEAudioUnitFilter alloc] initWithComponentDescription:reverbComp
+                                                              audioController:self.audioController
+                                                                        error:nil];
+        
+        self.lpf = [[AEAudioUnitFilter alloc] initWithComponentDescription:lpfComp
+                                                           audioController:self.audioController
+                                                                     error:nil];
+        
+        AudioUnitSetParameter(self.reverb.audioUnit, kReverb2Param_DryWetMix, kAudioUnitScope_Global, 0, 5, 0);
+        AudioUnitSetParameter(self.lpf.audioUnit, kLowPassParam_CutoffFrequency, kAudioUnitScope_Global, 0, 20000, 0);
+        
+        [self.audioController addFilter:self.reverb];
+        [self.audioController addFilter:self.lpf];
+    }
 }
 
 - (void)play
@@ -172,6 +204,20 @@
 {
     // TODO: to implement
     return 0.0; // Range: -1.0 (left) to 1.0 (right)
+}
+
+- (CGFloat)reverbForUser:(User *)user
+{
+    // TODO: to implement
+    AudioUnitSetParameter(self.reverb.audioUnit, kReverb2Param_DryWetMix, kAudioUnitScope_Global, 0, 5, 0);
+    return 0.0f;
+}
+
+- (CGFloat)lowPassFilterForUser:(User *)user
+{
+    // TODO: to implement
+    AudioUnitSetParameter(self.lpf.audioUnit, kLowPassParam_CutoffFrequency, kAudioUnitScope_Global, 0, 20000, 0);
+    return 0.0f;
 }
 
 #pragma mark - Moving around
