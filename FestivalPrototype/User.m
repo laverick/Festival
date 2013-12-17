@@ -52,6 +52,12 @@ static const CGFloat UserSize = 130.0f;
     return sqrt(dx*dx + dy*dy);
 }
 
+- (CGFloat)xPosFrom:(User *)user
+{
+    double dx = (user.position.x - self.position.x);
+    return dx;
+}
+
 - (NSURL *)currentTrack
 {
     return [[NSBundle mainBundle] URLForResource:self.playlist[self.currentTrackIndex] withExtension:@"m4a"];
