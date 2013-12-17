@@ -26,6 +26,9 @@
 // Outlets
 @property (strong, nonatomic) IBOutlet UIView *scene;
 
+@property (nonatomic) NSTimer *timer;
+@property (nonatomic) CGPoint destination;
+
 @end
 
 @implementation ViewController
@@ -41,6 +44,12 @@
     [self configurePlayer];
     
     [self play];
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                                                  target:self
+                                                selector:@selector(updateUser)
+                                                userInfo:nil
+                                                 repeats:YES];
 }
 
 #pragma mark - Users
@@ -73,16 +82,6 @@
                                    playlist:@[@"4"]
                                    position:CGPointMake(668.0f, 100.0f)];
     [self.users addObject:michal];
-}
-
-#pragma mark - Drawing
-
-//Quick and dirty
-
-- (void)updateUI
-{
-    // Clean-up
-    [[self.scene subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     // Border
     self.scene.layer.borderColor = [[UIColor redColor] CGColor];
@@ -92,9 +91,9 @@
     CGFloat userSize = 80.0f;
     for (User *user in self.users) {
         UIView *userView = [[UIView alloc] initWithFrame:CGRectMake(user.position.x - userSize/2,
-                                                                   user.position.y - userSize/2,
-                                                                   userSize,
-                                                                   userSize)];
+                                                                    user.position.y - userSize/2,
+                                                                    userSize,
+                                                                    userSize)];
         
         UILabel *nameLabel = [[UILabel alloc] initWithFrame:userView.bounds];
         nameLabel.textColor = [UIColor blackColor];
@@ -109,9 +108,9 @@
     
     { // Draw Main User
         self.mainUserView = [[UIView alloc] initWithFrame:CGRectMake(self.mainUser.position.x - userSize/2,
-                                                                        self.mainUser.position.y - userSize/2,
-                                                                        userSize,
-                                                                        userSize)];
+                                                                     self.mainUser.position.y - userSize/2,
+                                                                     userSize,
+                                                                     userSize)];
         self.mainUserView.alpha = 0.5;
         self.mainUserView.layer.cornerRadius = 50;
         self.mainUserView.backgroundColor = [UIColor blueColor];
@@ -123,6 +122,19 @@
         [self.mainUserView addSubview:nameLabel];
         [self.scene addSubview:self.mainUserView];
     }
+}
+
+#pragma mark - Drawing
+
+- (void)updateUI
+{
+    [UIView animateWithDuration:0.1
+                          delay:0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         self.mainUserView.center = self.mainUser.position;
+                     }
+                     completion:nil];
 }
 
 #pragma mark - Audio Player
@@ -196,15 +208,28 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [[event allTouches] anyObject];
-    CGPoint location = [touch locationInView:self.view];
-    [self moveUserToPosition:location];
+    self.destination = [touch locationInView:self.view];
+    //[self moveUserToPosition:location];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [[event allTouches] anyObject];
-    CGPoint location = [touch locationInView:self.view];
-    [self moveUserToPosition:location];
+    self.destination = [touch locationInView:self.view];
+    //[self moveUserToPosition:location];
+}
+
+- (void)updateUser
+{
+    CGPoint currentPosition = self.mainUser.position;
+    
+    CGPoint nextPosition = CGPointMake((((currentPosition.x + self.destination.x) / 2 + currentPosition.x) / 2 + currentPosition.x) / 2,
+                                       (((currentPosition.y + self.destination.y) / 2 + currentPosition.y) / 2 + currentPosition.y) / 2);
+
+//    CGPoint nextPosition = CGPointMake(,
+//    );
+    
+    [self moveUserToPosition:nextPosition];
 }
 
 - (void)moveUserToPosition:(CGPoint)position
