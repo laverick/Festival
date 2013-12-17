@@ -43,6 +43,8 @@
 		8387F6CB18609105003FD39F /* nico.png in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6CA18609105003FD39F /* nico.png */; };
 		8387F6CD186092E1003FD39F /* stage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6CC186092E1003FD39F /* stage.png */; };
 		8387F6D418609C95003FD39F /* grass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6D318609C95003FD39F /* grass.jpg */; };
+		8387F6D518609CCC003FD39F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA57F8621860681C00DCC187 /* Parse.framework */; };
+		8387F6D71860ABF4003FD39F /* bandmate.png in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6D61860ABF4003FD39F /* bandmate.png */; };
 		DA57F8651860683300DCC187 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA57F8641860683300DCC187 /* AudioToolbox.framework */; };
 		DA57F8671860683900DCC187 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA57F8661860683900DCC187 /* CFNetwork.framework */; };
 		DA57F8691860684300DCC187 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA57F8681860684300DCC187 /* CoreLocation.framework */; };
@@ -108,6 +110,7 @@
 		8387F6CA18609105003FD39F /* nico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nico.png; path = FestivalPrototype/Resources/Images/nico.png; sourceTree = SOURCE_ROOT; };
 		8387F6CC186092E1003FD39F /* stage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stage.png; sourceTree = "<group>"; };
 		8387F6D318609C95003FD39F /* grass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grass.jpg; sourceTree = "<group>"; };
+		8387F6D61860ABF4003FD39F /* bandmate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bandmate.png; sourceTree = "<group>"; };
 		B08A6521211741BC89EA34F0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		DA57F8621860681C00DCC187 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		DA57F8641860683300DCC187 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -174,6 +177,7 @@
 		27CD017718587CBA008E034E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8387F6D61860ABF4003FD39F /* bandmate.png */,
 				8387F6CC186092E1003FD39F /* stage.png */,
 				8387F6D318609C95003FD39F /* grass.jpg */,
 				27CD017818587CBA008E034E /* Faces */,
@@ -395,6 +399,7 @@
 				521C62011860A78B0083D2CC /* sven.png in Resources */,
 				521C61FE1860A78B0083D2CC /* luke.png in Resources */,
 				8387F6CB18609105003FD39F /* nico.png in Resources */,
+				8387F6D71860ABF4003FD39F /* bandmate.png in Resources */,
 				27E86B7B18585F1B00A8E88B /* Images.xcassets in Resources */,
 				521C61FF1860A78B0083D2CC /* maciej.png in Resources */,
 				521C61DD186080D90083D2CC /* 1430886.mp3 in Resources */,
