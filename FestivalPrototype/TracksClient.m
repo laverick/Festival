@@ -9,7 +9,7 @@
 #import "TracksClient.h"
 #import <Parse/Parse.h>
 
-static const NSTimeInterval updateDelay = 0.5f;
+static const NSTimeInterval updateDelay = 0.1f;
 
 @interface TracksClient()
 @property (nonatomic) NSMutableDictionary *previousState;

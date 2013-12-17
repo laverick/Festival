@@ -65,7 +65,6 @@
         
         if (userToUpdate) {
             [userToUpdate fillStage];
-            [userToUpdate animateBandmates];
             [self playTrackFromUser:userToUpdate withTrackID:track];
         }
     };
