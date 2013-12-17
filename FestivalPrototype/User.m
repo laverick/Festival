@@ -76,15 +76,40 @@ static const CGFloat UserHeight = 135.0f;
     return dx;
 }
 
-- (NSURL *)currentTrack
+- (void)playTrackID:(NSString *)trackID
+  inAudioController:(AEAudioController *)controller
+         withVolume:(CGFloat)volume
+                pan:(CGFloat)pan
 {
-    return [[NSBundle mainBundle] URLForResource:self.playlist[self.currentTrackIndex] withExtension:@"m4a"];
+    // Clear the existing player in case we don't catch the null preceding it.
+    if (self.player) {
+        [controller removeChannels:@[self.player]];
+        self.player = nil;
+    }
+    
+    if (!trackID) {
+        return;
+    }
+    
+    NSLog(@"playing %@ by %@", trackID, self.name);
+    
+    NSURL *fileURL = [[NSBundle mainBundle] URLForResource:trackID withExtension:@"mp3"];
+    
+    self.player = [AEAudioFilePlayer audioFilePlayerWithURL:fileURL
+                                            audioController:controller
+                                                      error:NULL];
+    self.player.volume = volume;
+    self.player.pan = pan;
+    self.player.currentTime = 0;
+    
+    [controller addChannels:@[self.player]];
 }
 
-- (void)nextTrack
+- (void)stopTracksInAudioController:(AEAudioController *)controller
 {
-    if (self.currentTrackIndex < [self.playlist count]) {
-        self.currentTrackIndex++;
+    if (self.player) {
+        [controller removeChannels:@[self.player]];
+        self.player = nil;
     }
 }
 
@@ -126,6 +151,16 @@ static const CGFloat UserHeight = 135.0f;
     for (UIView *bandmate in bandmates) {
         bandmate.hidden = NO;
     }
+}
+
+- (void)setVolume:(CGFloat)volume
+{
+    self.player.volume = volume;
+}
+
+- (void)setPan:(CGFloat)pan
+{
+    self.player.pan = pan;
 }
 
 @end
