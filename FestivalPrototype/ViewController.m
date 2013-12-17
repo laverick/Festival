@@ -74,6 +74,7 @@
         [self.mainUser.stageImageView removeFromSuperview];
         [self.mainUser.nameLabel removeFromSuperview];
         [self.scene addSubview:self.mainUser.view];
+        [self.scene bringSubviewToFront:self.mainUser.view];
     }
     
     { // Create and add Stages
@@ -210,7 +211,23 @@
         User *user = self.users[index];
         player.volume = [self volumeForUser:user];
         player.pan = [self panForUser:user];
+        [self adjustReverbForUser:user];
+        [self adjustLPFForUser:user];
     }
+}
+
+#pragma - Audio Effects
+
+- (void)adjustReverbForUser:(User *)user
+{
+    CGFloat reverb = [self reverbForUser:user];
+    AudioUnitSetParameter(self.reverb.audioUnit, kReverb2Param_DryWetMix, kAudioUnitScope_Global, 0, reverb, 0);
+}
+
+- (void)adjustLPFForUser:(User *)user
+{
+    CGFloat lpf = [self lowPassFilterForUser:user];
+    AudioUnitSetParameter(self.lpf.audioUnit, kLowPassParam_CutoffFrequency, kAudioUnitScope_Global, 0, lpf, 0);
 }
 
 - (CGFloat)volumeForUser:(User *)user
@@ -226,24 +243,20 @@
     CGFloat pan = [self.mainUser xPosFrom:user] / [UIScreen mainScreen].bounds.size.width;
     pan = pan < -1 ? -1 : pan;
     pan = pan > 1 ? 1 : pan;
-    return pan; // Range: -1.0 (left) to 1.0 (right)
+    return pan;
 }
 
 - (CGFloat)reverbForUser:(User *)user
 {
-    // TODO: to implement
-    AudioUnitSetParameter(self.reverb.audioUnit, kReverb2Param_DryWetMix, kAudioUnitScope_Global, 0, 5, 0);
-    return 0.0f;
+    return (100 / [self.mainUser distanceFrom:user]) + 30;
 }
 
 - (CGFloat)lowPassFilterForUser:(User *)user
 {
-    // TODO: to implement
-    AudioUnitSetParameter(self.lpf.audioUnit, kLowPassParam_CutoffFrequency, kAudioUnitScope_Global, 0, 20000, 0);
-    return 0.0f;
+    return 20000.0f;
 }
 
-#pragma mark - Moving around
+#pragma mark - Moving Around
 
 - (BOOL)canBecomeFirstResponder
 {
@@ -293,6 +306,7 @@
 //    CGPoint nextPosition = CGPointMake(currentPosition.x + (self.destination.x - currentPosition.x) / 10,
 //                                       currentPosition.y +  (self.destination.y - currentPosition.y) / 10);
     
+    [self.scene bringSubviewToFront:self.mainUser.view];
     [self moveUserToPosition:nextPosition];
 }
 
