@@ -86,16 +86,12 @@
     { // Create Listener
         self.mainUser = [[User alloc] initWithName:@"Nico"
                                           playlist:nil
-                                          position:CGPointMake(650.0f, 370.0f)];
+                                          position:CGPointMake(650.0f, 370.0f)
+                                          mainUser:YES];
         
         UIImageView *mainUserImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nico"]];
         mainUserImage.frame = CGRectMake(0, 0, 80, 80);
         [self.mainUser.view addSubview:mainUserImage];
-        [self.mainUser.stageImageView removeFromSuperview];
-        [self.mainUser.nameLabel removeFromSuperview];
-        [self.mainUser.bandmate1 removeFromSuperview];
-        [self.mainUser.bandmate2 removeFromSuperview];
-        [self.mainUser.bandmate3 removeFromSuperview];
         [self.scene addSubview:self.mainUser.view];
         [self.scene bringSubviewToFront:self.mainUser.view];
     }
@@ -105,19 +101,23 @@
         
         User *sven   = [[User alloc] initWithName:@"Sven"
                                          playlist:@[@"1"]
-                                         position:CGPointMake(150.0f, 618.0f)];
+                                         position:CGPointMake(150.0f, 618.0f)
+                                         mainUser:NO];
         
         User *luke   = [[User alloc] initWithName:@"Luke"
                                          playlist:@[@"2"]
-                                         position:CGPointMake(150.0f, 120.0f)];
+                                         position:CGPointMake(150.0f, 120.0f)
+                                         mainUser:NO];
         
         User *maciej = [[User alloc] initWithName:@"Maciej"
                                          playlist:@[@"3"]
-                                         position:CGPointMake(874.0f, 618.0f)];
+                                         position:CGPointMake(874.0f, 618.0f)
+                                         mainUser:NO];
         
         User *michal = [[User alloc] initWithName:@"Michal"
                                          playlist:@[@"4"]
-                                         position:CGPointMake(874.0f, 120.0f)];
+                                         position:CGPointMake(874.0f, 120.0f)
+                                         mainUser:NO];
         
         [self.users addObject:sven];
         [self.users addObject:luke];

@@ -23,6 +23,7 @@ static const CGFloat UserHeight = 135.0f;
 - (id)initWithName:(NSString *)name
           playlist:(NSArray *)playlist
           position:(CGPoint)position
+          mainUser:(BOOL)mainUser
 {
     self = [super init];
     if (self) {
@@ -49,12 +50,15 @@ static const CGFloat UserHeight = 135.0f;
         _bandmate1.frame = CGRectMake(20, 80, 40, 40);
         _bandmate2.frame = CGRectMake(88, 68, 60, 60);
         _bandmate3.frame = CGRectMake(160, 80, 40, 40);
-           
-        [self.view addSubview:self.stageImageView];
-        [self.view addSubview:self.nameLabel];
-        [self.view addSubview:_bandmate1];
-        [self.view addSubview:_bandmate2];
-        [self.view addSubview:_bandmate3];
+        
+        if (!mainUser) {
+            [self.view addSubview:self.stageImageView];
+            [self.view addSubview:self.nameLabel];
+            [self.view addSubview:_bandmate1];
+            [self.view addSubview:_bandmate2];
+            [self.view addSubview:_bandmate3];
+            [self animateBandmates];
+        }
     }
     return self;
 }
@@ -82,6 +86,27 @@ static const CGFloat UserHeight = 135.0f;
     if (self.currentTrackIndex < [self.playlist count]) {
         self.currentTrackIndex++;
     }
+}
+
+- (void)animateBandmates
+{
+    NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
+    for (UIImageView *bandmate in bandmates) {
+        [UIView animateWithDuration:0.25f
+                              delay:0.0f
+                            options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse)
+                         animations:^{
+                             CGRect frame = bandmate.frame;
+                             frame.origin.y -= 10;
+                             bandmate.frame = frame;
+                         }
+                         completion:nil];
+    }
+}
+
+- (void)stopAnimatingBandmates
+{
+    
 }
 
 @end
