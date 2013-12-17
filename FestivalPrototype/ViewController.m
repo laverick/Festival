@@ -21,7 +21,6 @@
 // Users
 @property (nonatomic, strong) NSMutableArray *users;
 @property (nonatomic, strong) User *mainUser;
-@property (nonatomic, strong) UIView *mainUserView;
 
 // Outlets
 @property (strong, nonatomic) IBOutlet UIView *scene;
@@ -53,76 +52,49 @@
 }
 
 #pragma mark - Users
+
 - (void)createUsers
 {
-    // Current User
-    self.mainUser = [[User alloc] initWithName:@"Nico"
-                                      playlist:nil
-                                      position:CGPointMake(250.0f, 250.0f)];
-    
-    // Other users
-    self.users = [@[] mutableCopy];
-    
-    User *sven = [[User alloc] initWithName:@"Sven"
-                                   playlist:@[@"1"]
-                                   position:CGPointMake(100.0f, 924.0f)];
-    
-    [self.users addObject:sven];
-    User *luke = [[User alloc] initWithName:@"Luke"
-                                   playlist:@[@"2"]
-                                   position:CGPointMake(100.0f, 100.0f)];
-    [self.users addObject:luke];
-    
-    User *maciej = [[User alloc] initWithName:@"Maciej"
-                                   playlist:@[@"3"]
-                                   position:CGPointMake(668.0f, 924.0f)];
-    [self.users addObject:maciej];
-    
-    User *michal = [[User alloc] initWithName:@"Michal"
-                                   playlist:@[@"4"]
-                                   position:CGPointMake(668.0f, 100.0f)];
-    [self.users addObject:michal];
-    
-    // Border
-    self.scene.layer.borderColor = [[UIColor redColor] CGColor];
-    self.scene.layer.borderWidth = 3.0f;
-    
-    // Users
-    CGFloat userSize = 80.0f;
-    for (User *user in self.users) {
-        UIView *userView = [[UIView alloc] initWithFrame:CGRectMake(user.position.x - userSize/2,
-                                                                    user.position.y - userSize/2,
-                                                                    userSize,
-                                                                    userSize)];
+    { // Create Listener
+        self.mainUser = [[User alloc] initWithName:@"Nico"
+                                          playlist:nil
+                                          position:CGPointMake(250.0f, 250.0f)];
         
-        UILabel *nameLabel = [[UILabel alloc] initWithFrame:userView.bounds];
-        nameLabel.textColor = [UIColor blackColor];
-        nameLabel.textAlignment = NSTextAlignmentCenter;
-        nameLabel.text = user.name;
-        
-        [userView addSubview:nameLabel];
-        userView.backgroundColor = [UIColor redColor];
-        
-        [self.scene addSubview:userView];
+        UIImageView *mainUserImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nico"]];
+        mainUserImage.frame = CGRectMake(0, 0, self.mainUser.view.frame.size.width, self.mainUser.view.frame.size.height);
+        [self.mainUser.view addSubview:mainUserImage];
+        [self.scene addSubview:self.mainUser.view];
     }
     
-    { // Draw Main User
-        self.mainUserView = [[UIView alloc] initWithFrame:CGRectMake(self.mainUser.position.x - userSize/2,
-                                                                     self.mainUser.position.y - userSize/2,
-                                                                     userSize,
-                                                                     userSize)];
-        self.mainUserView.alpha = 0.5;
-        self.mainUserView.layer.cornerRadius = 50;
-        self.mainUserView.backgroundColor = [UIColor blueColor];
-        UILabel *nameLabel = [[UILabel alloc] initWithFrame:self.mainUserView.bounds];
-        nameLabel.textColor = [UIColor whiteColor];
-        nameLabel.textAlignment = NSTextAlignmentCenter;
-        nameLabel.text = [self.mainUser.name uppercaseString];
+    { // Create and add Stages
+        self.users = [@[] mutableCopy];
         
-        self.destination = self.mainUserView.center;
+        User *sven   = [[User alloc] initWithName:@"Sven"
+                                         playlist:@[@"1"]
+                                         position:CGPointMake(100.0f, 668.0f)];
         
-        [self.mainUserView addSubview:nameLabel];
-        [self.scene addSubview:self.mainUserView];
+        User *luke   = [[User alloc] initWithName:@"Luke"
+                                         playlist:@[@"2"]
+                                         position:CGPointMake(100.0f, 100.0f)];
+        
+        User *maciej = [[User alloc] initWithName:@"Maciej"
+                                         playlist:@[@"3"]
+                                         position:CGPointMake(924.0f, 668.0f)];
+        
+        User *michal = [[User alloc] initWithName:@"Michal"
+                                         playlist:@[@"4"]
+                                         position:CGPointMake(924.0f, 100.0f)];
+        
+        [self.users addObject:sven];
+        [self.users addObject:luke];
+        [self.users addObject:maciej];
+        [self.users addObject:michal];
+        
+        self.destination = self.mainUser.view.center;
+        
+        for (User *user in self.users) {
+            [self.scene addSubview:user.view];
+        }
     }
 }
 
@@ -130,11 +102,11 @@
 
 - (void)updateUI
 {
-    [UIView animateWithDuration:0.1
+    [UIView animateWithDuration:0.1f
                           delay:0
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
-                         self.mainUserView.center = self.mainUser.position;
+                         self.mainUser.view.center = self.mainUser.position;
                      }
                      completion:nil];
 }

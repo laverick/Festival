@@ -8,6 +8,8 @@
 
 #import "User.h"
 
+static const CGFloat UserSize = 80.0f;
+
 @interface User ()
 @property (nonatomic) NSUInteger currentTrackIndex;
 @end
@@ -25,6 +27,15 @@
         _playlist = playlist;
         _position = position;
         _currentTrackIndex = 0;
+        
+        _view = [[UIView alloc] initWithFrame:CGRectMake(self.position.x - UserSize / 2, self.position.y - UserSize / 2, UserSize, UserSize)];
+        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
+
+        _nameLabel.text = name;
+        _nameLabel.textColor = [UIColor blackColor];
+        _nameLabel.textAlignment = NSTextAlignmentCenter;
+        
+        [self.view addSubview:self.nameLabel];
     }
     return self;
 }
