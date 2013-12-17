@@ -8,10 +8,13 @@
 
 #import "User.h"
 
-static const CGFloat UserSize = 130.0f;
+static const CGFloat UserWidth = 233.0f;
+static const CGFloat UserHeight = 135.0f;
 
 @interface User ()
+
 @property (nonatomic) NSUInteger currentTrackIndex;
+
 @end
 
 @implementation User
@@ -28,8 +31,8 @@ static const CGFloat UserSize = 130.0f;
         _position = position;
         _currentTrackIndex = 0;
         
-        _view = [[UIView alloc] initWithFrame:CGRectMake(self.position.x - UserSize / 2, self.position.y - UserSize / 2, UserSize, UserSize)];
-        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 130, 100)];
+        _view = [[UIView alloc] initWithFrame:CGRectMake(self.position.x - UserWidth / 2, self.position.y - UserHeight / 2, UserWidth, UserHeight)];
+        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, UserWidth, UserHeight)];
 
         _nameLabel.text = name;
         _nameLabel.font = [UIFont boldSystemFontOfSize:20];
@@ -37,9 +40,20 @@ static const CGFloat UserSize = 130.0f;
         _nameLabel.textAlignment = NSTextAlignmentCenter;
         
         _stageImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"stage"]];
-        _stageImageView.frame = CGRectMake(0, 0, 130, 65);
+        _stageImageView.frame = CGRectMake(0, 0, UserWidth, UserHeight);
+        
+        _bandmate1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bandmate"]];
+        _bandmate2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bandmate"]];
+        _bandmate3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bandmate"]];
+        
+        _bandmate1.frame = CGRectMake(20, 80, 40, 40);
+        _bandmate2.frame = CGRectMake(88, 68, 40, 40);
+        _bandmate3.frame = CGRectMake(160, 80, 40, 40);
         
         [self.view addSubview:self.stageImageView];
+        [self.view addSubview:_bandmate1];
+        [self.view addSubview:_bandmate2];
+        [self.view addSubview:_bandmate3];
         [self.view addSubview:self.nameLabel];
     }
     return self;
