@@ -38,7 +38,7 @@
 
 - (NSURL *)currentTrack
 {
-    return [[NSBundle mainBundle] URLForResource:self.playlist[self.currentTrackIndex] withExtension:@"mp3"];
+    return [[NSBundle mainBundle] URLForResource:self.playlist[self.currentTrackIndex] withExtension:@"m4a"];
 }
 
 - (void)nextTrack

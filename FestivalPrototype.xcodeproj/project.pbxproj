@@ -25,10 +25,10 @@
 		27E86B8418585F1B00A8E88B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E86B6318585F1B00A8E88B /* UIKit.framework */; };
 		27E86B8C18585F1B00A8E88B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27E86B8A18585F1B00A8E88B /* InfoPlist.strings */; };
 		27E86B8E18585F1B00A8E88B /* FestivalPrototypeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E86B8D18585F1B00A8E88B /* FestivalPrototypeTests.m */; };
-		27FDBBF2185F748200D61E32 /* 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 27FDBBEE185F748200D61E32 /* 1.mp3 */; };
-		27FDBBF3185F748200D61E32 /* 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 27FDBBEF185F748200D61E32 /* 2.mp3 */; };
-		27FDBBF4185F748200D61E32 /* 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 27FDBBF0185F748200D61E32 /* 3.mp3 */; };
-		27FDBBF5185F748200D61E32 /* 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 27FDBBF1185F748200D61E32 /* 4.mp3 */; };
+		8387F6C218607D0B003FD39F /* 1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6BE18607D0B003FD39F /* 1.m4a */; };
+		8387F6C318607D0B003FD39F /* 2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6BF18607D0B003FD39F /* 2.m4a */; };
+		8387F6C418607D0B003FD39F /* 3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6C018607D0B003FD39F /* 3.m4a */; };
+		8387F6C518607D0B003FD39F /* 4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6C118607D0B003FD39F /* 4.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,11 +64,11 @@
 		27E86B8918585F1B00A8E88B /* FestivalPrototypeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FestivalPrototypeTests-Info.plist"; sourceTree = "<group>"; };
 		27E86B8B18585F1B00A8E88B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		27E86B8D18585F1B00A8E88B /* FestivalPrototypeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FestivalPrototypeTests.m; sourceTree = "<group>"; };
-		27FDBBEE185F748200D61E32 /* 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 1.mp3; sourceTree = "<group>"; };
-		27FDBBEF185F748200D61E32 /* 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 2.mp3; sourceTree = "<group>"; };
-		27FDBBF0185F748200D61E32 /* 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 3.mp3; sourceTree = "<group>"; };
-		27FDBBF1185F748200D61E32 /* 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 4.mp3; sourceTree = "<group>"; };
 		74E8610407C64277B970245C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8387F6BE18607D0B003FD39F /* 1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.m4a; sourceTree = "<group>"; };
+		8387F6BF18607D0B003FD39F /* 2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2.m4a; sourceTree = "<group>"; };
+		8387F6C018607D0B003FD39F /* 3.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3.m4a; sourceTree = "<group>"; };
+		8387F6C118607D0B003FD39F /* 4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 4.m4a; sourceTree = "<group>"; };
 		B08A6521211741BC89EA34F0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,10 +124,10 @@
 		27CD017918587CBA008E034E /* Music */ = {
 			isa = PBXGroup;
 			children = (
-				27FDBBEE185F748200D61E32 /* 1.mp3 */,
-				27FDBBEF185F748200D61E32 /* 2.mp3 */,
-				27FDBBF0185F748200D61E32 /* 3.mp3 */,
-				27FDBBF1185F748200D61E32 /* 4.mp3 */,
+				8387F6BE18607D0B003FD39F /* 1.m4a */,
+				8387F6BF18607D0B003FD39F /* 2.m4a */,
+				8387F6C018607D0B003FD39F /* 3.m4a */,
+				8387F6C118607D0B003FD39F /* 4.m4a */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -290,13 +290,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				27E86B7618585F1B00A8E88B /* Main_iPad.storyboard in Resources */,
-				27FDBBF4185F748200D61E32 /* 3.mp3 in Resources */,
+				8387F6C518607D0B003FD39F /* 4.m4a in Resources */,
 				27E86B7B18585F1B00A8E88B /* Images.xcassets in Resources */,
+				8387F6C218607D0B003FD39F /* 1.m4a in Resources */,
+				8387F6C318607D0B003FD39F /* 2.m4a in Resources */,
 				27E86B7318585F1B00A8E88B /* Main_iPhone.storyboard in Resources */,
-				27FDBBF3185F748200D61E32 /* 2.mp3 in Resources */,
+				8387F6C418607D0B003FD39F /* 3.m4a in Resources */,
 				27E86B6A18585F1B00A8E88B /* InfoPlist.strings in Resources */,
-				27FDBBF2185F748200D61E32 /* 1.mp3 in Resources */,
-				27FDBBF5185F748200D61E32 /* 4.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

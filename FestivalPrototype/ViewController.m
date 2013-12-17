@@ -19,14 +19,12 @@
 @property (nonatomic, strong) NSMutableArray *filePlayers;
 
 // Users
-@property(nonatomic, strong) NSMutableArray *users;
-@property(nonatomic, strong) User *mainUser;
+@property (nonatomic, strong) NSMutableArray *users;
+@property (nonatomic, strong) User *mainUser;
+@property (nonatomic, strong) UIView *mainUserView;
 
 // Outlets
 @property (strong, nonatomic) IBOutlet UIView *scene;
-
-@property (strong, nonatomic) IBOutlet UITextField *xTextField;
-@property (strong, nonatomic) IBOutlet UITextField *yTextField;
 
 @end
 
@@ -58,7 +56,7 @@
     
     User *sven = [[User alloc] initWithName:@"Sven"
                                    playlist:@[@"1"]
-                                   position:CGPointMake(100.0f, 400.0f)];
+                                   position:CGPointMake(100.0f, 924.0f)];
     
     [self.users addObject:sven];
     User *luke = [[User alloc] initWithName:@"Luke"
@@ -68,18 +66,13 @@
     
     User *maciej = [[User alloc] initWithName:@"Maciej"
                                    playlist:@[@"3"]
-                                   position:CGPointMake(400.0f, 400.0f)];
+                                   position:CGPointMake(668.0f, 924.0f)];
     [self.users addObject:maciej];
     
     User *michal = [[User alloc] initWithName:@"Michal"
                                    playlist:@[@"4"]
-                                   position:CGPointMake(400.0f, 100.0f)];
+                                   position:CGPointMake(668.0f, 100.0f)];
     [self.users addObject:michal];
-    
-    User *dustin = [[User alloc] initWithName:@"Dustin"
-                                     playlist:@[@"4"]
-                                     position:CGPointMake(500.0f, 500.0f)];
-    [self.users addObject:dustin];
 }
 
 #pragma mark - Drawing
@@ -88,10 +81,6 @@
 
 - (void)updateUI
 {
-    // Textfields
-    self.xTextField.text = [NSString stringWithFormat:@"%d", (NSInteger)self.mainUser.position.x];
-    self.yTextField.text = [NSString stringWithFormat:@"%d", (NSInteger)self.mainUser.position.y];
-    
     // Clean-up
     [[self.scene subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
@@ -113,35 +102,27 @@
         nameLabel.text = user.name;
         
         [userView addSubview:nameLabel];
-        userView.backgroundColor = [self randomColor];
+        userView.backgroundColor = [UIColor redColor];
         
         [self.scene addSubview:userView];
     }
     
     { // Draw Main User
-        UIView *mainUserView = [[UIView alloc] initWithFrame:CGRectMake(self.mainUser.position.x - userSize/2,
+        self.mainUserView = [[UIView alloc] initWithFrame:CGRectMake(self.mainUser.position.x - userSize/2,
                                                                         self.mainUser.position.y - userSize/2,
                                                                         userSize,
                                                                         userSize)];
-        mainUserView.alpha = 0.5;
-        mainUserView.layer.cornerRadius = 50;
-        mainUserView.backgroundColor = [UIColor blueColor];
-        UILabel *nameLabel = [[UILabel alloc] initWithFrame:mainUserView.bounds];
+        self.mainUserView.alpha = 0.5;
+        self.mainUserView.layer.cornerRadius = 50;
+        self.mainUserView.backgroundColor = [UIColor blueColor];
+        UILabel *nameLabel = [[UILabel alloc] initWithFrame:self.mainUserView.bounds];
         nameLabel.textColor = [UIColor whiteColor];
         nameLabel.textAlignment = NSTextAlignmentCenter;
         nameLabel.text = [self.mainUser.name uppercaseString];
         
-        [mainUserView addSubview:nameLabel];
-        [self.scene addSubview:mainUserView];
+        [self.mainUserView addSubview:nameLabel];
+        [self.scene addSubview:self.mainUserView];
     }
-}
-
-- (UIColor *)randomColor
-{
-    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
-    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
-    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
-    return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
 }
 
 #pragma mark - Audio Player
@@ -192,8 +173,9 @@
 - (CGFloat)volumeForUser:(User *)user
 {
     // TODO: compute the volume properly (http://sengpielaudio.com/calculator-distance.htm)
-    CGFloat volume = ( self.scene.frame.size.width/2 - [self.mainUser distanceFrom:user] ) / self.scene.frame.size.width;
+    CGFloat volume = 100 / [self.mainUser distanceFrom:user];
     volume = volume < 0 ? 0 : volume;
+    volume = volume > 1 ? 1 : volume;
     NSLog (@"Volume for %@ is %f", user.name, volume);
     return volume;
 }
@@ -205,12 +187,24 @@
 }
 
 #pragma mark - Moving around
-- (IBAction)moveButtonPressed:(id)sender
+
+- (BOOL)canBecomeFirstResponder
 {
-    CGFloat x = [self.xTextField.text floatValue];
-    CGFloat y = [self.yTextField.text floatValue];
-    
-    [self moveUserToPosition:CGPointMake(x, y)];
+    return YES;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [[event allTouches] anyObject];
+    CGPoint location = [touch locationInView:self.view];
+    [self moveUserToPosition:location];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [[event allTouches] anyObject];
+    CGPoint location = [touch locationInView:self.view];
+    [self moveUserToPosition:location];
 }
 
 - (void)moveUserToPosition:(CGPoint)position

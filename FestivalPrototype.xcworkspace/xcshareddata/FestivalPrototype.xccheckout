@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>54AB2F1C-ADDC-44E8-B212-FAD79EDB28ED</string>
+	<string>CBB4962E-2ACE-41E1-B2EC-B678D6F37ED0</string>
 	<key>IDESourceControlProjectName</key>
 	<string>FestivalPrototype</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>F8291D7D-CD5A-4B76-B8CB-549C667112CE</key>
-		<string>https://github.com/nchourrout/Festival.git</string>
+		<key>7C429AA5-C988-497C-88E0-4E44B45C5CBE</key>
+		<string>https://github.com/laverick/Festival</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>FestivalPrototype.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>F8291D7D-CD5A-4B76-B8CB-549C667112CE</key>
+		<key>7C429AA5-C988-497C-88E0-4E44B45C5CBE</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/nchourrout/Festival.git</string>
+	<string>https://github.com/laverick/Festival</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>F8291D7D-CD5A-4B76-B8CB-549C667112CE</string>
+	<string>7C429AA5-C988-497C-88E0-4E44B45C5CBE</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>F8291D7D-CD5A-4B76-B8CB-549C667112CE</string>
+			<string>7C429AA5-C988-497C-88E0-4E44B45C5CBE</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Festival</string>
 		</dict>
