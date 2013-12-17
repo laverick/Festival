@@ -201,18 +201,18 @@
 
 - (CGFloat)volumeForUser:(User *)user
 {
-    // TODO: compute the volume properly (http://sengpielaudio.com/calculator-distance.htm)
     CGFloat volume = 100 / [self.mainUser distanceFrom:user];
     volume = volume < 0 ? 0 : volume;
     volume = volume > 1 ? 1 : volume;
-    NSLog (@"Volume for %@ is %f", user.name, volume);
     return volume;
 }
 
 - (CGFloat)panForUser:(User *)user
 {
-    // TODO: to implement
-    return 0.0; // Range: -1.0 (left) to 1.0 (right)
+    CGFloat pan = [self.mainUser xPosFrom:user] / [UIScreen mainScreen].bounds.size.width;
+    pan = pan < -1 ? -1 : pan;
+    pan = pan > 1 ? 1 : pan;
+    return pan; // Range: -1.0 (left) to 1.0 (right)
 }
 
 - (CGFloat)reverbForUser:(User *)user

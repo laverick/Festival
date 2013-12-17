@@ -23,6 +23,7 @@
           position:(CGPoint)position;
 
 - (CGFloat)distanceFrom:(User *)user;
+- (CGFloat)xPosFrom:(User *)user;
 
 - (NSURL *)currentTrack;
 - (void)nextTrack;
