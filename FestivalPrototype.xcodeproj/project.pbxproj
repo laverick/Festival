@@ -35,6 +35,7 @@
 		8387F6C418607D0B003FD39F /* 3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6C018607D0B003FD39F /* 3.m4a */; };
 		8387F6C518607D0B003FD39F /* 4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6C118607D0B003FD39F /* 4.m4a */; };
 		8387F6CB18609105003FD39F /* nico.png in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6CA18609105003FD39F /* nico.png */; };
+		8387F6CD186092E1003FD39F /* stage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6CC186092E1003FD39F /* stage.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		8387F6C018607D0B003FD39F /* 3.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3.m4a; sourceTree = "<group>"; };
 		8387F6C118607D0B003FD39F /* 4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 4.m4a; sourceTree = "<group>"; };
 		8387F6CA18609105003FD39F /* nico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nico.png; path = FestivalPrototype/Resources/Images/nico.png; sourceTree = SOURCE_ROOT; };
+		8387F6CC186092E1003FD39F /* stage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stage.png; sourceTree = "<group>"; };
 		B08A6521211741BC89EA34F0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,6 +123,7 @@
 		27CD017718587CBA008E034E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8387F6CC186092E1003FD39F /* stage.png */,
 				27CD017818587CBA008E034E /* Faces */,
 			);
 			path = Images;
@@ -323,6 +326,7 @@
 				521C61DD186080D90083D2CC /* 1430886.mp3 in Resources */,
 				8387F6C218607D0B003FD39F /* 1.m4a in Resources */,
 				521C61DC186080D90083D2CC /* 813379.mp3 in Resources */,
+				8387F6CD186092E1003FD39F /* stage.png in Resources */,
 				521C61E0186080D90083D2CC /* 3710048.mp3 in Resources */,
 				8387F6C318607D0B003FD39F /* 2.m4a in Resources */,
 				27E86B7318585F1B00A8E88B /* Main_iPhone.storyboard in Resources */,

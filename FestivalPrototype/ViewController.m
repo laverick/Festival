@@ -61,27 +61,29 @@
                                           position:CGPointMake(250.0f, 250.0f)];
         
         UIImageView *mainUserImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nico"]];
-        mainUserImage.frame = CGRectMake(0, 0, self.mainUser.view.frame.size.width, self.mainUser.view.frame.size.height);
+        mainUserImage.frame = CGRectMake(0, 0, self.mainUser.view.frame.size.width / 2, self.mainUser.view.frame.size.height / 2);
         [self.mainUser.view addSubview:mainUserImage];
+        [self.mainUser.stageImageView removeFromSuperview];
+        [self.mainUser.nameLabel removeFromSuperview];
         [self.scene addSubview:self.mainUser.view];
     }
     
     { // Create and add Stages
         self.users = [@[] mutableCopy];
         
-        User *sven   = [[User alloc] initWithName:@"Sven"
+        User *sven   = [[User alloc] initWithName:@"Sven Stage"
                                          playlist:@[@"1"]
                                          position:CGPointMake(100.0f, 668.0f)];
         
-        User *luke   = [[User alloc] initWithName:@"Luke"
+        User *luke   = [[User alloc] initWithName:@"Luke Stage"
                                          playlist:@[@"2"]
                                          position:CGPointMake(100.0f, 100.0f)];
         
-        User *maciej = [[User alloc] initWithName:@"Maciej"
+        User *maciej = [[User alloc] initWithName:@"Maciej Stage"
                                          playlist:@[@"3"]
                                          position:CGPointMake(924.0f, 668.0f)];
         
-        User *michal = [[User alloc] initWithName:@"Michal"
+        User *michal = [[User alloc] initWithName:@"Michal Stage"
                                          playlist:@[@"4"]
                                          position:CGPointMake(924.0f, 100.0f)];
         
