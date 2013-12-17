@@ -8,6 +8,8 @@
 
 #import "User.h"
 
+static const CGFloat UserSize = 130.0f;
+
 @interface User ()
 @property (nonatomic) NSUInteger currentTrackIndex;
 @end
@@ -25,6 +27,19 @@
         _playlist = playlist;
         _position = position;
         _currentTrackIndex = 0;
+        
+        _view = [[UIView alloc] initWithFrame:CGRectMake(self.position.x - UserSize / 2, self.position.y - UserSize / 2, UserSize, UserSize)];
+        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 130, 100)];
+
+        _nameLabel.text = name;
+        _nameLabel.textColor = [UIColor blackColor];
+        _nameLabel.textAlignment = NSTextAlignmentCenter;
+        
+        _stageImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"stage"]];
+        _stageImageView.frame = CGRectMake(0, 0, 130, 80);
+        
+        [self.view addSubview:self.stageImageView];
+        [self.view addSubview:self.nameLabel];
     }
     return self;
 }
@@ -38,7 +53,7 @@
 
 - (NSURL *)currentTrack
 {
-    return [[NSBundle mainBundle] URLForResource:self.playlist[self.currentTrackIndex] withExtension:@"mp3"];
+    return [[NSBundle mainBundle] URLForResource:self.playlist[self.currentTrackIndex] withExtension:@"m4a"];
 }
 
 - (void)nextTrack

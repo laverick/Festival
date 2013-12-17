@@ -19,14 +19,14 @@
 @property (nonatomic, strong) NSMutableArray *filePlayers;
 
 // Users
-@property(nonatomic, strong) NSMutableArray *users;
-@property(nonatomic, strong) User *mainUser;
+@property (nonatomic, strong) NSMutableArray *users;
+@property (nonatomic, strong) User *mainUser;
 
 // Outlets
 @property (strong, nonatomic) IBOutlet UIView *scene;
 
-@property (strong, nonatomic) IBOutlet UITextField *xTextField;
-@property (strong, nonatomic) IBOutlet UITextField *yTextField;
+@property (nonatomic) NSTimer *timer;
+@property (nonatomic) CGPoint destination;
 
 @end
 
@@ -43,105 +43,74 @@
     [self configurePlayer];
     
     [self play];
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                                                  target:self
+                                                selector:@selector(updateUser)
+                                                userInfo:nil
+                                                 repeats:YES];
 }
 
 #pragma mark - Users
+
 - (void)createUsers
 {
-    // Current User
-    self.mainUser = [[User alloc] initWithName:@"Nico"
-                                      playlist:nil
-                                      position:CGPointMake(250.0f, 250.0f)];
+    { // Create Listener
+        self.mainUser = [[User alloc] initWithName:@"Nico"
+                                          playlist:nil
+                                          position:CGPointMake(250.0f, 250.0f)];
+        
+        UIImageView *mainUserImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nico"]];
+        mainUserImage.frame = CGRectMake(0, 0, self.mainUser.view.frame.size.width / 2, self.mainUser.view.frame.size.height / 2);
+        [self.mainUser.view addSubview:mainUserImage];
+        [self.mainUser.stageImageView removeFromSuperview];
+        [self.mainUser.nameLabel removeFromSuperview];
+        [self.scene addSubview:self.mainUser.view];
+    }
     
-    // Other users
-    self.users = [@[] mutableCopy];
-    
-    User *sven = [[User alloc] initWithName:@"Sven"
-                                   playlist:@[@"1"]
-                                   position:CGPointMake(100.0f, 400.0f)];
-    
-    [self.users addObject:sven];
-    User *luke = [[User alloc] initWithName:@"Luke"
-                                   playlist:@[@"2"]
-                                   position:CGPointMake(100.0f, 100.0f)];
-    [self.users addObject:luke];
-    
-    User *maciej = [[User alloc] initWithName:@"Maciej"
-                                   playlist:@[@"3"]
-                                   position:CGPointMake(400.0f, 400.0f)];
-    [self.users addObject:maciej];
-    
-    User *michal = [[User alloc] initWithName:@"Michal"
-                                   playlist:@[@"4"]
-                                   position:CGPointMake(400.0f, 100.0f)];
-    [self.users addObject:michal];
-    
-    User *dustin = [[User alloc] initWithName:@"Dustin"
-                                     playlist:@[@"4"]
-                                     position:CGPointMake(500.0f, 500.0f)];
-    [self.users addObject:dustin];
+    { // Create and add Stages
+        self.users = [@[] mutableCopy];
+        
+        User *sven   = [[User alloc] initWithName:@"Sven Stage"
+                                         playlist:@[@"1"]
+                                         position:CGPointMake(100.0f, 668.0f)];
+        
+        User *luke   = [[User alloc] initWithName:@"Luke Stage"
+                                         playlist:@[@"2"]
+                                         position:CGPointMake(100.0f, 100.0f)];
+        
+        User *maciej = [[User alloc] initWithName:@"Maciej Stage"
+                                         playlist:@[@"3"]
+                                         position:CGPointMake(924.0f, 668.0f)];
+        
+        User *michal = [[User alloc] initWithName:@"Michal Stage"
+                                         playlist:@[@"4"]
+                                         position:CGPointMake(924.0f, 100.0f)];
+        
+        [self.users addObject:sven];
+        [self.users addObject:luke];
+        [self.users addObject:maciej];
+        [self.users addObject:michal];
+        
+        self.destination = self.mainUser.view.center;
+        
+        for (User *user in self.users) {
+            [self.scene addSubview:user.view];
+        }
+    }
 }
 
 #pragma mark - Drawing
 
-//Quick and dirty
-
 - (void)updateUI
 {
-    // Textfields
-    self.xTextField.text = [NSString stringWithFormat:@"%d", (NSInteger)self.mainUser.position.x];
-    self.yTextField.text = [NSString stringWithFormat:@"%d", (NSInteger)self.mainUser.position.y];
-    
-    // Clean-up
-    [[self.scene subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
-    // Border
-    self.scene.layer.borderColor = [[UIColor redColor] CGColor];
-    self.scene.layer.borderWidth = 3.0f;
-    
-    // Users
-    CGFloat userSize = 80.0f;
-    for (User *user in self.users) {
-        UIView *userView = [[UIView alloc] initWithFrame:CGRectMake(user.position.x - userSize/2,
-                                                                   user.position.y - userSize/2,
-                                                                   userSize,
-                                                                   userSize)];
-        
-        UILabel *nameLabel = [[UILabel alloc] initWithFrame:userView.bounds];
-        nameLabel.textColor = [UIColor blackColor];
-        nameLabel.textAlignment = NSTextAlignmentCenter;
-        nameLabel.text = user.name;
-        
-        [userView addSubview:nameLabel];
-        userView.backgroundColor = [self randomColor];
-        
-        [self.scene addSubview:userView];
-    }
-    
-    { // Draw Main User
-        UIView *mainUserView = [[UIView alloc] initWithFrame:CGRectMake(self.mainUser.position.x - userSize/2,
-                                                                        self.mainUser.position.y - userSize/2,
-                                                                        userSize,
-                                                                        userSize)];
-        mainUserView.alpha = 0.5;
-        mainUserView.layer.cornerRadius = 50;
-        mainUserView.backgroundColor = [UIColor blueColor];
-        UILabel *nameLabel = [[UILabel alloc] initWithFrame:mainUserView.bounds];
-        nameLabel.textColor = [UIColor whiteColor];
-        nameLabel.textAlignment = NSTextAlignmentCenter;
-        nameLabel.text = [self.mainUser.name uppercaseString];
-        
-        [mainUserView addSubview:nameLabel];
-        [self.scene addSubview:mainUserView];
-    }
-}
-
-- (UIColor *)randomColor
-{
-    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
-    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
-    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
-    return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+    [UIView animateWithDuration:0.1f
+                          delay:0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         self.mainUser.view.center = self.mainUser.position;
+                     }
+                     completion:nil];
 }
 
 #pragma mark - Audio Player
@@ -192,8 +161,9 @@
 - (CGFloat)volumeForUser:(User *)user
 {
     // TODO: compute the volume properly (http://sengpielaudio.com/calculator-distance.htm)
-    CGFloat volume = ( self.scene.frame.size.width/2 - [self.mainUser distanceFrom:user] ) / self.scene.frame.size.width;
+    CGFloat volume = 100 / [self.mainUser distanceFrom:user];
     volume = volume < 0 ? 0 : volume;
+    volume = volume > 1 ? 1 : volume;
     NSLog (@"Volume for %@ is %f", user.name, volume);
     return volume;
 }
@@ -205,12 +175,46 @@
 }
 
 #pragma mark - Moving around
-- (IBAction)moveButtonPressed:(id)sender
+
+- (BOOL)canBecomeFirstResponder
 {
-    CGFloat x = [self.xTextField.text floatValue];
-    CGFloat y = [self.yTextField.text floatValue];
+    return YES;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [[event allTouches] anyObject];
+    self.destination = [touch locationInView:self.view];
+    //[self moveUserToPosition:location];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [[event allTouches] anyObject];
+    self.destination = [touch locationInView:self.view];
+    //[self moveUserToPosition:location];
+}
+
+- (void)updateUser
+{
+    CGPoint currentPosition = self.mainUser.position;
     
-    [self moveUserToPosition:CGPointMake(x, y)];
+    CGFloat distance = 10.f;
+    
+    CGFloat bigDeltaX = self.destination.x - currentPosition.x;
+    CGFloat bigDeltaY = self.destination.y - currentPosition.y;
+    
+    CGFloat deltaX = fabsf(bigDeltaX) > 0.0001 ? distance / sqrtf( powf(bigDeltaY / bigDeltaX, 2) + 1 ) : 0;
+    CGFloat deltaY = fabsf(bigDeltaY) > 0.0001 ? distance / sqrtf( powf(bigDeltaX / bigDeltaY, 2) + 1 ) : 0;
+
+    deltaX = bigDeltaX > 0 ? deltaX : -deltaX;
+    deltaY = bigDeltaY > 0 ? deltaY : -deltaY;
+
+    CGPoint nextPosition = CGPointMake(currentPosition.x + deltaX, currentPosition.y + deltaY);
+//    CGPoint nextPosition = CGPointMake(currentPosition.x + (self.destination.x - currentPosition.x) / 10,
+//                                       currentPosition.y +  (self.destination.y - currentPosition.y) / 10);
+    
+    [self moveUserToPosition:nextPosition];
 }
 
 - (void)moveUserToPosition:(CGPoint)position

@@ -11,8 +11,12 @@
 @interface User : NSObject
 
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic) CGPoint position;
+@property (nonatomic, strong) UIView *view;
+@property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) NSArray *playlist;
+@property (nonatomic) CGPoint position;
+
+@property (nonatomic, strong) UIImageView *stageImageView;
 
 - (id)initWithName:(NSString *)name
           playlist:(NSArray *)playlist
