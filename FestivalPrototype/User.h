@@ -32,5 +32,9 @@
 - (NSURL *)currentTrack;
 - (void)nextTrack;
 
+- (void)animateBandmates;
+- (void)stopAnimatingBandmates;
+- (void)clearStage;
+- (void)fillStage;
 
 @end

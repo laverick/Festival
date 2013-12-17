@@ -54,13 +54,44 @@
         // If track is nil, stop current track
         NSLog(@"Update %@ \t%@", user, track);
         
+        User *userToUpdate;
         
+        if ([user isEqualToString:@"Luke"]) {
+            userToUpdate = self.users[1];
+        } else if ([user isEqualToString:@"Maciek"]) {
+            userToUpdate = self.users[2];
+        } else if ([user isEqualToString:@"Sven"]) {
+            userToUpdate = self.users[0];
+        } else if ([user isEqualToString:@"Michal"]) {
+            userToUpdate = self.users[3];
+        }
         
+        if (userToUpdate) {
+            [userToUpdate fillStage];
+            [userToUpdate animateBandmates];
+        }
     };
     
     tracksClient.exitBlock = ^(NSString *user){
         // remove user from stage
         NSLog(@"Exit %@", user);
+        
+        User *userToUpdate;
+        
+        if ([user isEqualToString:@"Luke"]) {
+            userToUpdate = self.users[1];
+        } else if ([user isEqualToString:@"Maciek"]) {
+            userToUpdate = self.users[2];
+        } else if ([user isEqualToString:@"Sven"]) {
+            userToUpdate = self.users[0];
+        } else if ([user isEqualToString:@"Michal"]) {
+            userToUpdate = self.users[3];
+        }
+        
+        if (userToUpdate){
+            [userToUpdate clearStage];
+            [userToUpdate stopAnimatingBandmates];
+        }
     };
     
     
