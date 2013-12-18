@@ -12,6 +12,7 @@ static const CGFloat UserWidth = 233.0f;
 static const CGFloat UserHeight = 135.0f;
 
 static const CGFloat BandmateRestingY = 64.0f;
+static const CGFloat LeadingBandmateRestingY = 44.f;
 
 @interface User ()
 
@@ -71,7 +72,7 @@ static const CGFloat BandmateRestingY = 64.0f;
         _bandmate3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:bandmate3FileName]];
         
         _bandmate1.frame = CGRectMake(20, BandmateRestingY, 40, 40);
-        _bandmate2.frame = CGRectMake(80, BandmateRestingY, 60, 60);
+        _bandmate2.frame = CGRectMake(80, LeadingBandmateRestingY, 60, 60);
         _bandmate3.frame = CGRectMake(160, BandmateRestingY, 40, 40);
         
         if (mainUser) {
@@ -177,20 +178,34 @@ static const CGFloat BandmateRestingY = 64.0f;
 
 - (void)animateBandmates
 {
-    NSLog(@"Start animating");
-    NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
+        NSLog(@"start animating");
+    NSArray *bandmates = @[self.bandmate1, self.bandmate3];
     for (UIImageView *bandmate in bandmates) {
         [UIView animateWithDuration:0.25f
-                              delay:0.0f
-                            options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionCurveEaseInOut)
+                              delay:0.1f
+                            options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse |
+                                     UIViewAnimationOptionCurveEaseInOut)
                          animations:^{
                              CGRect frame = bandmate.frame;
                              int jumpHeight = (arc4random() % 5) + 7;
+                             NSLog(@"%u", jumpHeight);
                              frame.origin.y = BandmateRestingY + jumpHeight;
                              bandmate.frame = frame;
                          }
                          completion:nil];
     }
+    
+    [UIView animateWithDuration:0.25f
+                          delay:0.0f
+                        options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse)
+                     animations:^{
+                         CGRect frame = self.bandmate2.frame;
+                         int jumpHeight = (arc4random() % 5) + 7;
+                         NSLog(@"%u", jumpHeight);
+                         frame.origin.y = LeadingBandmateRestingY + jumpHeight;
+                         self.bandmate2.frame = frame;
+                     }
+                     completion:nil];
 }
 
 - (void)stopAnimatingBandmates

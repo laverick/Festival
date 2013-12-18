@@ -169,10 +169,22 @@
 
 - (void)getFatter
 {
+    NSURL *fileURL = [[NSBundle mainBundle] URLForResource:@"chomp" withExtension:@"wav"];
+    if (fileURL) {
+        AEAudioFilePlayer *chomp = [AEAudioFilePlayer audioFilePlayerWithURL:fileURL
+                                                             audioController:self.audioController
+                                                                       error:NULL];
+        chomp.loop = NO;
+        chomp.volume = 0.8f;
+        chomp.currentTime = 0;
+        
+        [self.audioController addChannels:@[chomp]];
+    }
+    
     self.currentFatness += 0.2f;
     NSLog(@"Making Nico fatter: %f", self.currentFatness);
     [UIView animateWithDuration:0.15f
-                          delay:0.0f
+                          delay:1.4f
                         options:kNilOptions
                      animations:^{
                          self.mainUserImage.transform = CGAffineTransformMakeScale(self.currentFatness*1.4, self.currentFatness*1.2);
@@ -320,7 +332,7 @@
         
         static int direction = 1;
         
-        if ([self isCloseToAStage:position]) {
+        if ([self isCloseToAFilledStage:position]) {
             direction = -direction;
            // position.y += direction * 3;
             position.x += direction * 3;
@@ -473,18 +485,23 @@
     [self moveUserToPosition:nextPosition];
 }
 
-- (BOOL)isCloseToAStage:(CGPoint)location
+- (BOOL)isCloseToAFilledStage:(CGPoint)location
 {
     const CGFloat max = 450;
     
+    User *topLeft = self.users[1];
+    User *topRight = self.users[3];
+    User *bottomLeft = self.users[0];
+    User *bottomRight = self.users[2];
+    
     return
-    [self distanceBetween:CGPointMake(0, 0) and:location] < max
+    ([self distanceBetween:CGPointMake(0, 0) and:location] < max && topLeft.bandmate1.alpha != 0.0f)
     ||
-    [self distanceBetween:CGPointMake(0, self.view.frame.size.width) and:location] < max
+    ([self distanceBetween:CGPointMake(0, self.view.frame.size.width) and:location] < max && topRight.bandmate1.alpha != 0.0f)
     ||
-    [self distanceBetween:CGPointMake(self.view.frame.size.height, 0) and:location] < max
+    ([self distanceBetween:CGPointMake(self.view.frame.size.height, 0) and:location] < max && bottomLeft.bandmate1.alpha != 0.0f)
     ||
-    [self distanceBetween:CGPointMake(self.view.frame.size.height, self.view.frame.size.width) and:location] < max
+    ([self distanceBetween:CGPointMake(self.view.frame.size.height, self.view.frame.size.width) and:location] < max && bottomRight.bandmate1.alpha != 0.0f)
     ;
 }
 

@@ -91,6 +91,7 @@
 		83BA01B31861BB6C00228543 /* Staff-28.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01921861BB6C00228543 /* Staff-28.png */; };
 		83BA01B41861BB6C00228543 /* Staff-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01931861BB6C00228543 /* Staff-29.png */; };
 		83BA01B91861BDBA00228543 /* concession.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01B81861BDBA00228543 /* concession.png */; };
+		83BA01BD1861DD5D00228543 /* chomp.wav in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01BC1861DD5D00228543 /* chomp.wav */; };
 		DA57F8651860683300DCC187 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA57F8641860683300DCC187 /* AudioToolbox.framework */; };
 		DA57F8671860683900DCC187 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA57F8661860683900DCC187 /* CFNetwork.framework */; };
 		DA57F8691860684300DCC187 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA57F8681860684300DCC187 /* CoreLocation.framework */; };
@@ -206,6 +207,7 @@
 		83BA01921861BB6C00228543 /* Staff-28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Staff-28.png"; path = "FestivalPrototype/Resources/Images/Staff/Staff-28.png"; sourceTree = SOURCE_ROOT; };
 		83BA01931861BB6C00228543 /* Staff-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Staff-29.png"; path = "FestivalPrototype/Resources/Images/Staff/Staff-29.png"; sourceTree = SOURCE_ROOT; };
 		83BA01B81861BDBA00228543 /* concession.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = concession.png; sourceTree = "<group>"; };
+		83BA01BC1861DD5D00228543 /* chomp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chomp.wav; sourceTree = "<group>"; };
 		B08A6521211741BC89EA34F0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		DA57F8641860683300DCC187 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DA57F8661860683900DCC187 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -296,6 +298,7 @@
 		27CD017918587CBA008E034E /* Music */ = {
 			isa = PBXGroup;
 			children = (
+				83BA01BC1861DD5D00228543 /* chomp.wav */,
 				83BA01731861B98800228543 /* crowd.wav */,
 				521C621F1861B0E90083D2CC /* Dustin */,
 				521C62141860BC9A0083D2CC /* Sven */,
@@ -628,6 +631,7 @@
 				521C61E0186080D90083D2CC /* 1129057.mp3 in Resources */,
 				83BA019E1861BB6C00228543 /* Staff-7.png in Resources */,
 				521C621D1860BCAA0083D2CC /* 3660642.mp3 in Resources */,
+				83BA01BD1861DD5D00228543 /* chomp.wav in Resources */,
 				83BA01B01861BB6C00228543 /* Staff-25.png in Resources */,
 				83BA01741861B98800228543 /* crowd.wav in Resources */,
 				83BA01A11861BB6C00228543 /* Staff-10.png in Resources */,
