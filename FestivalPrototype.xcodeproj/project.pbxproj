@@ -89,6 +89,7 @@
 		83BA01B51861BB6C00228543 /* Staff-30.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01941861BB6C00228543 /* Staff-30.png */; };
 		83BA01B61861BB6C00228543 /* Staff-31.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01951861BB6C00228543 /* Staff-31.png */; };
 		83BA01B71861BB6C00228543 /* Staff-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01961861BB6C00228543 /* Staff-32.png */; };
+		83BA01B91861BDBA00228543 /* concession.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01B81861BDBA00228543 /* concession.png */; };
 		DA57F8651860683300DCC187 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA57F8641860683300DCC187 /* AudioToolbox.framework */; };
 		DA57F8671860683900DCC187 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA57F8661860683900DCC187 /* CFNetwork.framework */; };
 		DA57F8691860684300DCC187 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA57F8681860684300DCC187 /* CoreLocation.framework */; };
@@ -202,6 +203,7 @@
 		83BA01941861BB6C00228543 /* Staff-30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Staff-30.png"; path = "FestivalPrototype/Resources/Images/Staff/Staff-30.png"; sourceTree = SOURCE_ROOT; };
 		83BA01951861BB6C00228543 /* Staff-31.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Staff-31.png"; path = "FestivalPrototype/Resources/Images/Staff/Staff-31.png"; sourceTree = SOURCE_ROOT; };
 		83BA01961861BB6C00228543 /* Staff-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Staff-32.png"; path = "FestivalPrototype/Resources/Images/Staff/Staff-32.png"; sourceTree = SOURCE_ROOT; };
+		83BA01B81861BDBA00228543 /* concession.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = concession.png; sourceTree = "<group>"; };
 		B08A6521211741BC89EA34F0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		DA57F8641860683300DCC187 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DA57F8661860683900DCC187 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -267,6 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				277BC7431861B30F00030A22 /* bg.png */,
+				83BA01B81861BDBA00228543 /* concession.png */,
 				8387F6D61860ABF4003FD39F /* bandmate.png */,
 				8387F6CC186092E1003FD39F /* stage.png */,
 				27CD017818587CBA008E034E /* Faces */,
@@ -567,6 +570,7 @@
 				83BA01AB1861BB6C00228543 /* Staff-20.png in Resources */,
 				83BA01AC1861BB6C00228543 /* Staff-21.png in Resources */,
 				521C621B1860BCAA0083D2CC /* 1228061.mp3 in Resources */,
+				83BA01B91861BDBA00228543 /* concession.png in Resources */,
 				83BA01A51861BB6C00228543 /* Staff-14.png in Resources */,
 				83BA01A31861BB6C00228543 /* Staff-12.png in Resources */,
 				83BA01A01861BB6C00228543 /* Staff-9.png in Resources */,

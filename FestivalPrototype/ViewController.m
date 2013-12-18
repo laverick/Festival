@@ -117,6 +117,8 @@
     [self createUsersSK];
 #else
     [self createUsers];
+    
+    [self createConcessionStand];
 
     [self updateUI];
     
@@ -136,6 +138,25 @@
 }
 
 #pragma mark - Users
+
+- (void)createConcessionStand
+{
+    UIImageView *concession = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"concession"]];
+    concession.userInteractionEnabled = YES;
+    concession.frame = CGRectMake(412, 20, 200, 154);
+    [self.scene addSubview:concession];
+    UITapGestureRecognizer *concessionTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buyWater)];
+    concession.gestureRecognizers = @[concessionTap];
+}
+
+- (void)buyWater
+{
+    [[[UIAlertView alloc] initWithTitle:@"Confirm Your In-App Purchase"
+                                message:@"Do you want to buy one Overpriced Priced Bottle of Water for £4.99?"
+                               delegate:nil
+                      cancelButtonTitle:@"Cancel"
+                      otherButtonTitles:@"Buy", nil] show];
+}
 
 - (void)createUsers
 {
@@ -217,7 +238,7 @@
     self.collision.translatesReferenceBoundsIntoBoundary = YES;
     
     self.pushers = [NSMutableArray array];
-    for (int i = 0; i< 20; i++) {
+    for (int i = 0; i< 8; i++) {
         CrowdMember *person = [[CrowdMember alloc] initWithFrame:CGRectMake(250 + i * 20, 250 + i * 20, 15, 15)];
         person.backgroundColor = [UIColor blueColor];
         
@@ -226,13 +247,13 @@
                 person.targetLoc = CGPointMake(200, 200);
                 break;
             case 1:
-                person.targetLoc = CGPointMake(200, 500);
+                person.targetLoc = CGPointMake(200, 550);
                 break;
             case 2:
                 person.targetLoc = CGPointMake(800, 200);
                 break;
             default:
-                person.targetLoc = CGPointMake(800, 500);
+                person.targetLoc = CGPointMake(800, 550);
                 break;
         }
         
@@ -311,7 +332,7 @@
                                                              audioController:self.audioController
                                                                        error:NULL];
         crowd.loop = YES;
-        crowd.volume = 0.05f;
+        crowd.volume = 0.025f;
         crowd.pan = 0.0f;
         crowd.currentTime = 0;
         
