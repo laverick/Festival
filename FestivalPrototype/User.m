@@ -188,7 +188,7 @@ static const CGFloat LeadingBandmateRestingY = 44.f;
                                      UIViewAnimationOptionCurveEaseInOut)
                          animations:^{
                              CGRect frame = bandmate.frame;
-                             int jumpHeight = (arc4random() % 10) + 7;
+                             int jumpHeight = (arc4random() % 5) + 7;
                              NSLog(@"%u", jumpHeight);
                              frame.origin.y = BandmateRestingY + jumpHeight;
                              bandmate.frame = frame;
@@ -201,7 +201,7 @@ static const CGFloat LeadingBandmateRestingY = 44.f;
                         options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse)
                      animations:^{
                          CGRect frame = self.bandmate2.frame;
-                         int jumpHeight = (arc4random() % 10) + 7;
+                         int jumpHeight = (arc4random() % 5) + 7;
                          NSLog(@"%u", jumpHeight);
                          frame.origin.y = LeadingBandmateRestingY + jumpHeight;
                          self.bandmate2.frame = frame;
