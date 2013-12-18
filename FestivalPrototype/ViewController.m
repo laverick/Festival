@@ -214,13 +214,13 @@
         [self.animator addBehavior:self.usersBehavior];
         
         User *user1 = self.users[0]; // Dustin, Lower-Left
-        user1.view.transform = CGAffineTransformMakeRotation(6);
+        user1.view.transform = CGAffineTransformMakeRotation(6.2);
         User *user2 = self.users[1]; // Luke, Upper-Left
-        user2.view.transform = CGAffineTransformMakeRotation(6);
+        user2.view.transform = CGAffineTransformMakeRotation(6.2);
         User *user3 = self.users[2]; // Maciej, Lower-Right
-        user3.view.transform = CGAffineTransformMakeRotation(0.25);
+        user3.view.transform = CGAffineTransformMakeRotation(0.05);
         User *user4 = self.users[3]; // Michal, Upper-Right
-        user4.view.transform = CGAffineTransformMakeRotation(0.25);
+        user4.view.transform = CGAffineTransformMakeRotation(0.05);
     }
 }
 
