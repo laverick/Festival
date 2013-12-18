@@ -23,7 +23,7 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
 @property (nonatomic) NSTimer *fadeOutTimer;
 @property (nonatomic) AEAudioController *controllerCopy;
 @property (nonatomic) BOOL mainUser;
-@property (nonatomic) BOOL isAnimating;
+
 
 @end
 

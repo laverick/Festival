@@ -590,13 +590,13 @@
     User *bottomRight = self.users[2];
     
     return
-    ([self distanceBetween:CGPointMake(0, 0) and:location] < max && topLeft.bandmate1.alpha != 0.0f)
+    ([self distanceBetween:CGPointMake(0, 0) and:location] < max && topLeft.bandmate1.alpha != 0.0f && topLeft.isAnimating)
     ||
-    ([self distanceBetween:CGPointMake(self.view.frame.size.width, 0) and:location] < max && topRight.bandmate1.alpha != 0.0f)
+    ([self distanceBetween:CGPointMake(self.view.frame.size.width, 0) and:location] < max && topRight.bandmate1.alpha != 0.0f && topRight.isAnimating)
     ||
-    ([self distanceBetween:CGPointMake(0, self.view.frame.size.height) and:location] < max && bottomLeft.bandmate1.alpha != 0.0f)
+    ([self distanceBetween:CGPointMake(0, self.view.frame.size.height) and:location] < max && bottomLeft.bandmate1.alpha != 0.0f && bottomLeft.isAnimating)
     ||
-    ([self distanceBetween:CGPointMake(self.view.frame.size.width, self.view.frame.size.height) and:location] < max && bottomRight.bandmate1.alpha != 0.0f)
+    ([self distanceBetween:CGPointMake(self.view.frame.size.width, self.view.frame.size.height) and:location] < max && bottomRight.bandmate1.alpha != 0.0f && bottomRight.isAnimating)
     ;
 }
 
@@ -608,8 +608,6 @@
 - (void)moveUserToPosition:(CGPoint)position
 {
     self.mainUser.position = position;
-    
-
     
     [self updateUI];
     
