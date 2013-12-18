@@ -420,6 +420,7 @@
         user.trackLabel.text = nil;
     }
 
+    if (![artist isEqualToString:@""] && ![title isEqualToString:@""]) {
     dispatch_async(dispatch_get_global_queue(0,0), ^{
         NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:imageURL]];
         if ( data == nil ) {
@@ -430,6 +431,11 @@
             user.coverImageView2.image = [UIImage imageWithData: data];
         });
     });
+    }
+    else {
+        user.coverImageView.image = nil;
+        user.coverImageView2.image = nil;
+    }
 }
 
 - (void)stopTracksFromUser:(User *)user
