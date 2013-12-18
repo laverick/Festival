@@ -24,6 +24,8 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
 @property (nonatomic) AEAudioController *controllerCopy;
 @property (nonatomic) BOOL mainUser;
 
+@property (nonatomic) NSString *artist;
+
 
 @end
 
@@ -243,6 +245,8 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
                              self.bandmate2.frame = frame;
                          }
                          completion:nil];
+        
+        self.trackLabel.text = self.artist;
     }
 
 }
@@ -279,6 +283,7 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
         CGRect frame = self.bandmate2.frame;
         frame.origin.y = LeadingBandmateRestingY;
         self.bandmate2.frame = frame;
+        self.artist = self.trackLabel.text;
         self.trackLabel.text = nil;
         self.coverImageView.image = nil;
         self.coverImageView2.image = nil;
