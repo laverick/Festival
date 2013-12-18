@@ -10,62 +10,166 @@
 
 const uint32_t SolidCategory  =  0x1 << 0;
 
+static inline CGVector VectorMultiply(CGVector vector, CGFloat m);
+
+static inline CGVector VectorMinus(CGPoint p1, CGPoint p2)
+{
+    return CGVectorMake(
+                        p1.x - p2.x,
+                        p1.y - p2.y
+                        );
+}
+
+static inline CGFloat VectorLength(CGVector vector)
+{
+	return sqrtf(vector.dx * vector.dx + vector.dy * vector.dy);
+}
+
+static inline CGVector VectorUnit(CGVector vector)
+{
+	CGFloat invLen = 1.0 / VectorLength(vector);
+	return VectorMultiply(vector, invLen);
+}
+
+static inline CGVector VectorMultiply(CGVector vector, CGFloat m)
+{
+    return CGVectorMake(
+                        vector.dx * m,
+                        vector.dy * m
+                        );
+}
+
+@interface MyScene ()
+
+@property (nonatomic) NSMutableArray *persons;
+
+@end
+
 @implementation MyScene {
     SKNode *_nodeA;
     SKNode *_nodeB;
     SKNode *_movingNode;
+    SKNode *_edge;
 }
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         
+        self.view.showsFPS = YES;
+        self.view.showsNodeCount = YES;
+
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
 
-        _nodeA = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(80, 80)];
-        _nodeA.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-        _nodeA.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_nodeA.frame.size];
-        _nodeA.physicsBody.dynamic = YES;
-        _nodeA.physicsBody.categoryBitMask = SolidCategory;
-        [self addChild:_nodeA];
-
-        _nodeB = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(80, 80)];
-        _nodeB.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-        _nodeB.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_nodeB.frame.size];
-        _nodeB.physicsBody.dynamic = YES;
-        _nodeB.physicsBody.categoryBitMask = SolidCategory;
-        [self addChild:_nodeB];
-
         self.physicsWorld.gravity = CGVectorMake(0, 0);
+        SKPhysicsBody* borderBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
+        self.physicsBody = borderBody;
+        self.physicsBody.friction = 0;
+        self.physicsBody.categoryBitMask = SolidCategory;
+
+        { // top
+            SKNode* top = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:CGSizeMake(1024, 50)];
+            top.position = CGPointMake(512, 824);
+            top.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:top.frame.size];
+            top.physicsBody.categoryBitMask = SolidCategory;
+            top.physicsBody.dynamic = NO;
+            [self addChild:top];
+        }
+        { // bottom
+            SKNode* bottom = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:CGSizeMake(1024, 50)];
+            bottom.position = CGPointMake(512, 200);
+            bottom.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:bottom.frame.size];
+            bottom.physicsBody.categoryBitMask = SolidCategory;
+            bottom.physicsBody.dynamic = NO;
+            [self addChild:bottom];
+        }
+        
+        [self createCrowd];
     }
 
     return self;
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    for (UITouch *touch in touches) {
-        CGPoint location = [touch locationInNode:self];
-        for (SKNode *n in @[_nodeA, _nodeB]) {
-            if (CGRectContainsPoint(n.frame, location)) {
-                _movingNode = n;
+- (void)createCrowd
+{
+    self.persons = [NSMutableArray array];
+    for (int i = 0; i < 20; i++) {
+        SKSpriteNode *person = [[SKSpriteNode alloc] initWithColor:[SKColor blueColor] size:CGSizeMake(15, 15)];
+        person.position = CGPointMake(250 + i * 20, 250 + i * 20);
+        person.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:person.frame.size];
+        person.physicsBody.dynamic = YES;
+        person.physicsBody.categoryBitMask = SolidCategory;
+        person.physicsBody.mass = 2;
+        person.physicsBody.friction = 0;
+        person.physicsBody.linearDamping = 0;
+        person.physicsBody.restitution = 0;
+        [self.persons addObject:person];
+        [self addChild:person];
+        
+        CGPoint targetLoc;
+        switch (i%4) {
+            case 0:
+                targetLoc = CGPointMake(200, 200);
                 break;
-            }
+            case 1:
+                targetLoc = CGPointMake(200, 500);
+                break;
+            case 2:
+                targetLoc = CGPointMake(800, 200);
+                break;
+            default:
+                targetLoc = CGPointMake(800, 500);
+                break;
         }
+        CGVector direction = VectorUnit(CGVectorMake(targetLoc.x - person.position.x, targetLoc.y - person.position.y));
+        
+        CGFloat magnitude = 100;
+        person.physicsBody.velocity = VectorMultiply(direction, magnitude);
+
     }
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+//    for (UITouch *touch in touches) {
+//        CGPoint location = [touch locationInNode:self];
+//        for (SKNode *n in @[_nodeA, _nodeB]) {
+//            if (CGRectContainsPoint(n.frame, location)) {
+//                _movingNode = n;
+//                break;
+//            }
+//        }
+//    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    for (UITouch *touch in touches) {
-        CGPoint location = [touch locationInNode:self];
-        CGPoint newLoc = CGPointMake(location.x, location.y);
-        _movingNode.position = newLoc;
-    }
+//    for (UITouch *touch in touches) {
+//        CGPoint location = [touch locationInNode:self];
+//        CGPoint newLoc = CGPointMake(location.x, location.y);
+//        _movingNode.position = newLoc;
+//    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     _movingNode = nil;
+}
+
+- (void)update:(NSTimeInterval)currentTime
+{
+    const int maxSpeed = 1000;
+
+    for (SKNode *p in self.persons) {
+        CGFloat v = VectorLength(p.physicsBody.velocity);
+        if (v > maxSpeed) {
+            p.physicsBody.linearDamping = 0.4f;
+        } else {
+            p.physicsBody.linearDamping = 0.0f;
+            CGFloat magnitude = 0.5;
+            CGVector direction = VectorUnit(p.physicsBody.velocity);
+            [p.physicsBody applyImpulse:VectorMultiply(direction, magnitude)];
+        }
+    }
 }
 
 @end
