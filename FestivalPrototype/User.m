@@ -24,6 +24,8 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
 @property (nonatomic) AEAudioController *controllerCopy;
 @property (nonatomic) BOOL mainUser;
 
+@property (nonatomic) NSString *artist;
+
 
 @end
 
@@ -83,10 +85,14 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
         _musicNoteView.clipsToBounds = NO;
         _musicNoteView.hidden = YES;
         
+        _crowdHangers = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"crowdhangers"]];
+        _crowdHangers.frame = CGRectMake(4, 125, 225, 90);
+        
         if (_mainUser) {
             // customize main user
         } else {
             [self.view addSubview:self.stageImageView];
+            [self.view addSubview:self.crowdHangers];
             [self.view addSubview:self.coverImageView];
             [self.view addSubview:self.coverImageView2];
             [self.view addSubview:self.nameLabel];
@@ -243,6 +249,8 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
                              self.bandmate2.frame = frame;
                          }
                          completion:nil];
+        
+        self.trackLabel.text = self.artist;
     }
 
 }
@@ -279,6 +287,7 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
         CGRect frame = self.bandmate2.frame;
         frame.origin.y = LeadingBandmateRestingY;
         self.bandmate2.frame = frame;
+        self.artist = self.trackLabel.text;
         self.trackLabel.text = nil;
         self.coverImageView.image = nil;
         self.coverImageView2.image = nil;
