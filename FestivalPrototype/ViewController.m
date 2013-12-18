@@ -169,10 +169,22 @@
 
 - (void)getFatter
 {
+    NSURL *fileURL = [[NSBundle mainBundle] URLForResource:@"chomp" withExtension:@"wav"];
+    if (fileURL) {
+        AEAudioFilePlayer *chomp = [AEAudioFilePlayer audioFilePlayerWithURL:fileURL
+                                                             audioController:self.audioController
+                                                                       error:NULL];
+        chomp.loop = NO;
+        chomp.volume = 0.8f;
+        chomp.currentTime = 0;
+        
+        [self.audioController addChannels:@[chomp]];
+    }
+    
     self.currentFatness += 0.2f;
     NSLog(@"Making Nico fatter: %f", self.currentFatness);
     [UIView animateWithDuration:0.15f
-                          delay:0.0f
+                          delay:1.4f
                         options:kNilOptions
                      animations:^{
                          self.mainUserImage.transform = CGAffineTransformMakeScale(self.currentFatness*1.4, self.currentFatness*1.2);
