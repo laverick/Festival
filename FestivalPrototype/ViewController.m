@@ -130,7 +130,7 @@ static const int numCrowd = 8;
 
 #ifndef USE_SK
     
-    [self createCrowd];
+//    [self createCrowd];
 
     [self createUsers];
     
