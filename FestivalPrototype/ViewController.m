@@ -157,7 +157,7 @@
 - (void)buyWater
 {
     [[[UIAlertView alloc] initWithTitle:@"Confirm Your In-App Purchase"
-                                message:@"Do you want to buy one Overpriced Hamburger for £4.99?"
+                                message:@"Do you want to buy one Overpriced Hamburger for £12.69?"
                                delegate:self
                       cancelButtonTitle:@"Cancel"
                       otherButtonTitles:@"Buy", nil] show];
