@@ -21,7 +21,7 @@
 static const CGPoint targets[] = {(CGPoint){200, 200}, (CGPoint){200, 550}, (CGPoint){800, 200}, (CGPoint){800, 550}};
 
 
-static const int numCrowd = 20;
+static const int numCrowd = 8;
 //#define USE_SK
 
 @interface ViewController () <UIAlertViewDelegate>
@@ -130,7 +130,7 @@ static const int numCrowd = 20;
 
 #ifndef USE_SK
     
-//    [self createCrowd];
+    [self createCrowd];
 
     [self createUsers];
     
@@ -357,7 +357,7 @@ static const int numCrowd = 20;
     
     self.pushers = [NSMutableArray array];
     for (int i = 0; i< numCrowd; i++) {
-        CrowdMember *person = [[CrowdMember alloc] initWithFrame:CGRectMake(300 + 15 * (i % 30), 210 + 15 * (i / 30), 30, 30)];
+        CrowdMember *person = [[CrowdMember alloc] initWithFrame:CGRectMake(500 + 15 * (i % 30), 410 + 15 * (i / 30), 50, 50)];
 
         person.image = [UIImage imageNamed:[NSString stringWithFormat:@"Staff-%i.png", i]];
         
@@ -381,14 +381,27 @@ static const int numCrowd = 20;
 
 - (void)moveCrowd
 {
+    int i = 0;
     for (UIPushBehavior *pusher in self.pushers) {
+        ++i;
         CrowdMember *person = (CrowdMember *)[pusher.items firstObject];
         CGVector diff = CGVectorMake(person.targetLoc.x - person.center.x, person.targetLoc.y - person.center.y);
         pusher.magnitude = 0;
         pusher.pushDirection = diff;
         CGFloat multiplier = sqrtf(diff.dx * diff.dx)+(diff.dy * diff.dy);
         pusher.magnitude /= 10000 + multiplier;   // distance away &
+
+        
+        float changeChance = (arc4random()%1000)/1000.0f;
+        if (changeChance <= 0.05){
+            int i = arc4random() % 4;
+            person.targetLoc = targets[i];
+        }
+
     }
+    
+    
+    
 }
 
 #pragma mark - Drawing
