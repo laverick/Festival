@@ -141,22 +141,28 @@ static const CGFloat UserHeight = 135.0f;
 
 - (void)stopAnimatingBandmates
 {
-        dispatch_async(dispatch_get_main_queue(), ^{
-    NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
-    for (UIView *bandmate in bandmates) {
-        CGRect frame = bandmate.frame;
-        frame.origin.y = 80;
-        bandmate.frame = frame;
-        [bandmate.layer removeAllAnimations];
-    }
-                });
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
+        for (UIView *bandmate in bandmates) {
+            CGRect frame = bandmate.frame;
+            frame.origin.y = 80;
+            bandmate.frame = frame;
+            [bandmate.layer removeAllAnimations];
+        }
+    });
 }
 
 - (void)clearStage
 {
     NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
     for (UIView *bandmate in bandmates) {
-        bandmate.hidden = YES;
+        [UIView animateWithDuration:0.75f
+                              delay:0.0f
+                            options:kNilOptions
+                         animations:^{
+                             bandmate.alpha = 0.0f;
+                         }
+                         completion:nil];
     }
 }
 
@@ -164,7 +170,13 @@ static const CGFloat UserHeight = 135.0f;
 {
     NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
     for (UIView *bandmate in bandmates) {
-        bandmate.hidden = NO;
+        [UIView animateWithDuration:0.75f
+                              delay:0.0f
+                            options:kNilOptions
+                         animations:^{
+                             bandmate.alpha = 1.0f;
+                         }
+                         completion:nil];
     }
 }
 
