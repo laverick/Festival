@@ -68,7 +68,7 @@
     scene.scaleMode = SKSceneScaleModeAspectFill;
     [(SKView *)self.view presentScene:scene];
 #else
-    [self createCrowd];
+//    [self createCrowd];
 #endif
     
 

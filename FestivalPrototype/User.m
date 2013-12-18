@@ -75,6 +75,10 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
         _bandmate2.frame = CGRectMake(80, LeadingBandmateRestingY, 60, 60);
         _bandmate3.frame = CGRectMake(160, BandmateRestingY, 40, 40);
         
+        _musicNoteView = [[PPEmitterView alloc] initWithFrame:CGRectMake(38, 0, 100, 100)];
+        _musicNoteView.clipsToBounds = NO;
+        _musicNoteView.hidden = YES;
+        
         if (mainUser) {
             // customize main user
         } else {
@@ -86,6 +90,7 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
             [self.view addSubview:_bandmate1];
             [self.view addSubview:_bandmate2];
             [self.view addSubview:_bandmate3];
+            [self.view addSubview:_musicNoteView];
             [self clearStageWithAnimation:NO];
             
             _audioQueue = dispatch_queue_create("audio queue", NULL);
@@ -145,6 +150,7 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
             self.player.currentTime = 0;
             
             [controller addChannels:@[self.player]];
+            
         } else {
             NSLog(@"TRACK NOT FOUND, YO!");
         }
@@ -180,6 +186,7 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
 - (void)animateBandmates
 {
         NSLog(@"start animating");
+    self.musicNoteView.hidden = NO;
     NSArray *bandmates = @[self.bandmate1, self.bandmate3];
     for (UIImageView *bandmate in bandmates) {
         [UIView animateWithDuration:0.25f
@@ -212,6 +219,7 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
 - (void)stopAnimatingBandmates
 {
     NSLog(@"Stop animating");
+    self.musicNoteView.hidden = YES;
         NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
         for (UIView *bandmate in bandmates) {
             CGRect frame = bandmate.frame;

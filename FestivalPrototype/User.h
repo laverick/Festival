@@ -11,6 +11,7 @@
 #import "AEAudioController.h"
 #import "AEAudioFilePlayer.h"
 #import "AEAudioUnitFilter.h"
+#import "PPEmitterView.h"
 
 @interface User : NSObject
 
@@ -24,6 +25,7 @@
 @property (nonatomic) UIImageView *bandmate3;
 @property (nonatomic, strong) AEAudioFilePlayer *player;
 @property (nonatomic) CGPoint position;
+@property (nonatomic, strong) PPEmitterView *musicNoteView;
 
 @property (nonatomic, strong) UIImageView *stageImageView;
 @property (nonatomic, strong) UIImageView *coverImageView;
