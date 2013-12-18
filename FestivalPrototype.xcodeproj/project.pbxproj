@@ -94,6 +94,7 @@
 		83BA01BD1861DD5D00228543 /* chomp.wav in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01BC1861DD5D00228543 /* chomp.wav */; };
 		83BA01C01861ED3100228543 /* PPEmitterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BA01BF1861ED3100228543 /* PPEmitterView.m */; };
 		83BA01C21861ED4300228543 /* notes.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01C11861ED4300228543 /* notes.png */; };
+		83BA01C41861F89500228543 /* slim.wav in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01C31861F89500228543 /* slim.wav */; };
 		DA57F8651860683300DCC187 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA57F8641860683300DCC187 /* AudioToolbox.framework */; };
 		DA57F8671860683900DCC187 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA57F8661860683900DCC187 /* CFNetwork.framework */; };
 		DA57F8691860684300DCC187 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA57F8681860684300DCC187 /* CoreLocation.framework */; };
@@ -213,6 +214,7 @@
 		83BA01BE1861ED3100228543 /* PPEmitterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPEmitterView.h; sourceTree = "<group>"; };
 		83BA01BF1861ED3100228543 /* PPEmitterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPEmitterView.m; sourceTree = "<group>"; };
 		83BA01C11861ED4300228543 /* notes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notes.png; sourceTree = "<group>"; };
+		83BA01C31861F89500228543 /* slim.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = slim.wav; sourceTree = "<group>"; };
 		B08A6521211741BC89EA34F0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		DA57F8641860683300DCC187 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DA57F8661860683900DCC187 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -306,6 +308,7 @@
 			children = (
 				83BA01BC1861DD5D00228543 /* chomp.wav */,
 				83BA01731861B98800228543 /* crowd.wav */,
+				83BA01C31861F89500228543 /* slim.wav */,
 				521C621F1861B0E90083D2CC /* Dustin */,
 				521C62141860BC9A0083D2CC /* Sven */,
 				521C62091860B72E0083D2CC /* Luke */,
@@ -620,6 +623,7 @@
 				8387F6D71860ABF4003FD39F /* bandmate.png in Resources */,
 				83BA01A61861BB6C00228543 /* Staff-15.png in Resources */,
 				521C62121860B7450083D2CC /* 6553066.mp3 in Resources */,
+				83BA01C41861F89500228543 /* slim.wav in Resources */,
 				83BA01AE1861BB6C00228543 /* Staff-23.png in Resources */,
 				83BA019A1861BB6C00228543 /* Staff-3.png in Resources */,
 				27E86B7B18585F1B00A8E88B /* Images.xcassets in Resources */,

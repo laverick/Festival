@@ -174,6 +174,14 @@
     return YES;
 }
 
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    if (motion == UIEventSubtypeMotionShake )
+    {
+        [self getThinner];
+    }
+}
+
 #pragma mark - Users
 
 - (void)createConcessionStand
@@ -216,6 +224,36 @@
                         options:kNilOptions
                      animations:^{
                          self.mainUserImage.transform = CGAffineTransformMakeScale(self.currentFatness*1.4, self.currentFatness*1.2);
+                     }
+                     completion:^(BOOL finished) {
+                         [UIView animateWithDuration:0.15f
+                                          animations:^{
+                                              self.mainUserImage.transform = CGAffineTransformMakeScale(self.currentFatness, self.currentFatness);
+                                          }];
+                     }];
+}
+
+- (void)getThinner
+{
+    NSURL *fileURL = [[NSBundle mainBundle] URLForResource:@"slim" withExtension:@"wav"];
+    if (fileURL) {
+        AEAudioFilePlayer *slim = [AEAudioFilePlayer audioFilePlayerWithURL:fileURL
+                                                            audioController:self.audioController
+                                                                      error:NULL];
+        slim.loop = NO;
+        slim.volume = 0.5f;
+        slim.currentTime = 0;
+        
+        [self.audioController addChannels:@[slim]];
+    }
+    
+    self.currentFatness = 1.0f;
+    NSLog(@"Making Nico thinner: %f", self.currentFatness);
+    [UIView animateWithDuration:0.15f
+                          delay:0.15f
+                        options:kNilOptions
+                     animations:^{
+                         self.mainUserImage.transform = CGAffineTransformMakeScale(self.currentFatness*0.6, self.currentFatness*0.8);
                      }
                      completion:^(BOOL finished) {
                          [UIView animateWithDuration:0.15f
