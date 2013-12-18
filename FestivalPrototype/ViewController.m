@@ -107,8 +107,8 @@
         }
         
         if (userToUpdate){
-            [userToUpdate clearStage];
             [userToUpdate stopAnimatingBandmates];
+            [userToUpdate clearStageWithAnimation:YES];
             [self stopTracksFromUser:userToUpdate];
         }
     };
@@ -210,7 +210,7 @@
 
 - (void)createCrowd
 {
-    
+    return;
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
     
     self.collision = [[UICollisionBehavior alloc] init];
