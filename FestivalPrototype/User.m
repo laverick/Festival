@@ -43,12 +43,17 @@ static const CGFloat UserHeight = 135.0f;
         _stageImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"stage"]];
         _stageImageView.frame = CGRectMake(0, 0, UserWidth, UserHeight);
         
-        _bandmate1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bandmate"]];
+        int bandmate1Pic = arc4random() % 33;
+        int bandmate3Pic = arc4random() % 33;
+        NSString *bandmate1FileName = [NSString stringWithFormat:@"Staff-%d", bandmate1Pic];
+        NSString *bandmate3FileName = [NSString stringWithFormat:@"Staff-%d", bandmate3Pic];
+        
+        _bandmate1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:bandmate1FileName]];
         _bandmate2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[name lowercaseString]]];
-        _bandmate3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bandmate"]];
+        _bandmate3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:bandmate3FileName]];
         
         _bandmate1.frame = CGRectMake(20, 80, 40, 40);
-        _bandmate2.frame = CGRectMake(88, 80, 60, 60);
+        _bandmate2.frame = CGRectMake(80, 80, 60, 60);
         _bandmate3.frame = CGRectMake(160, 80, 40, 40);
         
         if (!mainUser) {
@@ -62,6 +67,8 @@ static const CGFloat UserHeight = 135.0f;
     }
     return self;
 }
+
+
 
 - (CGFloat)distanceFrom:(User *)user
 {
@@ -197,6 +204,33 @@ static const CGFloat UserHeight = 135.0f;
 - (void)setPan:(CGFloat)pan
 {
     self.player.pan = pan;
+}
+
+
+#pragma mark - Motion Effect
+- (UIView *)viewWithMotionEffect
+{
+    UIView *view = [UIView new];
+    UIInterpolatingMotionEffect *verticalMotionEffect =
+    [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+    
+    verticalMotionEffect.minimumRelativeValue = @(-50);
+    verticalMotionEffect.maximumRelativeValue = @(50);
+    
+    UIInterpolatingMotionEffect *horizontalMotionEffect =
+    [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+    
+    horizontalMotionEffect.minimumRelativeValue = @(-50);
+    
+    horizontalMotionEffect.maximumRelativeValue = @(50);
+    
+    
+    UIMotionEffectGroup *group = [UIMotionEffectGroup new];
+    
+    group.motionEffects = @[horizontalMotionEffect, verticalMotionEffect];
+    
+    [view addMotionEffect:group];
+    return view;
 }
 
 @end
