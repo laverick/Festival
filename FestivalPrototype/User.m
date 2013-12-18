@@ -48,10 +48,9 @@ static const CGFloat LeadingBandmateRestingY = 44.f;
         _trackLabel.textAlignment = NSTextAlignmentCenter;
 //        _trackLabel.backgroundColor = [UIColor blueColor];
         
-        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 80, UserWidth, UserHeight)];
-
-        _nameLabel.text = [NSString stringWithFormat:@"%@'s", name];
-        _nameLabel.font = [UIFont boldSystemFontOfSize:18];
+        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, -54, UserWidth, UserHeight)];
+        _nameLabel.text = name;
+        _nameLabel.font = [UIFont boldSystemFontOfSize:15];
         _nameLabel.textColor = [UIColor whiteColor];
         _nameLabel.textAlignment = NSTextAlignmentCenter;
         

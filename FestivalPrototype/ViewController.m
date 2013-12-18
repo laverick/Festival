@@ -412,8 +412,9 @@
     inAudioController:self.audioController
            withVolume:[self volumeForUser:user]
                   pan:[self panForUser:user]];
-    if (title && artist) {
-        user.trackLabel.text = [NSString stringWithFormat:@"%@ by %@", title, artist];
+    if (title && artist && ![title isEqualToString:@""] && ![artist isEqualToString:@""]) {
+//        user.trackLabel.text = [NSString stringWithFormat:@"%@ by %@", title, artist];
+        user.trackLabel.text = artist;
     }
 
     dispatch_async(dispatch_get_global_queue(0,0), ^{
