@@ -11,6 +11,8 @@
 static const CGFloat UserWidth = 233.0f;
 static const CGFloat UserHeight = 135.0f;
 
+static const CGFloat BandmateRestingY = 64.0f;
+
 @interface User ()
 
 @property (nonatomic) NSUInteger currentTrackIndex;
@@ -52,9 +54,9 @@ static const CGFloat UserHeight = 135.0f;
         _bandmate2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[name lowercaseString]]];
         _bandmate3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:bandmate3FileName]];
         
-        _bandmate1.frame = CGRectMake(20, 80, 40, 40);
-        _bandmate2.frame = CGRectMake(80, 80, 60, 60);
-        _bandmate3.frame = CGRectMake(160, 80, 40, 40);
+        _bandmate1.frame = CGRectMake(20, BandmateRestingY, 40, 40);
+        _bandmate2.frame = CGRectMake(80, BandmateRestingY, 60, 60);
+        _bandmate3.frame = CGRectMake(160, BandmateRestingY, 40, 40);
         
         if (mainUser) {
             // customize main user
@@ -145,7 +147,8 @@ static const CGFloat UserHeight = 135.0f;
                                 options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse)
                              animations:^{
                                  CGRect frame = bandmate.frame;
-                                 frame.origin.y = 70;
+                                 int jumpHeight = (arc4random() % 5) + 7;
+                                 frame.origin.y = BandmateRestingY + jumpHeight;
                                  bandmate.frame = frame;
                              }
                              completion:nil];
@@ -158,7 +161,7 @@ static const CGFloat UserHeight = 135.0f;
         NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
         for (UIView *bandmate in bandmates) {
             CGRect frame = bandmate.frame;
-            frame.origin.y = 80;
+            frame.origin.y = BandmateRestingY;
             bandmate.frame = frame;
             [bandmate.layer removeAllAnimations];
         }
