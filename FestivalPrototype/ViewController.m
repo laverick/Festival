@@ -133,12 +133,40 @@
     
     [self configurePlayer];
 
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1f
-                                                  target:self
-                                                selector:@selector(updateUser)
-                                                userInfo:nil
-                                                 repeats:YES];
+
 #endif
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    CGRect frame = self.mainUser.view.frame;
+    CGRect newFrame = frame;
+    newFrame.origin.y -= 80.;
+    
+    [UIView animateWithDuration:0.2
+                          delay:0.3
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         self.mainUser.view.frame = newFrame;
+                         
+                     } completion:^(BOOL finished) {
+                         
+                         [UIView animateWithDuration:0.2
+                                               delay:0
+                                             options:UIViewAnimationOptionCurveEaseIn
+                                          animations:^{
+                                              self.mainUser.view.frame = frame;
+                                              
+                                          } completion:^(BOOL finished) {
+                                              self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1f
+                                                                                            target:self
+                                                                                          selector:@selector(updateUser)
+                                                                                          userInfo:nil
+                                                                                           repeats:YES];
+                                          }];
+                     }];
 }
 
 - (BOOL) prefersStatusBarHidden
