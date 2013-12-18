@@ -99,15 +99,18 @@ static const CGFloat UserHeight = 135.0f;
         
         NSURL *fileURL = [[NSBundle mainBundle] URLForResource:trackID withExtension:@"mp3"];
         
-        
-        self.player = [AEAudioFilePlayer audioFilePlayerWithURL:fileURL
-                                                audioController:controller
-                                                          error:NULL];
-        self.player.volume = volume;
-        self.player.pan = pan;
-        self.player.currentTime = 0;
-        
-        [controller addChannels:@[self.player]];
+        if (fileURL) {
+            self.player = [AEAudioFilePlayer audioFilePlayerWithURL:fileURL
+                                                    audioController:controller
+                                                              error:NULL];
+            self.player.volume = volume;
+            self.player.pan = pan;
+            self.player.currentTime = 0;
+            
+            [controller addChannels:@[self.player]];
+        } else {
+            NSLog(@"TRACK NOT FOUND, YO!");
+        }
     });
 }
 

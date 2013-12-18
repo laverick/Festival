@@ -46,10 +46,6 @@
 		521C621C1860BCAA0083D2CC /* 1456971.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C62171860BCAA0083D2CC /* 1456971.mp3 */; };
 		521C621D1860BCAA0083D2CC /* 3660642.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C62181860BCAA0083D2CC /* 3660642.mp3 */; };
 		521C621E1860BCAA0083D2CC /* 6366963.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C62191860BCAA0083D2CC /* 6366963.mp3 */; };
-		8387F6C218607D0B003FD39F /* 1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6BE18607D0B003FD39F /* 1.m4a */; };
-		8387F6C318607D0B003FD39F /* 2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6BF18607D0B003FD39F /* 2.m4a */; };
-		8387F6C418607D0B003FD39F /* 3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6C018607D0B003FD39F /* 3.m4a */; };
-		8387F6C518607D0B003FD39F /* 4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6C118607D0B003FD39F /* 4.m4a */; };
 		8387F6CB18609105003FD39F /* nico.png in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6CA18609105003FD39F /* nico.png */; };
 		8387F6CD186092E1003FD39F /* stage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6CC186092E1003FD39F /* stage.png */; };
 		8387F6D418609C95003FD39F /* grass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6D318609C95003FD39F /* grass.jpg */; };
@@ -124,10 +120,6 @@
 		521C62181860BCAA0083D2CC /* 3660642.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 3660642.mp3; sourceTree = "<group>"; };
 		521C62191860BCAA0083D2CC /* 6366963.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 6366963.mp3; sourceTree = "<group>"; };
 		74E8610407C64277B970245C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		8387F6BE18607D0B003FD39F /* 1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.m4a; sourceTree = "<group>"; };
-		8387F6BF18607D0B003FD39F /* 2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2.m4a; sourceTree = "<group>"; };
-		8387F6C018607D0B003FD39F /* 3.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3.m4a; sourceTree = "<group>"; };
-		8387F6C118607D0B003FD39F /* 4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 4.m4a; sourceTree = "<group>"; };
 		8387F6CA18609105003FD39F /* nico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nico.png; path = FestivalPrototype/Resources/Images/nico.png; sourceTree = SOURCE_ROOT; };
 		8387F6CC186092E1003FD39F /* stage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stage.png; sourceTree = "<group>"; };
 		8387F6D318609C95003FD39F /* grass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grass.jpg; sourceTree = "<group>"; };
@@ -223,10 +215,6 @@
 				521C62141860BC9A0083D2CC /* Sven */,
 				521C62091860B72E0083D2CC /* Luke */,
 				521C61DA186080D90083D2CC /* Maciek */,
-				8387F6BE18607D0B003FD39F /* 1.m4a */,
-				8387F6BF18607D0B003FD39F /* 2.m4a */,
-				8387F6C018607D0B003FD39F /* 3.m4a */,
-				8387F6C118607D0B003FD39F /* 4.m4a */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -445,7 +433,6 @@
 				521C621C1860BCAA0083D2CC /* 1456971.mp3 in Resources */,
 				521C621B1860BCAA0083D2CC /* 1228061.mp3 in Resources */,
 				27E86B7618585F1B00A8E88B /* Main_iPad.storyboard in Resources */,
-				8387F6C518607D0B003FD39F /* 4.m4a in Resources */,
 				521C62111860B7450083D2CC /* 1270079.mp3 in Resources */,
 				521C62011860A78B0083D2CC /* sven.png in Resources */,
 				521C620F1860B7450083D2CC /* 894844.mp3 in Resources */,
@@ -458,17 +445,14 @@
 				521C61DD186080D90083D2CC /* 1430886.mp3 in Resources */,
 				521C61FD1860A78B0083D2CC /* dustin.png in Resources */,
 				521C621A1860BCAA0083D2CC /* 630358.mp3 in Resources */,
-				8387F6C218607D0B003FD39F /* 1.m4a in Resources */,
 				521C61DC186080D90083D2CC /* 813379.mp3 in Resources */,
 				8387F6CD186092E1003FD39F /* stage.png in Resources */,
 				521C62001860A78B0083D2CC /* michal.png in Resources */,
 				8387F6D418609C95003FD39F /* grass.jpg in Resources */,
 				521C61E0186080D90083D2CC /* 3710048.mp3 in Resources */,
 				521C621D1860BCAA0083D2CC /* 3660642.mp3 in Resources */,
-				8387F6C318607D0B003FD39F /* 2.m4a in Resources */,
 				27E86B7318585F1B00A8E88B /* Main_iPhone.storyboard in Resources */,
 				521C61DE186080D90083D2CC /* 1476784.mp3 in Resources */,
-				8387F6C418607D0B003FD39F /* 3.m4a in Resources */,
 				27E86B6A18585F1B00A8E88B /* InfoPlist.strings in Resources */,
 				521C62131860B7450083D2CC /* 14855586.mp3 in Resources */,
 				521C61DF186080D90083D2CC /* 3455247.mp3 in Resources */,
