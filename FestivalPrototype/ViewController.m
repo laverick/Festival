@@ -186,11 +186,12 @@
     { // Create Listener
         self.mainUser = [[User alloc] initWithName:@"Nico"
                                           playlist:nil
-                                          position:CGPointMake(650.0f, 370.0f)
+                                          position:CGPointMake(512, 384)
                                           mainUser:YES];
         
         self.mainUserImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nico"]];
         self.mainUserImage.frame = CGRectMake(0, 0, 80, 80);
+        self.mainUser.view.frame = self.mainUserImage.frame;
         [self.mainUser.view addSubview:self.mainUserImage];
         [self.scene addSubview:self.mainUser.view];
         [self.scene bringSubviewToFront:self.mainUser.view];
@@ -224,7 +225,7 @@
         [self.users addObject:maciej];
         [self.users addObject:michal];
         
-        self.destination = self.mainUser.view.center;
+        self.destination = CGPointMake(512, 384);
         
         self.usersBehavior = [[UIDynamicItemBehavior alloc] init];
         self.usersBehavior.density = 1000.0;
