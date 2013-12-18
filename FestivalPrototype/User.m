@@ -57,7 +57,7 @@ static const CGFloat UserHeight = 135.0f;
             [self.view addSubview:_bandmate1];
             [self.view addSubview:_bandmate2];
             [self.view addSubview:_bandmate3];
-            [self clearStage];
+            [self clearStageWithAnimation:NO];
         }
     }
     return self;
@@ -89,7 +89,9 @@ static const CGFloat UserHeight = 135.0f;
         }
         
         if (!trackID) {
-            [self stopAnimatingBandmates];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self stopAnimatingBandmates];
+            });
             return;
         }
         
@@ -144,7 +146,6 @@ static const CGFloat UserHeight = 135.0f;
 
 - (void)stopAnimatingBandmates
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
         NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
         for (UIView *bandmate in bandmates) {
             CGRect frame = bandmate.frame;
@@ -152,35 +153,40 @@ static const CGFloat UserHeight = 135.0f;
             bandmate.frame = frame;
             [bandmate.layer removeAllAnimations];
         }
-    });
 }
 
-- (void)clearStage
+- (void)clearStageWithAnimation:(BOOL)animate
 {
     NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
-    for (UIView *bandmate in bandmates) {
-        [UIView animateWithDuration:0.75f
-                              delay:0.0f
-                            options:kNilOptions
-                         animations:^{
+    
+    CGFloat duration = animate ? 0.75 : 0;
+    
+    [UIView animateWithDuration:duration
+                          delay:0.0f
+                        options:kNilOptions
+                     animations:^{
+                         for (UIView *bandmate in bandmates) {
                              bandmate.alpha = 0.0f;
+                             self.nameLabel.alpha = 0.0f;
                          }
-                         completion:nil];
-    }
+                     }
+                     completion:nil];
 }
 
 - (void)fillStage
 {
     NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
-    for (UIView *bandmate in bandmates) {
-        [UIView animateWithDuration:0.75f
-                              delay:0.0f
-                            options:kNilOptions
-                         animations:^{
+    
+    [UIView animateWithDuration:0.75f
+                          delay:0.0f
+                        options:kNilOptions
+                     animations:^{
+                         for (UIView *bandmate in bandmates) {
                              bandmate.alpha = 1.0f;
+                             self.nameLabel.alpha = 1.0f;
                          }
-                         completion:nil];
-    }
+                     }
+                     completion:nil];
 }
 
 - (void)setVolume:(CGFloat)volume
