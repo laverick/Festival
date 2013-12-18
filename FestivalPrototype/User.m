@@ -187,6 +187,9 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
         return;
     }
     [self.view.layer removeAllAnimations];
+    for (UIView *view in self.view.subviews) {
+        [view.layer removeAllAnimations];
+    }
     self.isAnimating = YES;
     if (self.mainUser) {
         [UIView animateWithDuration:0.25f
@@ -241,11 +244,15 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
     if (!self.isAnimating) {
         return;
     }
+    [self.view.layer removeAllAnimations];
+    for (UIView *view in self.view.subviews) {
+        [view.layer removeAllAnimations];
+    }
 
     NSLog(@"Stop animating");
     if (self.mainUser) {
         UIImageView *imageView = (UIImageView *)[self.view viewWithTag:10];
-        [imageView.layer removeAllAnimations];
+        //[imageView.layer removeAllAnimations];
         CGRect frame = imageView.frame;
         frame.origin.y = 0;
         imageView.frame = frame;
@@ -261,6 +268,13 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
         frame.origin.y = LeadingBandmateRestingY;
         self.bandmate2.frame = frame;
     }
+    
+    [self.view.layer removeAllAnimations];
+    
+    for (UIView *view in self.view.subviews) {
+        [view.layer removeAllAnimations];
+    }
+    
     self.isAnimating = NO;
 }
 

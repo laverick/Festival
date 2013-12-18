@@ -367,7 +367,8 @@
                          self.mainUser.view.center = position;
                      }
                      completion:^(BOOL finished){
-                         if (finished) {
+                             if (fabsf(self.mainUser.position.x - self.destination.x) < 0.0001 &&
+                                 fabsf(self.mainUser.position.y - self.destination.y) < 0.0001) {
                                  if ([self isCloseToAFilledStage:position]) {
                                      [self.mainUser animate];
                                  } else {
@@ -564,13 +565,15 @@
 {
     self.mainUser.position = position;
     
-//    [self.mainUser stopAnimating];
+
+    
     [self updateUI];
     
     if (!(fabsf(self.mainUser.position.x - self.destination.x) < 0.0001 &&
         fabsf(self.mainUser.position.y - self.destination.y) < 0.0001)) {
         // stationary
-    [self adjustChannels];
+        [self.mainUser stopAnimating];
+        [self adjustChannels];
     }
 }
 
