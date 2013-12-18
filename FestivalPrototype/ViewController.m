@@ -74,7 +74,7 @@
 
     TracksClient *tracksClient = [TracksClient sharedClient];
 
-    tracksClient.updateBlock = ^(NSString *user, NSString *track){
+    tracksClient.updateBlock = ^(NSString *user, NSString *track, NSString *artist, NSString *title, NSString *imageUrl){
         // Start new track for user
         // If track is nil, stop current track
         NSLog(@"Update %@ \t%@", user, track);
@@ -93,7 +93,11 @@
         
         if (userToUpdate) {
             [userToUpdate fillStage];
-            [self playTrackFromUser:userToUpdate withTrackID:track];
+            [self playTrackFromUser:userToUpdate
+                        withTrackID:track
+                             artist:artist
+                              title:title
+                           imageURL:imageUrl];
         }
     };
     
@@ -186,11 +190,12 @@
     { // Create Listener
         self.mainUser = [[User alloc] initWithName:@"Nico"
                                           playlist:nil
-                                          position:CGPointMake(650.0f, 370.0f)
+                                          position:CGPointMake(512, 384)
                                           mainUser:YES];
         
         self.mainUserImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nico"]];
         self.mainUserImage.frame = CGRectMake(0, 0, 80, 80);
+        self.mainUser.view.frame = self.mainUserImage.frame;
         [self.mainUser.view addSubview:self.mainUserImage];
         [self.scene addSubview:self.mainUser.view];
         [self.scene bringSubviewToFront:self.mainUser.view];
@@ -224,7 +229,7 @@
         [self.users addObject:maciej];
         [self.users addObject:michal];
         
-        self.destination = self.mainUser.view.center;
+        self.destination = CGPointMake(512, 384);
         
         self.usersBehavior = [[UIDynamicItemBehavior alloc] init];
         self.usersBehavior.density = 1000.0;
@@ -315,7 +320,7 @@
         
         static int direction = 1;
         
-        if ([self isCloseToAStage:position]) {
+        if ([self isCloseToAFilledStage:position]) {
             direction = -direction;
            // position.y += direction * 3;
             position.x += direction * 3;
@@ -359,11 +364,27 @@
 }
 
 - (void)playTrackFromUser:(User *)user withTrackID:(NSString *)trackID
+                   artist:(NSString *)artist
+                   title:(NSString *)title
+                   imageURL:(NSString *)imageURL
 {
     [user playTrackID:trackID
     inAudioController:self.audioController
            withVolume:[self volumeForUser:user]
                   pan:[self panForUser:user]];
+    if (title && artist) {
+        user.trackLabel.text = [NSString stringWithFormat:@"%@ by %@", title, artist];
+    }
+
+    dispatch_async(dispatch_get_global_queue(0,0), ^{
+        NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:imageURL]];
+        if ( data == nil ) {
+            return;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            user.coverImageView.image = [UIImage imageWithData: data];
+        });
+    });
 }
 
 - (void)stopTracksFromUser:(User *)user
@@ -451,18 +472,23 @@
     [self moveUserToPosition:nextPosition];
 }
 
-- (BOOL)isCloseToAStage:(CGPoint)location
+- (BOOL)isCloseToAFilledStage:(CGPoint)location
 {
     const CGFloat max = 450;
     
+    User *topLeft = self.users[1];
+    User *topRight = self.users[3];
+    User *bottomLeft = self.users[0];
+    User *bottomRight = self.users[2];
+    
     return
-    [self distanceBetween:CGPointMake(0, 0) and:location] < max
+    ([self distanceBetween:CGPointMake(0, 0) and:location] < max && topLeft.bandmate1.alpha != 0.0f)
     ||
-    [self distanceBetween:CGPointMake(0, self.view.frame.size.width) and:location] < max
+    ([self distanceBetween:CGPointMake(0, self.view.frame.size.width) and:location] < max && topRight.bandmate1.alpha != 0.0f)
     ||
-    [self distanceBetween:CGPointMake(self.view.frame.size.height, 0) and:location] < max
+    ([self distanceBetween:CGPointMake(self.view.frame.size.height, 0) and:location] < max && bottomLeft.bandmate1.alpha != 0.0f)
     ||
-    [self distanceBetween:CGPointMake(self.view.frame.size.height, self.view.frame.size.width) and:location] < max
+    ([self distanceBetween:CGPointMake(self.view.frame.size.height, self.view.frame.size.width) and:location] < max && bottomRight.bandmate1.alpha != 0.0f)
     ;
 }
 

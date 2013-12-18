@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) UIView *view;
 @property (nonatomic, strong) UILabel *nameLabel;
+@property (nonatomic, strong) UILabel *trackLabel;
 @property (nonatomic, strong) NSArray *playlist;
 @property (nonatomic) UIImageView *bandmate1;
 @property (nonatomic) UIImageView *bandmate2;
@@ -25,6 +26,7 @@
 @property (nonatomic) CGPoint position;
 
 @property (nonatomic, strong) UIImageView *stageImageView;
+@property (nonatomic, strong) UIImageView *coverImageView;
 
 - (id)initWithName:(NSString *)name
           playlist:(NSArray *)playlist
