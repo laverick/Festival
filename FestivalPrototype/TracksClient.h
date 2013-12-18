@@ -18,6 +18,7 @@ typedef void (^TracksClientExitBlock)(NSString *user);
 
 @property (nonatomic, copy) TracksClientUpdateBlock updateBlock;
 @property (nonatomic, copy) TracksClientExitBlock exitBlock;
+@property (nonatomic) NSMutableDictionary *playbackState;
 
 
 
