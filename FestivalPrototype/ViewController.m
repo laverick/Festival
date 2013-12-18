@@ -45,6 +45,7 @@
 @property (strong, nonatomic) UIDynamicItemBehavior *crowdBehavior;
 
 @property (nonatomic) UIView *water;
+@property (nonatomic) UIImageView *concession;
 @property (nonatomic) CGRect waterHiddenFrame;
 
 @end
@@ -118,7 +119,7 @@
         }
         
         if (userToUpdate){
-            [userToUpdate stopAnimatingBandmates];
+            [userToUpdate stopAnimating];
             [userToUpdate clearStageWithAnimation:YES];
             [self stopTracksFromUser:userToUpdate];
         }
@@ -146,27 +147,29 @@
     newFrame.origin.y -= 80.;
     
     [UIView animateWithDuration:0.2
-                          delay:0.3
+                          delay:1
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          self.mainUser.view.frame = newFrame;
                          
-                     } completion:^(BOOL finished) {
-                         
-                         [UIView animateWithDuration:0.2
-                                               delay:0
-                                             options:UIViewAnimationOptionCurveEaseIn
-                                          animations:^{
-                                              self.mainUser.view.frame = frame;
-                                              
-                                          } completion:^(BOOL finished) {
-                                              self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1f
-                                                                                            target:self
-                                                                                          selector:@selector(updateUser)
-                                                                                          userInfo:nil
-                                                                                           repeats:YES];
-                                          }];
-                     }];
+                     } completion:
+     ^(BOOL finished) {
+         
+         [UIView animateWithDuration:0.2
+                               delay:0
+                             options:UIViewAnimationOptionCurveEaseIn
+                          animations:^{
+                              self.mainUser.view.frame = frame;
+                              
+                          } completion:
+          ^(BOOL finished) {
+              self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1f
+                                                            target:self
+                                                          selector:@selector(updateUser)
+                                                          userInfo:nil
+                                                           repeats:YES];
+          }];
+     }];
 }
 
 - (BOOL) prefersStatusBarHidden
@@ -189,6 +192,7 @@
     UIImageView *concession = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"concession"]];
     concession.userInteractionEnabled = YES;
     concession.frame = CGRectMake(412, 20, 200, 154);
+    self.concession = concession;
     [self.scene addSubview:concession];
     UITapGestureRecognizer *concessionTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buyWater)];
     concession.gestureRecognizers = @[concessionTap];
@@ -196,11 +200,13 @@
 
 - (void)buyWater
 {
-    [[[UIAlertView alloc] initWithTitle:@"Confirm Your In-App Purchase"
-                                message:@"Do you want to buy one Overpriced Hamburger for £12.69?"
-                               delegate:self
-                      cancelButtonTitle:@"Cancel"
-                      otherButtonTitles:@"Buy", nil] show];
+    if ([self distanceBetween:self.destination and:self.mainUser.view.center] < 100) {
+        [[[UIAlertView alloc] initWithTitle:@"Confirm Your In-App Purchase"
+                                    message:@"Do you want to buy one Overpriced Hamburger for £12.69?"
+                                   delegate:self
+                          cancelButtonTitle:@"Cancel"
+                          otherButtonTitles:@"Buy", nil] show];
+    }
 }
 
 - (void)getFatter
@@ -272,6 +278,7 @@
                                           mainUser:YES];
         
         self.mainUserImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nico"]];
+        self.mainUserImage.tag = 10;
         self.mainUserImage.frame = CGRectMake(0, 0, 80, 80);
         self.mainUser.view.frame = self.mainUserImage.frame;
         [self.mainUser.view addSubview:self.mainUserImage];
@@ -391,26 +398,21 @@
 {
     CGPoint position = self.mainUser.position;
     
-    if (fabsf(self.mainUser.position.x - self.destination.x) < 0.0001 &&
-        fabsf(self.mainUser.position.y - self.destination.y) < 0.0001) {
-        // stationary
-        
-        static int direction = 1;
-        
-        if ([self isCloseToAFilledStage:position]) {
-            direction = -direction;
-           // position.y += direction * 3;
-            position.x += direction * 3;
-        }
-    }
-    
     [UIView animateWithDuration:0.1f
                           delay:0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          self.mainUser.view.center = position;
                      }
-                     completion:nil];
+                     completion:^(BOOL finished){
+                         if (finished) {
+                                 if ([self isCloseToAFilledStage:position]) {
+                                     [self.mainUser animate];
+                                 } else {
+                                     [self.mainUser stopAnimating];
+                                 }
+                             }
+                     }];
 }
 
 #pragma mark - Audio Player
@@ -456,6 +458,7 @@
         user.trackLabel.text = nil;
     }
 
+    if (![artist isEqualToString:@""] && ![title isEqualToString:@""]) {
     dispatch_async(dispatch_get_global_queue(0,0), ^{
         NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:imageURL]];
         if ( data == nil ) {
@@ -466,6 +469,11 @@
             user.coverImageView2.image = [UIImage imageWithData: data];
         });
     });
+    }
+    else {
+        user.coverImageView.image = nil;
+        user.coverImageView2.image = nil;
+    }
 }
 
 - (void)stopTracksFromUser:(User *)user
@@ -509,13 +517,31 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [[event allTouches] anyObject];
-    self.destination = [touch locationInView:self.view];
+    CGPoint location = [touch locationInView:self.view];
+    
+    if (location.y < self.concession.frame.origin.y + self.concession.frame.size.height &&
+        location.x > self.concession.frame.origin.x &&
+        location.x < self.concession.frame.origin.x + self.concession.frame.size.width) {
+        
+        location.y = self.concession.frame.origin.y + self.concession.frame.size.height;
+    }
+    
+    self.destination = location;
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [[event allTouches] anyObject];
-    self.destination = [touch locationInView:self.view];
+    CGPoint location = [touch locationInView:self.view];
+    
+    if (location.y < self.concession.frame.origin.y + self.concession.frame.size.height &&
+        location.x > self.concession.frame.origin.x &&
+        location.x < self.concession.frame.origin.x + self.concession.frame.size.width) {
+        
+        location.y = self.concession.frame.origin.y + self.concession.frame.size.height;
+    }
+    
+    self.destination = location;
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -582,6 +608,7 @@
 {
     self.mainUser.position = position;
     
+//    [self.mainUser stopAnimating];
     [self updateUI];
     
     if (!(fabsf(self.mainUser.position.x - self.destination.x) < 0.0001 &&

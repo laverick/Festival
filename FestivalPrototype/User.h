@@ -49,8 +49,8 @@
 - (void)setVolume:(CGFloat)volume;
 - (void)setPan:(CGFloat)pan;
 
-- (void)animateBandmates;
-- (void)stopAnimatingBandmates;
+- (void)animate;
+- (void)stopAnimating;
 - (void)clearStageWithAnimation:(BOOL)animate;
 - (void)fillStage;
 
