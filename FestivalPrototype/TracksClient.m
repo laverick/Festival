@@ -12,7 +12,7 @@
 static const NSTimeInterval updateDelay = 0.1f;
 
 @interface TracksClient()
-@property (nonatomic) NSMutableDictionary *previousState;
+
 
 @end
 
@@ -48,11 +48,18 @@ static const NSTimeInterval updateDelay = 0.1f;
             for (PFObject *obj in objects) {
                 NSString *name = obj[@"name"];
                 NSString *track = obj[@"trackId"];
-                newState[name] = track;
+                NSString *title = obj[@"title"];
+                NSString *artist = obj[@"artist"];
+                NSString *imageUrl = obj[@"imageUrl"];
                 
-                if (self.previousState[name]) {
+                newState[name] = @{ @"trackId" : track ? : @"",
+                                    @"title" : title ? : @"",
+                                    @"artist" : artist ? : @"",
+                                    @"imageUrl" : imageUrl ? : @"" };
+                
+                if (self.playbackState[name]) {
                     // user exists
-                    if ([self.previousState[name] isEqualToString:track]) {
+                    if ([self.playbackState[name][@"trackId"] isEqualToString:track]) {
                         // same track, do nothing
                         continue;
                     } else {
@@ -64,7 +71,7 @@ static const NSTimeInterval updateDelay = 0.1f;
                 }
             }
             
-            for (NSString *name in [self.previousState allKeys]) {
+            for (NSString *name in [self.playbackState allKeys]) {
                 BOOL found = NO;
                 for (PFObject *obj in objects) {
                     if ([obj[@"name"] isEqualToString:name]) {
@@ -79,7 +86,7 @@ static const NSTimeInterval updateDelay = 0.1f;
                 }
             }
             
-            self.previousState = newState;
+            self.playbackState = newState;
             [self performSelector:@selector(fetchUpdates) withObject:nil afterDelay:updateDelay];
         }
     }];

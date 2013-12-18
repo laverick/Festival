@@ -19,7 +19,7 @@
 
 //#define USE_SK
 
-@interface ViewController ()
+@interface ViewController () <UIAlertViewDelegate>
 
 // Audio Engine
 @property (nonatomic, strong) AEAudioController *audioController;
@@ -27,6 +27,9 @@
 // Users
 @property (nonatomic, strong) NSMutableArray *users;
 @property (nonatomic, strong) User *mainUser;
+@property (nonatomic, strong) UIImageView *mainUserImage;
+
+@property (nonatomic) CGFloat currentFatness;
 
 // Outlets
 @property (strong, nonatomic) IBOutlet UIView *scene;
@@ -41,6 +44,9 @@
 @property (strong, nonatomic) UIDynamicItemBehavior *usersBehavior;
 @property (strong, nonatomic) UIDynamicItemBehavior *crowdBehavior;
 
+@property (nonatomic) UIView *water;
+@property (nonatomic) CGRect waterHiddenFrame;
+
 @end
 
 @implementation ViewController
@@ -49,6 +55,7 @@
 {
     [super viewDidLoad];
     
+    self.currentFatness = 1.0f;
 
 //    // Guide
 //    UIView *dot = [[UIView alloc] initWithFrame:CGRectMake(200, 200, 5, 5)];
@@ -150,10 +157,17 @@
 - (void)buyWater
 {
     [[[UIAlertView alloc] initWithTitle:@"Confirm Your In-App Purchase"
-                                message:@"Do you want to buy one Overpriced Priced Bottle of Water for £4.99?"
-                               delegate:nil
+                                message:@"Do you want to buy one Overpriced Hamburger for £4.99?"
+                               delegate:self
                       cancelButtonTitle:@"Cancel"
                       otherButtonTitles:@"Buy", nil] show];
+}
+
+- (void)getFatter
+{
+    self.currentFatness += 0.2f;
+    NSLog(@"Making Nico fatter: %f", self.currentFatness);
+    self.mainUserImage.transform = CGAffineTransformMakeScale(self.currentFatness, self.currentFatness);
 }
 
 - (void)createUsers
@@ -164,9 +178,9 @@
                                           position:CGPointMake(650.0f, 370.0f)
                                           mainUser:YES];
         
-        UIImageView *mainUserImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nico"]];
-        mainUserImage.frame = CGRectMake(0, 0, 80, 80);
-        [self.mainUser.view addSubview:mainUserImage];
+        self.mainUserImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nico"]];
+        self.mainUserImage.frame = CGRectMake(0, 0, 80, 80);
+        [self.mainUser.view addSubview:self.mainUserImage];
         [self.scene addSubview:self.mainUser.view];
         [self.scene bringSubviewToFront:self.mainUser.view];
     }
@@ -455,5 +469,42 @@
     [self adjustChannels];
 }
 
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        [self getFatter];
+    }
+}
+
+
+
+- (void)drown
+{
+    CGRect frame = self.view.bounds;
+    frame.origin.y = self.view.bounds.size.height;
+    self.waterHiddenFrame = frame;
+    self.water = [[UIView alloc] initWithFrame:self.waterHiddenFrame];
+    self.water.backgroundColor = [UIColor blueColor];
+    self.water.alpha = 0.3f;
+    [self.view addSubview:self.water];
+    [UIView animateWithDuration:3.0f
+                     animations:^{
+                         self.water.frame = self.view.bounds;
+                     } completion:^(BOOL finished) {
+                         [self resurface];
+                     }];
+}
+
+- (void)resurface
+{
+    [UIView animateWithDuration:3.0f
+                     animations:^{
+                         self.water.frame = self.waterHiddenFrame;
+                     } completion:^(BOOL finished) {
+                         //
+                     }];
+}
 
 @end
