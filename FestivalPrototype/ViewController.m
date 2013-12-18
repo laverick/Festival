@@ -68,7 +68,7 @@
     scene.scaleMode = SKSceneScaleModeAspectFill;
     [(SKView *)self.view presentScene:scene];
 #else
-//    [self createCrowd];
+    [self createCrowd];
 #endif
     
 
@@ -294,7 +294,6 @@
 
 - (void)createCrowd
 {
-    return;
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
     
     self.collision = [[UICollisionBehavior alloc] init];
