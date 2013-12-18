@@ -202,7 +202,7 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
                          }
                          completion:nil];
     } else {
-    
+        
         NSLog(@"start animating");
         NSArray *bandmates = @[self.bandmate1, self.bandmate3];
         for (UIImageView *bandmate in bandmates) {
@@ -220,18 +220,19 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
                              completion:nil];
         }
         
-
-    [UIView animateWithDuration:0.25f
-                          delay:0.0f
-                        options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse)
-                     animations:^{
-                         CGRect frame = self.bandmate2.frame;
-                         int jumpHeight = (arc4random() % 5) + 7;
-                         NSLog(@"%u", jumpHeight);
-                         frame.origin.y = LeadingBandmateRestingY - jumpHeight;
-                         self.bandmate2.frame = frame;
-                     }
-                     completion:nil];
+        
+        [UIView animateWithDuration:0.25f
+                              delay:0.0f
+                            options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse)
+                         animations:^{
+                             CGRect frame = self.bandmate2.frame;
+                             int jumpHeight = (arc4random() % 5) + 7;
+                             NSLog(@"%u", jumpHeight);
+                             frame.origin.y = LeadingBandmateRestingY - jumpHeight;
+                             self.bandmate2.frame = frame;
+                         }
+                         completion:nil];
+    }
 
 }
 
