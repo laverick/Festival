@@ -118,7 +118,7 @@
         }
         
         if (userToUpdate){
-            [userToUpdate stopAnimatingBandmates];
+            [userToUpdate stopAnimating];
             [userToUpdate clearStageWithAnimation:YES];
             [self stopTracksFromUser:userToUpdate];
         }
@@ -206,6 +206,7 @@
                                           mainUser:YES];
         
         self.mainUserImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nico"]];
+        self.mainUserImage.tag = 10;
         self.mainUserImage.frame = CGRectMake(0, 0, 80, 80);
         self.mainUser.view.frame = self.mainUserImage.frame;
         [self.mainUser.view addSubview:self.mainUserImage];
@@ -326,26 +327,21 @@
 {
     CGPoint position = self.mainUser.position;
     
-    if (fabsf(self.mainUser.position.x - self.destination.x) < 0.0001 &&
-        fabsf(self.mainUser.position.y - self.destination.y) < 0.0001) {
-        // stationary
-        
-        static int direction = 1;
-        
-        if ([self isCloseToAFilledStage:position]) {
-            direction = -direction;
-           // position.y += direction * 3;
-            position.x += direction * 3;
-        }
-    }
-    
     [UIView animateWithDuration:0.1f
                           delay:0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          self.mainUser.view.center = position;
                      }
-                     completion:nil];
+                     completion:^(BOOL finished){
+                         if (finished) {
+                                 if ([self isCloseToAFilledStage:position]) {
+                                     [self.mainUser animate];
+                                 } else {
+                                     [self.mainUser stopAnimating];
+                                 }
+                             }
+                     }];
 }
 
 #pragma mark - Audio Player
@@ -514,6 +510,7 @@
 {
     self.mainUser.position = position;
     
+//    [self.mainUser stopAnimating];
     [self updateUI];
     
     if (!(fabsf(self.mainUser.position.x - self.destination.x) < 0.0001 &&
