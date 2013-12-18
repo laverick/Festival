@@ -71,6 +71,13 @@ static const NSTimeInterval updateDelay = 0.1f;
                                              imageUrl);
                         }
                     }
+                } else if (track && ![track isEqualToString:@""]) {
+                    if (self.updateBlock) {
+                        self.updateBlock(name, [track isEqualToString:@""] ? nil : track,
+                                         artist,
+                                         title,
+                                         imageUrl);
+                    }
                 }
             }
             
