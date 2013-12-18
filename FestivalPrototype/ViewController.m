@@ -13,6 +13,11 @@
 #import "User.h"
 #import "TracksClient.h"
 #import "CrowdMember.h"
+#import "MyScene.h"
+
+#import <SpriteKit/SpriteKit.h>
+
+#define USE_SK 1
 
 @interface ViewController ()
 
@@ -50,7 +55,12 @@
 //    dot.backgroundColor = [UIColor orangeColor];
 //    [self.view addSubview:dot];
     
-    [self createCrowd];
+#ifdef USE_SK
+    self.view = [[SKView alloc] initWithFrame:self.view.frame];
+    SKScene *scene = [MyScene sceneWithSize:self.view.bounds.size];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+    [(SKView *)self.view presentScene:scene];
+#endif
     
     TracksClient *tracksClient = [TracksClient sharedClient];
 
@@ -99,22 +109,23 @@
             [self stopTracksFromUser:userToUpdate];
         }
     };
-    
-    
-    
+
+    [self configurePlayer];
+
+#ifdef USE_SK
+    [self createUsersSK];
+#else
+    [self createCrowd];
     [self createUsers];
-    
     [self updateUI];
     
-    [self configurePlayer];
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1f
                                                   target:self
                                                 selector:@selector(updateUser)
                                                 userInfo:nil
                                                  repeats:YES];
-    
-
+#endif
 }
 
 - (BOOL) prefersStatusBarHidden
@@ -188,6 +199,11 @@
         User *user4 = self.users[3]; // Michal, Upper-Right
         user4.view.transform = CGAffineTransformMakeRotation(0.25);
     }
+}
+
+- (void)createUsersSK
+{
+    
 }
 
 - (void)createCrowd
