@@ -27,6 +27,7 @@
 
 @property (nonatomic, strong) UIImageView *stageImageView;
 @property (nonatomic, strong) UIImageView *coverImageView;
+@property (nonatomic, strong) UIImageView *coverImageView2;
 
 - (id)initWithName:(NSString *)name
           playlist:(NSArray *)playlist

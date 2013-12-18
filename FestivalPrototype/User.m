@@ -11,8 +11,8 @@
 static const CGFloat UserWidth = 233.0f;
 static const CGFloat UserHeight = 135.0f;
 
-static const CGFloat BandmateRestingY = 64.0f;
-static const CGFloat LeadingBandmateRestingY = 44.f;
+static const CGFloat BandmateRestingY = 74.0f;
+static const CGFloat LeadingBandmateRestingY = 54.f;
 
 @interface User ()
 
@@ -62,9 +62,9 @@ static const CGFloat LeadingBandmateRestingY = 44.f;
         _stageImageView.frame = CGRectMake(0, 0, UserWidth, UserHeight);
         
         _coverImageView = [UIImageView new];
-        _coverImageView.frame = CGRectMake(92, 47, 48, 48);
-//        _coverImageView.backgroundColor = [UIColor redColor];
-        
+        _coverImageView.frame = CGRectMake(68, 47, 48, 48);
+        _coverImageView2 = [UIImageView new];
+        _coverImageView2.frame = CGRectMake(116, 47, 48, 48);
         
         int bandmate1Pic = arc4random() % 30;
         int bandmate3Pic = arc4random() % 30;
@@ -84,6 +84,7 @@ static const CGFloat LeadingBandmateRestingY = 44.f;
         } else {
             [self.view addSubview:self.stageImageView];
             [self.view addSubview:self.coverImageView];
+            [self.view addSubview:self.coverImageView2];
             [self.view addSubview:self.nameLabel];
             [self.view addSubview:self.trackLabel];
             [self.view addSubview:_bandmate1];
@@ -219,19 +220,19 @@ static const CGFloat LeadingBandmateRestingY = 44.f;
                              completion:nil];
         }
         
-        [UIView animateWithDuration:0.25f
-                              delay:0.0f
-                            options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionCurveEaseOut)
-                         animations:^{
-                             CGRect frame = self.bandmate2.frame;
-                             int jumpHeight = (arc4random() % 5) + 7;
-                             NSLog(@"%u", jumpHeight);
-                             frame.origin.y = LeadingBandmateRestingY + jumpHeight;
-                             self.bandmate2.frame = frame;
-                         }
-                         completion:nil];
-    }
-    
+
+    [UIView animateWithDuration:0.25f
+                          delay:0.0f
+                        options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse)
+                     animations:^{
+                         CGRect frame = self.bandmate2.frame;
+                         int jumpHeight = (arc4random() % 5) + 7;
+                         NSLog(@"%u", jumpHeight);
+                         frame.origin.y = LeadingBandmateRestingY - jumpHeight;
+                         self.bandmate2.frame = frame;
+                     }
+                     completion:nil];
+
 }
 
 - (void)stopAnimating
@@ -255,6 +256,9 @@ static const CGFloat LeadingBandmateRestingY = 44.f;
             bandmate.frame = frame;
             [bandmate.layer removeAllAnimations];
         }
+        CGRect frame = self.bandmate2.frame;
+        frame.origin.y = LeadingBandmateRestingY;
+        self.bandmate2.frame = frame;
     }
     self.isAnimating = NO;
 }
