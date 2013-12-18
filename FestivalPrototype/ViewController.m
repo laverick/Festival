@@ -407,7 +407,7 @@
                      completion:^(BOOL finished){
                              if (fabsf(self.mainUser.position.x - self.destination.x) < 0.0001 &&
                                  fabsf(self.mainUser.position.y - self.destination.y) < 0.0001) {
-                                 if ([self isCloseToAFilledStage:position]) {
+                                 if ([self isCloseToAPlayingStage:position]) {
                                      [self.mainUser animate];
                                  } else {
                                      [self.mainUser stopAnimating];
@@ -580,7 +580,7 @@
     [self moveUserToPosition:nextPosition];
 }
 
-- (BOOL)isCloseToAFilledStage:(CGPoint)location
+- (BOOL)isCloseToAPlayingStage:(CGPoint)location
 {
     const CGFloat max = 450;
     
