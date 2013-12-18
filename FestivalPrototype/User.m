@@ -193,4 +193,31 @@ static const CGFloat UserHeight = 135.0f;
     self.player.pan = pan;
 }
 
+
+#pragma mark - Motion Effect
+- (UIView *)viewWithMotionEffect
+{
+    UIView *view = [UIView new];
+    UIInterpolatingMotionEffect *verticalMotionEffect =
+    [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+    
+    verticalMotionEffect.minimumRelativeValue = @(-50);
+    verticalMotionEffect.maximumRelativeValue = @(50);
+    
+    UIInterpolatingMotionEffect *horizontalMotionEffect =
+    [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+    
+    horizontalMotionEffect.minimumRelativeValue = @(-50);
+    
+    horizontalMotionEffect.maximumRelativeValue = @(50);
+    
+    
+    UIMotionEffectGroup *group = [UIMotionEffectGroup new];
+    
+    group.motionEffects = @[horizontalMotionEffect, verticalMotionEffect];
+    
+    [view addMotionEffect:group];
+    return view;
+}
+
 @end
