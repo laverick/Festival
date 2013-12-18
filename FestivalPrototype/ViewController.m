@@ -68,7 +68,7 @@
     scene.scaleMode = SKSceneScaleModeAspectFill;
     [(SKView *)self.view presentScene:scene];
 #else
-//    [self createCrowd];
+    [self createCrowd];
 #endif
     
 
@@ -294,7 +294,6 @@
 
 - (void)createCrowd
 {
-    return;
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
     
     self.collision = [[UICollisionBehavior alloc] init];
@@ -415,6 +414,8 @@
     if (title && artist && ![title isEqualToString:@""] && ![artist isEqualToString:@""]) {
 //        user.trackLabel.text = [NSString stringWithFormat:@"%@ by %@", title, artist];
         user.trackLabel.text = artist;
+    } else {
+        user.trackLabel.text = nil;
     }
 
     dispatch_async(dispatch_get_global_queue(0,0), ^{

@@ -11,8 +11,8 @@
 static const CGFloat UserWidth = 233.0f;
 static const CGFloat UserHeight = 135.0f;
 
-static const CGFloat BandmateRestingY = 64.0f;
-static const CGFloat LeadingBandmateRestingY = 44.f;
+static const CGFloat BandmateRestingY = 74.0f;
+static const CGFloat LeadingBandmateRestingY = 54.f;
 
 @interface User ()
 
@@ -190,7 +190,7 @@ static const CGFloat LeadingBandmateRestingY = 44.f;
                              CGRect frame = bandmate.frame;
                              int jumpHeight = (arc4random() % 5) + 7;
                              NSLog(@"%u", jumpHeight);
-                             frame.origin.y = BandmateRestingY + jumpHeight;
+                             frame.origin.y = BandmateRestingY - jumpHeight;
                              bandmate.frame = frame;
                          }
                          completion:nil];
@@ -203,7 +203,7 @@ static const CGFloat LeadingBandmateRestingY = 44.f;
                          CGRect frame = self.bandmate2.frame;
                          int jumpHeight = (arc4random() % 5) + 7;
                          NSLog(@"%u", jumpHeight);
-                         frame.origin.y = LeadingBandmateRestingY + jumpHeight;
+                         frame.origin.y = LeadingBandmateRestingY - jumpHeight;
                          self.bandmate2.frame = frame;
                      }
                      completion:nil];
@@ -219,6 +219,10 @@ static const CGFloat LeadingBandmateRestingY = 44.f;
             bandmate.frame = frame;
             [bandmate.layer removeAllAnimations];
         }
+    
+    CGRect frame = self.bandmate2.frame;
+    frame.origin.y = LeadingBandmateRestingY;
+    self.bandmate2.frame = frame;
 }
 
 - (void)clearStageWithAnimation:(BOOL)animate
