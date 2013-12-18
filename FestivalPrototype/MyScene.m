@@ -136,6 +136,7 @@ static inline CGVector VectorMultiply(CGVector vector, CGFloat m)
         for (SKNode *n in self.persons) {
             if (CGRectContainsPoint(n.frame, location)) {
                 _movingNode = n;
+                _movingNode.physicsBody.velocity = CGVectorMake(0, 0);
                 break;
             }
         }
@@ -161,6 +162,9 @@ static inline CGVector VectorMultiply(CGVector vector, CGFloat m)
     const int maxSpeed = 1000;
 
     for (SKNode *p in self.persons) {
+        if (p == _movingNode) {
+            return;
+        }
         CGFloat v = VectorLength(p.physicsBody.velocity);
         if (v > maxSpeed) {
             p.physicsBody.linearDamping = 0.4f;
