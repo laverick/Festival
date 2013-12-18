@@ -332,7 +332,7 @@
                                                              audioController:self.audioController
                                                                        error:NULL];
         crowd.loop = YES;
-        crowd.volume = 0.05f;
+        crowd.volume = 0.025f;
         crowd.pan = 0.0f;
         crowd.currentTime = 0;
         
