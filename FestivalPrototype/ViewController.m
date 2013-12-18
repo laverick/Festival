@@ -306,7 +306,7 @@
     
     [UIView animateWithDuration:0.1f
                           delay:0
-                        options:UIViewAnimationOptionCurveLinear
+                        options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          self.mainUser.view.center = position;
                      }
@@ -435,7 +435,7 @@
 
 - (BOOL)isCloseToAStage:(CGPoint)location
 {
-    const CGFloat max = 400;
+    const CGFloat max = 300;
     
     return
     [self distanceBetween:CGPointMake(0, 0) and:location] < max
