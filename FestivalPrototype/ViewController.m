@@ -41,6 +41,9 @@
 @property (strong, nonatomic) UIDynamicItemBehavior *usersBehavior;
 @property (strong, nonatomic) UIDynamicItemBehavior *crowdBehavior;
 
+@property (nonatomic) UIView *water;
+@property (nonatomic) CGRect waterHiddenFrame;
+
 @end
 
 @implementation ViewController
@@ -441,5 +444,33 @@
     [self adjustChannels];
 }
 
+
+
+- (void)drown
+{
+    CGRect frame = self.view.bounds;
+    frame.origin.y = self.view.bounds.size.height;
+    self.waterHiddenFrame = frame;
+    self.water = [[UIView alloc] initWithFrame:self.waterHiddenFrame];
+    self.water.backgroundColor = [UIColor blueColor];
+    self.water.alpha = 0.3f;
+    [self.view addSubview:self.water];
+    [UIView animateWithDuration:3.0f
+                     animations:^{
+                         self.water.frame = self.view.bounds;
+                     } completion:^(BOOL finished) {
+                         [self resurface];
+                     }];
+}
+
+- (void)resurface
+{
+    [UIView animateWithDuration:3.0f
+                     animations:^{
+                         self.water.frame = self.waterHiddenFrame;
+                     } completion:^(BOOL finished) {
+                         //
+                     }];
+}
 
 @end
