@@ -113,12 +113,12 @@ static const CGFloat UserHeight = 135.0f;
 
 - (void)stopTracksInAudioController:(AEAudioController *)controller
 {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-    if (self.player) {
-        [controller removeChannels:@[self.player]];
-        self.player = nil;
-    }
-        });
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        if (self.player) {
+            [controller removeChannels:@[self.player]];
+            self.player = nil;
+        }
+    });
 }
 
 - (void)animateBandmates
