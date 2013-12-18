@@ -14,10 +14,7 @@ static inline CGVector VectorMultiply(CGVector vector, CGFloat m);
 
 static inline CGVector VectorMinus(CGPoint p1, CGPoint p2)
 {
-    return CGVectorMake(
-                        p1.x - p2.x,
-                        p1.y - p2.y
-                        );
+    return CGVectorMake(p1.x - p2.x, p1.y - p2.y);
 }
 
 static inline CGFloat VectorLength(CGVector vector)
@@ -27,16 +24,18 @@ static inline CGFloat VectorLength(CGVector vector)
 
 static inline CGVector VectorUnit(CGVector vector)
 {
-	CGFloat invLen = 1.0 / VectorLength(vector);
-	return VectorMultiply(vector, invLen);
+    CGFloat length = VectorLength(vector);
+    if (length > 0) {
+        CGFloat invLen = 1.0 / VectorLength(vector);
+        return VectorMultiply(vector, invLen);
+    } else {
+        return CGVectorMake(0, 0);
+    }
 }
 
 static inline CGVector VectorMultiply(CGVector vector, CGFloat m)
 {
-    return CGVectorMake(
-                        vector.dx * m,
-                        vector.dy * m
-                        );
+    return CGVectorMake(vector.dx * m, vector.dy * m);
 }
 
 @interface MyScene ()
@@ -102,7 +101,7 @@ static inline CGVector VectorMultiply(CGVector vector, CGFloat m)
         person.physicsBody.dynamic = YES;
         person.physicsBody.categoryBitMask = SolidCategory;
         person.physicsBody.mass = 2;
-        person.physicsBody.friction = 0.1;
+        person.physicsBody.friction = 0;
         person.physicsBody.linearDamping = 0;
         person.physicsBody.restitution = 0;
         [self.persons addObject:person];
@@ -132,24 +131,24 @@ static inline CGVector VectorMultiply(CGVector vector, CGFloat m)
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//    for (UITouch *touch in touches) {
-//        CGPoint location = [touch locationInNode:self];
-//        for (SKNode *n in @[_nodeA, _nodeB]) {
-//            if (CGRectContainsPoint(n.frame, location)) {
-//                _movingNode = n;
-//                break;
-//            }
-//        }
-//    }
+    for (UITouch *touch in touches) {
+        CGPoint location = [touch locationInNode:self];
+        for (SKNode *n in self.persons) {
+            if (CGRectContainsPoint(n.frame, location)) {
+                _movingNode = n;
+                break;
+            }
+        }
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-//    for (UITouch *touch in touches) {
-//        CGPoint location = [touch locationInNode:self];
-//        CGPoint newLoc = CGPointMake(location.x, location.y);
-//        _movingNode.position = newLoc;
-//    }
+    for (UITouch *touch in touches) {
+        CGPoint location = [touch locationInNode:self];
+        CGPoint newLoc = CGPointMake(location.x, location.y);
+        _movingNode.position = newLoc;
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
