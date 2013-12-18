@@ -92,15 +92,17 @@ static inline CGVector VectorMultiply(CGVector vector, CGFloat m)
 
 - (void)createCrowd
 {
+    const int NumberOfPersons = 30;
     self.persons = [NSMutableArray array];
-    for (int i = 0; i < 20; i++) {
-        SKSpriteNode *person = [[SKSpriteNode alloc] initWithColor:[SKColor blueColor] size:CGSizeMake(15, 15)];
+    for (int i = 0; i < NumberOfPersons; i++) {
+        SKSpriteNode *person = [[SKSpriteNode alloc] initWithImageNamed:[NSString stringWithFormat:@"Staff-%d.png", i]];
+        person.size = CGSizeMake(30, 30);
         person.position = CGPointMake(250 + i * 20, 250 + i * 20);
-        person.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:person.frame.size];
+        person.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:15];
         person.physicsBody.dynamic = YES;
         person.physicsBody.categoryBitMask = SolidCategory;
         person.physicsBody.mass = 2;
-        person.physicsBody.friction = 0;
+        person.physicsBody.friction = 0.1;
         person.physicsBody.linearDamping = 0;
         person.physicsBody.restitution = 0;
         [self.persons addObject:person];
