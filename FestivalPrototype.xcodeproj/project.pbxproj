@@ -10,6 +10,7 @@
 		03970C73185F9ED6007DA998 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 03970C72185F9ED6007DA998 /* User.m */; };
 		03970C74185F9ED6007DA998 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 03970C72185F9ED6007DA998 /* User.m */; };
 		21A118FD03B64A379CD96734 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E8610407C64277B970245C /* libPods.a */; };
+		26332BBF1861AB6A00A5231D /* MyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 26332BBE1861AB6A00A5231D /* MyScene.m */; };
 		27E86B6018585F1B00A8E88B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E86B5F18585F1B00A8E88B /* Foundation.framework */; };
 		27E86B6218585F1B00A8E88B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E86B6118585F1B00A8E88B /* CoreGraphics.framework */; };
 		27E86B6418585F1B00A8E88B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E86B6318585F1B00A8E88B /* UIKit.framework */; };
@@ -81,6 +82,8 @@
 /* Begin PBXFileReference section */
 		03970C71185F9ED6007DA998 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		03970C72185F9ED6007DA998 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		26332BBD1861AB6A00A5231D /* MyScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyScene.h; sourceTree = "<group>"; };
+		26332BBE1861AB6A00A5231D /* MyScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyScene.m; sourceTree = "<group>"; };
 		27E86B5C18585F1B00A8E88B /* FestivalPrototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FestivalPrototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27E86B5F18585F1B00A8E88B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		27E86B6118585F1B00A8E88B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -287,6 +290,8 @@
 				27E86B6618585F1B00A8E88B /* Supporting Files */,
 				03970C71185F9ED6007DA998 /* User.h */,
 				03970C72185F9ED6007DA998 /* User.m */,
+				26332BBD1861AB6A00A5231D /* MyScene.h */,
+				26332BBE1861AB6A00A5231D /* MyScene.m */,
 			);
 			path = FestivalPrototype;
 			sourceTree = "<group>";
@@ -531,6 +536,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26332BBF1861AB6A00A5231D /* MyScene.m in Sources */,
 				03970C73185F9ED6007DA998 /* User.m in Sources */,
 				27E86B7918585F1B00A8E88B /* ViewController.m in Sources */,
 				27E86B7018585F1B00A8E88B /* AppDelegate.m in Sources */,
