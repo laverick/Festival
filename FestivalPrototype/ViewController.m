@@ -212,7 +212,7 @@
 
 - (void)moveCrowd
 {
-    int i = 0;
+    NSUInteger i = 0;
     for (UIPushBehavior *pusher in self.pushers) {
         pusher.angle += 0.1 + i++;
     }
