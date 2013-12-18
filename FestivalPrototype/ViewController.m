@@ -120,6 +120,8 @@
     [self createUsersSK];
 #else
     [self createUsers];
+    
+    [self createConcessionStand];
 
     [self updateUI];
     
@@ -139,6 +141,25 @@
 }
 
 #pragma mark - Users
+
+- (void)createConcessionStand
+{
+    UIImageView *concession = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"concession"]];
+    concession.userInteractionEnabled = YES;
+    concession.frame = CGRectMake(412, 20, 200, 154);
+    [self.scene addSubview:concession];
+    UITapGestureRecognizer *concessionTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buyWater)];
+    concession.gestureRecognizers = @[concessionTap];
+}
+
+- (void)buyWater
+{
+    [[[UIAlertView alloc] initWithTitle:@"Confirm Your In-App Purchase"
+                                message:@"Do you want to buy one Overpriced Priced Bottle of Water for £4.99?"
+                               delegate:nil
+                      cancelButtonTitle:@"Cancel"
+                      otherButtonTitles:@"Buy", nil] show];
+}
 
 - (void)createUsers
 {
@@ -196,13 +217,13 @@
         [self.animator addBehavior:self.usersBehavior];
         
         User *user1 = self.users[0]; // Dustin, Lower-Left
-        user1.view.transform = CGAffineTransformMakeRotation(6);
+        user1.view.transform = CGAffineTransformMakeRotation(6.2);
         User *user2 = self.users[1]; // Luke, Upper-Left
-        user2.view.transform = CGAffineTransformMakeRotation(6);
+        user2.view.transform = CGAffineTransformMakeRotation(6.2);
         User *user3 = self.users[2]; // Maciej, Lower-Right
-        user3.view.transform = CGAffineTransformMakeRotation(0.25);
+        user3.view.transform = CGAffineTransformMakeRotation(0.05);
         User *user4 = self.users[3]; // Michal, Upper-Right
-        user4.view.transform = CGAffineTransformMakeRotation(0.25);
+        user4.view.transform = CGAffineTransformMakeRotation(0.05);
     }
 }
 
@@ -221,7 +242,7 @@
     
     self.pushers = [NSMutableArray array];
     for (int i = 0; i< 8; i++) {
-        CrowdMember *person = [[CrowdMember alloc] initWithFrame:CGRectMake(250 + i * 20, 250 + i * 20, 15, 15)];
+        CrowdMember *person = [[CrowdMember alloc] initWithFrame:CGRectMake(300 + 15 * (i % 30), 210 + 15 * (i / 30), 15, 15)];
         person.backgroundColor = [UIColor blueColor];
         
         switch (i%4) {
@@ -314,7 +335,7 @@
                                                              audioController:self.audioController
                                                                        error:NULL];
         crowd.loop = YES;
-        crowd.volume = 0.05f;
+        crowd.volume = 0.025f;
         crowd.pan = 0.0f;
         crowd.currentTime = 0;
         
