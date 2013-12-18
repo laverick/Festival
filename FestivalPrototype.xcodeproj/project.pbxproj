@@ -28,10 +28,10 @@
 		27E86B8C18585F1B00A8E88B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27E86B8A18585F1B00A8E88B /* InfoPlist.strings */; };
 		27E86B8E18585F1B00A8E88B /* FestivalPrototypeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E86B8D18585F1B00A8E88B /* FestivalPrototypeTests.m */; };
 		521C61DC186080D90083D2CC /* 813379.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C61D5186080D90083D2CC /* 813379.mp3 */; };
-		521C61DD186080D90083D2CC /* 1430886.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C61D6186080D90083D2CC /* 1430886.mp3 */; };
+		521C61DD186080D90083D2CC /* 595652.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C61D6186080D90083D2CC /* 595652.mp3 */; };
 		521C61DE186080D90083D2CC /* 1476784.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C61D7186080D90083D2CC /* 1476784.mp3 */; };
-		521C61DF186080D90083D2CC /* 3455247.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C61D8186080D90083D2CC /* 3455247.mp3 */; };
-		521C61E0186080D90083D2CC /* 3710048.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C61D9186080D90083D2CC /* 3710048.mp3 */; };
+		521C61DF186080D90083D2CC /* 10946818.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C61D8186080D90083D2CC /* 10946818.mp3 */; };
+		521C61E0186080D90083D2CC /* 1129057.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C61D9186080D90083D2CC /* 1129057.mp3 */; };
 		521C61FD1860A78B0083D2CC /* dustin.png in Resources */ = {isa = PBXBuildFile; fileRef = 521C61F81860A78B0083D2CC /* dustin.png */; };
 		521C61FE1860A78B0083D2CC /* luke.png in Resources */ = {isa = PBXBuildFile; fileRef = 521C61F91860A78B0083D2CC /* luke.png */; };
 		521C61FF1860A78B0083D2CC /* maciej.png in Resources */ = {isa = PBXBuildFile; fileRef = 521C61FA1860A78B0083D2CC /* maciej.png */; };
@@ -142,10 +142,10 @@
 		27E86B8B18585F1B00A8E88B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		27E86B8D18585F1B00A8E88B /* FestivalPrototypeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FestivalPrototypeTests.m; sourceTree = "<group>"; };
 		521C61D5186080D90083D2CC /* 813379.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 813379.mp3; sourceTree = "<group>"; };
-		521C61D6186080D90083D2CC /* 1430886.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 1430886.mp3; sourceTree = "<group>"; };
+		521C61D6186080D90083D2CC /* 595652.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 595652.mp3; sourceTree = "<group>"; };
 		521C61D7186080D90083D2CC /* 1476784.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 1476784.mp3; sourceTree = "<group>"; };
-		521C61D8186080D90083D2CC /* 3455247.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 3455247.mp3; sourceTree = "<group>"; };
-		521C61D9186080D90083D2CC /* 3710048.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 3710048.mp3; sourceTree = "<group>"; };
+		521C61D8186080D90083D2CC /* 10946818.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 10946818.mp3; sourceTree = "<group>"; };
+		521C61D9186080D90083D2CC /* 1129057.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 1129057.mp3; sourceTree = "<group>"; };
 		521C61F81860A78B0083D2CC /* dustin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dustin.png; path = FestivalPrototype/Resources/Images/dustin.png; sourceTree = SOURCE_ROOT; };
 		521C61F91860A78B0083D2CC /* luke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = luke.png; path = FestivalPrototype/Resources/Images/luke.png; sourceTree = SOURCE_ROOT; };
 		521C61FA1860A78B0083D2CC /* maciej.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = maciej.png; path = FestivalPrototype/Resources/Images/maciej.png; sourceTree = SOURCE_ROOT; };
@@ -405,10 +405,10 @@
 			isa = PBXGroup;
 			children = (
 				521C61D5186080D90083D2CC /* 813379.mp3 */,
-				521C61D6186080D90083D2CC /* 1430886.mp3 */,
+				521C61D6186080D90083D2CC /* 595652.mp3 */,
 				521C61D7186080D90083D2CC /* 1476784.mp3 */,
-				521C61D8186080D90083D2CC /* 3455247.mp3 */,
-				521C61D9186080D90083D2CC /* 3710048.mp3 */,
+				521C61D8186080D90083D2CC /* 10946818.mp3 */,
+				521C61D9186080D90083D2CC /* 1129057.mp3 */,
 			);
 			name = Maciek;
 			path = ../../../Pods;
@@ -606,7 +606,7 @@
 				27E86B7B18585F1B00A8E88B /* Images.xcassets in Resources */,
 				521C62251861B1110083D2CC /* 3291397.mp3 in Resources */,
 				521C61FF1860A78B0083D2CC /* maciej.png in Resources */,
-				521C61DD186080D90083D2CC /* 1430886.mp3 in Resources */,
+				521C61DD186080D90083D2CC /* 595652.mp3 in Resources */,
 				521C61FD1860A78B0083D2CC /* dustin.png in Resources */,
 				521C621A1860BCAA0083D2CC /* 630358.mp3 in Resources */,
 				521C61DC186080D90083D2CC /* 813379.mp3 in Resources */,
@@ -617,8 +617,8 @@
 				83BA01B61861BB6C00228543 /* Staff-31.png in Resources */,
 				83BA01AA1861BB6C00228543 /* Staff-19.png in Resources */,
 				8387F6D418609C95003FD39F /* grass.jpg in Resources */,
+				521C61E0186080D90083D2CC /* 1129057.mp3 in Resources */,
 				83BA019E1861BB6C00228543 /* Staff-7.png in Resources */,
-				521C61E0186080D90083D2CC /* 3710048.mp3 in Resources */,
 				521C621D1860BCAA0083D2CC /* 3660642.mp3 in Resources */,
 				83BA01B01861BB6C00228543 /* Staff-25.png in Resources */,
 				83BA01741861B98800228543 /* crowd.wav in Resources */,
@@ -633,7 +633,7 @@
 				83BA01AD1861BB6C00228543 /* Staff-22.png in Resources */,
 				27E86B6A18585F1B00A8E88B /* InfoPlist.strings in Resources */,
 				521C62131860B7450083D2CC /* 14855586.mp3 in Resources */,
-				521C61DF186080D90083D2CC /* 3455247.mp3 in Resources */,
+				521C61DF186080D90083D2CC /* 10946818.mp3 in Resources */,
 				521C62101860B7450083D2CC /* 1032493.mp3 in Resources */,
 				83BA01B41861BB6C00228543 /* Staff-29.png in Resources */,
 				83BA01991861BB6C00228543 /* Staff-2.png in Resources */,

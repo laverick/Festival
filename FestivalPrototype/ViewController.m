@@ -107,8 +107,8 @@
         }
         
         if (userToUpdate){
-            [userToUpdate clearStage];
             [userToUpdate stopAnimatingBandmates];
+            [userToUpdate clearStageWithAnimation:YES];
             [self stopTracksFromUser:userToUpdate];
         }
     };
@@ -231,14 +231,14 @@
 
 - (void)createCrowd
 {
-    
+    return;
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
     
     self.collision = [[UICollisionBehavior alloc] init];
     self.collision.translatesReferenceBoundsIntoBoundary = YES;
     
     self.pushers = [NSMutableArray array];
-    for (int i = 0; i< 20; i++) {
+    for (int i = 0; i< 8; i++) {
         CrowdMember *person = [[CrowdMember alloc] initWithFrame:CGRectMake(250 + i * 20, 250 + i * 20, 15, 15)];
         person.backgroundColor = [UIColor blueColor];
         
@@ -247,13 +247,13 @@
                 person.targetLoc = CGPointMake(200, 200);
                 break;
             case 1:
-                person.targetLoc = CGPointMake(200, 500);
+                person.targetLoc = CGPointMake(200, 550);
                 break;
             case 2:
                 person.targetLoc = CGPointMake(800, 200);
                 break;
             default:
-                person.targetLoc = CGPointMake(800, 500);
+                person.targetLoc = CGPointMake(800, 550);
                 break;
         }
         

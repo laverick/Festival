@@ -46,7 +46,7 @@
 
 - (void)animateBandmates;
 - (void)stopAnimatingBandmates;
-- (void)clearStage;
+- (void)clearStageWithAnimation:(BOOL)animate;
 - (void)fillStage;
 
 @end
