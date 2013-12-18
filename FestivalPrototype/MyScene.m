@@ -14,10 +14,7 @@ static inline CGVector VectorMultiply(CGVector vector, CGFloat m);
 
 static inline CGVector VectorMinus(CGPoint p1, CGPoint p2)
 {
-    return CGVectorMake(
-                        p1.x - p2.x,
-                        p1.y - p2.y
-                        );
+    return CGVectorMake(p1.x - p2.x, p1.y - p2.y);
 }
 
 static inline CGFloat VectorLength(CGVector vector)
@@ -27,16 +24,18 @@ static inline CGFloat VectorLength(CGVector vector)
 
 static inline CGVector VectorUnit(CGVector vector)
 {
-	CGFloat invLen = 1.0 / VectorLength(vector);
-	return VectorMultiply(vector, invLen);
+    CGFloat length = VectorLength(vector);
+    if (length > 0) {
+        CGFloat invLen = 1.0 / VectorLength(vector);
+        return VectorMultiply(vector, invLen);
+    } else {
+        return CGVectorMake(0, 0);
+    }
 }
 
 static inline CGVector VectorMultiply(CGVector vector, CGFloat m)
 {
-    return CGVectorMake(
-                        vector.dx * m,
-                        vector.dy * m
-                        );
+    return CGVectorMake(vector.dx * m, vector.dy * m);
 }
 
 @interface MyScene ()
@@ -92,11 +91,13 @@ static inline CGVector VectorMultiply(CGVector vector, CGFloat m)
 
 - (void)createCrowd
 {
+    const int NumberOfPersons = 30;
     self.persons = [NSMutableArray array];
-    for (int i = 0; i < 20; i++) {
-        SKSpriteNode *person = [[SKSpriteNode alloc] initWithColor:[SKColor blueColor] size:CGSizeMake(15, 15)];
+    for (int i = 0; i < NumberOfPersons; i++) {
+        SKSpriteNode *person = [[SKSpriteNode alloc] initWithImageNamed:[NSString stringWithFormat:@"Staff-%d.png", i]];
+        person.size = CGSizeMake(30, 30);
         person.position = CGPointMake(250 + i * 20, 250 + i * 20);
-        person.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:person.frame.size];
+        person.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:15];
         person.physicsBody.dynamic = YES;
         person.physicsBody.categoryBitMask = SolidCategory;
         person.physicsBody.mass = 2;
@@ -130,24 +131,24 @@ static inline CGVector VectorMultiply(CGVector vector, CGFloat m)
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//    for (UITouch *touch in touches) {
-//        CGPoint location = [touch locationInNode:self];
-//        for (SKNode *n in @[_nodeA, _nodeB]) {
-//            if (CGRectContainsPoint(n.frame, location)) {
-//                _movingNode = n;
-//                break;
-//            }
-//        }
-//    }
+    for (UITouch *touch in touches) {
+        CGPoint location = [touch locationInNode:self];
+        for (SKNode *n in self.persons) {
+            if (CGRectContainsPoint(n.frame, location)) {
+                _movingNode = n;
+                break;
+            }
+        }
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-//    for (UITouch *touch in touches) {
-//        CGPoint location = [touch locationInNode:self];
-//        CGPoint newLoc = CGPointMake(location.x, location.y);
-//        _movingNode.position = newLoc;
-//    }
+    for (UITouch *touch in touches) {
+        CGPoint location = [touch locationInNode:self];
+        CGPoint newLoc = CGPointMake(location.x, location.y);
+        _movingNode.position = newLoc;
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
