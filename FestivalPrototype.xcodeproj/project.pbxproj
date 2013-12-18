@@ -54,7 +54,6 @@
 		521C62291861B1110083D2CC /* 10344949.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C62241861B1110083D2CC /* 10344949.mp3 */; };
 		8387F6CB18609105003FD39F /* nico.png in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6CA18609105003FD39F /* nico.png */; };
 		8387F6CD186092E1003FD39F /* stage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6CC186092E1003FD39F /* stage.png */; };
-		8387F6D418609C95003FD39F /* grass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6D318609C95003FD39F /* grass.jpg */; };
 		8387F6D71860ABF4003FD39F /* bandmate.png in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6D61860ABF4003FD39F /* bandmate.png */; };
 		83BA01741861B98800228543 /* crowd.wav in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01731861B98800228543 /* crowd.wav */; };
 		83BA01971861BB6C00228543 /* Staff-0.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01761861BB6C00228543 /* Staff-0.png */; };
@@ -168,7 +167,6 @@
 		74E8610407C64277B970245C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8387F6CA18609105003FD39F /* nico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nico.png; path = FestivalPrototype/Resources/Images/nico.png; sourceTree = SOURCE_ROOT; };
 		8387F6CC186092E1003FD39F /* stage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stage.png; sourceTree = "<group>"; };
-		8387F6D318609C95003FD39F /* grass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grass.jpg; sourceTree = "<group>"; };
 		8387F6D61860ABF4003FD39F /* bandmate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bandmate.png; sourceTree = "<group>"; };
 		83BA01731861B98800228543 /* crowd.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = crowd.wav; sourceTree = "<group>"; };
 		83BA01761861BB6C00228543 /* Staff-0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Staff-0.png"; path = "FestivalPrototype/Resources/Images/Staff/Staff-0.png"; sourceTree = SOURCE_ROOT; };
@@ -271,7 +269,6 @@
 				277BC7431861B30F00030A22 /* bg.png */,
 				8387F6D61860ABF4003FD39F /* bandmate.png */,
 				8387F6CC186092E1003FD39F /* stage.png */,
-				8387F6D318609C95003FD39F /* grass.jpg */,
 				27CD017818587CBA008E034E /* Faces */,
 			);
 			path = Images;
@@ -612,7 +609,6 @@
 				521C62001860A78B0083D2CC /* michal.png in Resources */,
 				83BA01B61861BB6C00228543 /* Staff-31.png in Resources */,
 				83BA01AA1861BB6C00228543 /* Staff-19.png in Resources */,
-				8387F6D418609C95003FD39F /* grass.jpg in Resources */,
 				521C61E0186080D90083D2CC /* 1129057.mp3 in Resources */,
 				83BA019E1861BB6C00228543 /* Staff-7.png in Resources */,
 				521C621D1860BCAA0083D2CC /* 3660642.mp3 in Resources */,
