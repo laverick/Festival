@@ -58,9 +58,9 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
         _stageImageView.frame = CGRectMake(0, 0, UserWidth, UserHeight);
         
         _coverImageView = [UIImageView new];
-        _coverImageView.frame = CGRectMake(92, 47, 48, 48);
-//        _coverImageView.backgroundColor = [UIColor redColor];
-        
+        _coverImageView.frame = CGRectMake(68, 47, 48, 48);
+        _coverImageView2 = [UIImageView new];
+        _coverImageView2.frame = CGRectMake(116, 47, 48, 48);
         
         int bandmate1Pic = arc4random() % 30;
         int bandmate3Pic = arc4random() % 30;
@@ -80,6 +80,7 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
         } else {
             [self.view addSubview:self.stageImageView];
             [self.view addSubview:self.coverImageView];
+            [self.view addSubview:self.coverImageView2];
             [self.view addSubview:self.nameLabel];
             [self.view addSubview:self.trackLabel];
             [self.view addSubview:_bandmate1];
