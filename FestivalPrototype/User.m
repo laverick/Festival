@@ -17,6 +17,8 @@ static const CGFloat BandmateRestingY = 64.0f;
 
 @property (nonatomic) NSUInteger currentTrackIndex;
 
+@property (nonatomic) dispatch_queue_t audioQueue;
+
 @end
 
 @implementation User
@@ -67,6 +69,8 @@ static const CGFloat BandmateRestingY = 64.0f;
             [self.view addSubview:_bandmate2];
             [self.view addSubview:_bandmate3];
             [self clearStageWithAnimation:NO];
+            
+            _audioQueue = dispatch_queue_create("audio queue", NULL);
         }
     }
     return self;
@@ -92,7 +96,7 @@ static const CGFloat BandmateRestingY = 64.0f;
          withVolume:(CGFloat)volume
                 pan:(CGFloat)pan
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+    dispatch_async(self.audioQueue, ^{
         // Clear the existing player in case we don't catch the null preceding it.
         if (self.player) {
             [controller removeChannels:@[self.player]];
@@ -100,13 +104,15 @@ static const CGFloat BandmateRestingY = 64.0f;
         }
         
         if (!trackID) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 [self stopAnimatingBandmates];
             });
             return;
         }
         
-        [self animateBandmates];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self animateBandmates];
+        });
         
         NSLog(@"playing %@ by %@", trackID, self.name);
         
@@ -129,7 +135,7 @@ static const CGFloat BandmateRestingY = 64.0f;
 
 - (void)stopTracksInAudioController:(AEAudioController *)controller
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+    dispatch_async(self.audioQueue, ^{
         if (self.player) {
             [controller removeChannels:@[self.player]];
             self.player = nil;
@@ -139,25 +145,25 @@ static const CGFloat BandmateRestingY = 64.0f;
 
 - (void)animateBandmates
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
-        for (UIImageView *bandmate in bandmates) {
-            [UIView animateWithDuration:0.25f
-                                  delay:0.0f
-                                options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse)
-                             animations:^{
-                                 CGRect frame = bandmate.frame;
-                                 int jumpHeight = (arc4random() % 5) + 7;
-                                 frame.origin.y = BandmateRestingY + jumpHeight;
-                                 bandmate.frame = frame;
-                             }
-                             completion:nil];
-        }
-    });
+        NSLog(@"start animating");
+    NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
+    for (UIImageView *bandmate in bandmates) {
+        [UIView animateWithDuration:0.25f
+                              delay:0.0f
+                            options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse)
+                         animations:^{
+                             CGRect frame = bandmate.frame;
+                             int jumpHeight = (arc4random() % 5) + 7;
+                             frame.origin.y = BandmateRestingY + jumpHeight;
+                             bandmate.frame = frame;
+                         }
+                         completion:nil];
+    }
 }
 
 - (void)stopAnimatingBandmates
 {
+    NSLog(@"stop animating");
         NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
         for (UIView *bandmate in bandmates) {
             CGRect frame = bandmate.frame;
