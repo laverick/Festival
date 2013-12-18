@@ -424,6 +424,7 @@
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             user.coverImageView.image = [UIImage imageWithData: data];
+            user.coverImageView2.image = [UIImage imageWithData: data];
         });
     });
 }
