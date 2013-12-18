@@ -239,7 +239,7 @@
     
     self.pushers = [NSMutableArray array];
     for (int i = 0; i< 8; i++) {
-        CrowdMember *person = [[CrowdMember alloc] initWithFrame:CGRectMake(250 + i * 20, 250 + i * 20, 15, 15)];
+        CrowdMember *person = [[CrowdMember alloc] initWithFrame:CGRectMake(300 + 15 * (i % 30), 210 + 15 * (i / 30), 15, 15)];
         person.backgroundColor = [UIColor blueColor];
         
         switch (i%4) {
