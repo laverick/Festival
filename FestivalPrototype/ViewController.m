@@ -117,6 +117,8 @@
     [self createUsersSK];
 #else
     [self createUsers];
+    
+    [self createConcessionStand];
 
     [self updateUI];
     
@@ -136,6 +138,25 @@
 }
 
 #pragma mark - Users
+
+- (void)createConcessionStand
+{
+    UIImageView *concession = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"concession"]];
+    concession.userInteractionEnabled = YES;
+    concession.frame = CGRectMake(412, 20, 200, 154);
+    [self.scene addSubview:concession];
+    UITapGestureRecognizer *concessionTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buyWater)];
+    concession.gestureRecognizers = @[concessionTap];
+}
+
+- (void)buyWater
+{
+    [[[UIAlertView alloc] initWithTitle:@"Confirm Your In-App Purchase"
+                                message:@"Do you want to buy one Overpriced Priced Bottle of Water for £4.99?"
+                               delegate:nil
+                      cancelButtonTitle:@"Cancel"
+                      otherButtonTitles:@"Buy", nil] show];
+}
 
 - (void)createUsers
 {
