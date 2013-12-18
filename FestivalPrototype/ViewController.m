@@ -451,7 +451,7 @@ static const int numCrowd = 20;
     inAudioController:self.audioController
            withVolume:[self volumeForUser:user]
                   pan:[self panForUser:user]];
-    if (title && artist && ![title isEqualToString:@""] && ![artist isEqualToString:@""]) {
+    if (artist && ![artist isEqualToString:@""]) {
 //        user.trackLabel.text = [NSString stringWithFormat:@"%@ by %@", title, artist];
         user.trackLabel.text = artist;
     } else {
