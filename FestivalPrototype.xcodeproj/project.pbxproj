@@ -45,6 +45,11 @@
 		521C621C1860BCAA0083D2CC /* 1456971.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C62171860BCAA0083D2CC /* 1456971.mp3 */; };
 		521C621D1860BCAA0083D2CC /* 3660642.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C62181860BCAA0083D2CC /* 3660642.mp3 */; };
 		521C621E1860BCAA0083D2CC /* 6366963.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C62191860BCAA0083D2CC /* 6366963.mp3 */; };
+		521C62251861B1110083D2CC /* 3291397.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C62201861B1110083D2CC /* 3291397.mp3 */; };
+		521C62261861B1110083D2CC /* 5680291.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C62211861B1110083D2CC /* 5680291.mp3 */; };
+		521C62271861B1110083D2CC /* 5762508.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C62221861B1110083D2CC /* 5762508.mp3 */; };
+		521C62281861B1110083D2CC /* 8001935.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C62231861B1110083D2CC /* 8001935.mp3 */; };
+		521C62291861B1110083D2CC /* 10344949.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C62241861B1110083D2CC /* 10344949.mp3 */; };
 		8387F6CB18609105003FD39F /* nico.png in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6CA18609105003FD39F /* nico.png */; };
 		8387F6CD186092E1003FD39F /* stage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6CC186092E1003FD39F /* stage.png */; };
 		8387F6D418609C95003FD39F /* grass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6D318609C95003FD39F /* grass.jpg */; };
@@ -116,6 +121,11 @@
 		521C62171860BCAA0083D2CC /* 1456971.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 1456971.mp3; sourceTree = "<group>"; };
 		521C62181860BCAA0083D2CC /* 3660642.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 3660642.mp3; sourceTree = "<group>"; };
 		521C62191860BCAA0083D2CC /* 6366963.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 6366963.mp3; sourceTree = "<group>"; };
+		521C62201861B1110083D2CC /* 3291397.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 3291397.mp3; sourceTree = "<group>"; };
+		521C62211861B1110083D2CC /* 5680291.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 5680291.mp3; sourceTree = "<group>"; };
+		521C62221861B1110083D2CC /* 5762508.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 5762508.mp3; sourceTree = "<group>"; };
+		521C62231861B1110083D2CC /* 8001935.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 8001935.mp3; sourceTree = "<group>"; };
+		521C62241861B1110083D2CC /* 10344949.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 10344949.mp3; sourceTree = "<group>"; };
 		74E8610407C64277B970245C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8387F6CA18609105003FD39F /* nico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nico.png; path = FestivalPrototype/Resources/Images/nico.png; sourceTree = SOURCE_ROOT; };
 		8387F6CC186092E1003FD39F /* stage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stage.png; sourceTree = "<group>"; };
@@ -209,6 +219,7 @@
 		27CD017918587CBA008E034E /* Music */ = {
 			isa = PBXGroup;
 			children = (
+				521C621F1861B0E90083D2CC /* Dustin */,
 				521C62141860BC9A0083D2CC /* Sven */,
 				521C62091860B72E0083D2CC /* Luke */,
 				521C61DA186080D90083D2CC /* Maciek */,
@@ -346,6 +357,18 @@
 			name = Sven;
 			sourceTree = "<group>";
 		};
+		521C621F1861B0E90083D2CC /* Dustin */ = {
+			isa = PBXGroup;
+			children = (
+				521C62201861B1110083D2CC /* 3291397.mp3 */,
+				521C62211861B1110083D2CC /* 5680291.mp3 */,
+				521C62221861B1110083D2CC /* 5762508.mp3 */,
+				521C62231861B1110083D2CC /* 8001935.mp3 */,
+				521C62241861B1110083D2CC /* 10344949.mp3 */,
+			);
+			name = Dustin;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -430,23 +453,28 @@
 				27E86B7618585F1B00A8E88B /* Main_iPad.storyboard in Resources */,
 				521C62111860B7450083D2CC /* 1270079.mp3 in Resources */,
 				521C62011860A78B0083D2CC /* sven.png in Resources */,
+				521C62291861B1110083D2CC /* 10344949.mp3 in Resources */,
 				521C620F1860B7450083D2CC /* 894844.mp3 in Resources */,
 				521C61FE1860A78B0083D2CC /* luke.png in Resources */,
 				8387F6CB18609105003FD39F /* nico.png in Resources */,
 				8387F6D71860ABF4003FD39F /* bandmate.png in Resources */,
 				521C62121860B7450083D2CC /* 6553066.mp3 in Resources */,
 				27E86B7B18585F1B00A8E88B /* Images.xcassets in Resources */,
+				521C62251861B1110083D2CC /* 3291397.mp3 in Resources */,
 				521C61FF1860A78B0083D2CC /* maciej.png in Resources */,
 				521C61DD186080D90083D2CC /* 1430886.mp3 in Resources */,
 				521C61FD1860A78B0083D2CC /* dustin.png in Resources */,
 				521C621A1860BCAA0083D2CC /* 630358.mp3 in Resources */,
 				521C61DC186080D90083D2CC /* 813379.mp3 in Resources */,
 				8387F6CD186092E1003FD39F /* stage.png in Resources */,
+				521C62281861B1110083D2CC /* 8001935.mp3 in Resources */,
 				521C62001860A78B0083D2CC /* michal.png in Resources */,
 				8387F6D418609C95003FD39F /* grass.jpg in Resources */,
 				521C61E0186080D90083D2CC /* 3710048.mp3 in Resources */,
 				521C621D1860BCAA0083D2CC /* 3660642.mp3 in Resources */,
 				27E86B7318585F1B00A8E88B /* Main_iPhone.storyboard in Resources */,
+				521C62261861B1110083D2CC /* 5680291.mp3 in Resources */,
+				521C62271861B1110083D2CC /* 5762508.mp3 in Resources */,
 				521C61DE186080D90083D2CC /* 1476784.mp3 in Resources */,
 				27E86B6A18585F1B00A8E88B /* InfoPlist.strings in Resources */,
 				521C62131860B7450083D2CC /* 14855586.mp3 in Resources */,
