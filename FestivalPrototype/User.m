@@ -99,26 +99,29 @@ static const CGFloat UserHeight = 135.0f;
         
         NSURL *fileURL = [[NSBundle mainBundle] URLForResource:trackID withExtension:@"mp3"];
         
-        
-        self.player = [AEAudioFilePlayer audioFilePlayerWithURL:fileURL
-                                                audioController:controller
-                                                          error:NULL];
-        self.player.volume = volume;
-        self.player.pan = pan;
-        self.player.currentTime = 0;
-        
-        [controller addChannels:@[self.player]];
+        if (fileURL) {
+            self.player = [AEAudioFilePlayer audioFilePlayerWithURL:fileURL
+                                                    audioController:controller
+                                                              error:NULL];
+            self.player.volume = volume;
+            self.player.pan = pan;
+            self.player.currentTime = 0;
+            
+            [controller addChannels:@[self.player]];
+        } else {
+            NSLog(@"TRACK NOT FOUND, YO!");
+        }
     });
 }
 
 - (void)stopTracksInAudioController:(AEAudioController *)controller
 {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-    if (self.player) {
-        [controller removeChannels:@[self.player]];
-        self.player = nil;
-    }
-        });
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        if (self.player) {
+            [controller removeChannels:@[self.player]];
+            self.player = nil;
+        }
+    });
 }
 
 - (void)animateBandmates
@@ -141,22 +144,28 @@ static const CGFloat UserHeight = 135.0f;
 
 - (void)stopAnimatingBandmates
 {
-        dispatch_async(dispatch_get_main_queue(), ^{
-    NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
-    for (UIView *bandmate in bandmates) {
-        CGRect frame = bandmate.frame;
-        frame.origin.y = 80;
-        bandmate.frame = frame;
-        [bandmate.layer removeAllAnimations];
-    }
-                });
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
+        for (UIView *bandmate in bandmates) {
+            CGRect frame = bandmate.frame;
+            frame.origin.y = 80;
+            bandmate.frame = frame;
+            [bandmate.layer removeAllAnimations];
+        }
+    });
 }
 
 - (void)clearStage
 {
     NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
     for (UIView *bandmate in bandmates) {
-        bandmate.hidden = YES;
+        [UIView animateWithDuration:0.75f
+                              delay:0.0f
+                            options:kNilOptions
+                         animations:^{
+                             bandmate.alpha = 0.0f;
+                         }
+                         completion:nil];
     }
 }
 
@@ -164,7 +173,13 @@ static const CGFloat UserHeight = 135.0f;
 {
     NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
     for (UIView *bandmate in bandmates) {
-        bandmate.hidden = NO;
+        [UIView animateWithDuration:0.75f
+                              delay:0.0f
+                            options:kNilOptions
+                         animations:^{
+                             bandmate.alpha = 1.0f;
+                         }
+                         completion:nil];
     }
 }
 
