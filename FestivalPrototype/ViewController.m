@@ -313,7 +313,7 @@
 
 - (CGFloat)volumeForUser:(User *)user
 {
-    CGFloat volume = 100 / [self.mainUser distanceFrom:user];
+    CGFloat volume = (100 / [self.mainUser distanceFrom:user]) - 0.15;
     volume = volume < 0 ? 0 : volume;
     volume = volume > 1 ? 1 : volume;
     return volume;
