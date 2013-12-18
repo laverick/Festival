@@ -58,6 +58,10 @@
 		521C62321861C10A0083D2CC /* 4874856.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 521C622E1861C10A0083D2CC /* 4874856.mp3 */; };
 		52BF56E61862020F004C534E /* 4248826.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 52BF56E41862020F004C534E /* 4248826.mp3 */; };
 		52BF56E71862020F004C534E /* 4685995.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 52BF56E51862020F004C534E /* 4685995.mp3 */; };
+		836607281862049500840984 /* crowdhangers.png in Resources */ = {isa = PBXBuildFile; fileRef = 836607271862049500840984 /* crowdhangers.png */; };
+		8366072C1862067F00840984 /* crowdhangers2.png in Resources */ = {isa = PBXBuildFile; fileRef = 836607291862067F00840984 /* crowdhangers2.png */; };
+		8366072D1862067F00840984 /* crowdhangers3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8366072A1862067F00840984 /* crowdhangers3.png */; };
+		8366072E1862067F00840984 /* crowdhangers4.png in Resources */ = {isa = PBXBuildFile; fileRef = 8366072B1862067F00840984 /* crowdhangers4.png */; };
 		8387F6CB18609105003FD39F /* nico.png in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6CA18609105003FD39F /* nico.png */; };
 		8387F6CD186092E1003FD39F /* stage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6CC186092E1003FD39F /* stage.png */; };
 		8387F6D71860ABF4003FD39F /* bandmate.png in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6D61860ABF4003FD39F /* bandmate.png */; };
@@ -179,6 +183,10 @@
 		52BF56E41862020F004C534E /* 4248826.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 4248826.mp3; sourceTree = "<group>"; };
 		52BF56E51862020F004C534E /* 4685995.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 4685995.mp3; sourceTree = "<group>"; };
 		74E8610407C64277B970245C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		836607271862049500840984 /* crowdhangers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crowdhangers.png; sourceTree = "<group>"; };
+		836607291862067F00840984 /* crowdhangers2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crowdhangers2.png; sourceTree = "<group>"; };
+		8366072A1862067F00840984 /* crowdhangers3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crowdhangers3.png; sourceTree = "<group>"; };
+		8366072B1862067F00840984 /* crowdhangers4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crowdhangers4.png; sourceTree = "<group>"; };
 		8387F6CA18609105003FD39F /* nico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nico.png; path = FestivalPrototype/Resources/Images/nico.png; sourceTree = SOURCE_ROOT; };
 		8387F6CC186092E1003FD39F /* stage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stage.png; sourceTree = "<group>"; };
 		8387F6D61860ABF4003FD39F /* bandmate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bandmate.png; sourceTree = "<group>"; };
@@ -288,6 +296,10 @@
 				8387F6D61860ABF4003FD39F /* bandmate.png */,
 				8387F6CC186092E1003FD39F /* stage.png */,
 				83BA01C11861ED4300228543 /* notes.png */,
+				836607271862049500840984 /* crowdhangers.png */,
+				836607291862067F00840984 /* crowdhangers2.png */,
+				8366072A1862067F00840984 /* crowdhangers3.png */,
+				8366072B1862067F00840984 /* crowdhangers4.png */,
 				27CD017818587CBA008E034E /* Faces */,
 			);
 			path = Images;
@@ -611,6 +623,7 @@
 				83BA01B31861BB6C00228543 /* Staff-28.png in Resources */,
 				521C62321861C10A0083D2CC /* 4874856.mp3 in Resources */,
 				83BA01971861BB6C00228543 /* Staff-0.png in Resources */,
+				8366072E1862067F00840984 /* crowdhangers4.png in Resources */,
 				83BA019C1861BB6C00228543 /* Staff-5.png in Resources */,
 				27E86B7618585F1B00A8E88B /* Main_iPad.storyboard in Resources */,
 				277BC7441861B30F00030A22 /* bg.png in Resources */,
@@ -630,6 +643,7 @@
 				8387F6D71860ABF4003FD39F /* bandmate.png in Resources */,
 				83BA01A61861BB6C00228543 /* Staff-15.png in Resources */,
 				521C62121860B7450083D2CC /* 6553066.mp3 in Resources */,
+				836607281862049500840984 /* crowdhangers.png in Resources */,
 				83BA01C41861F89500228543 /* slim.wav in Resources */,
 				83BA01AE1861BB6C00228543 /* Staff-23.png in Resources */,
 				83BA019A1861BB6C00228543 /* Staff-3.png in Resources */,
@@ -657,6 +671,7 @@
 				83BA01A11861BB6C00228543 /* Staff-10.png in Resources */,
 				83BA01B11861BB6C00228543 /* Staff-26.png in Resources */,
 				52BF56E61862020F004C534E /* 4248826.mp3 in Resources */,
+				8366072D1862067F00840984 /* crowdhangers3.png in Resources */,
 				83BA01B21861BB6C00228543 /* Staff-27.png in Resources */,
 				27E86B7318585F1B00A8E88B /* Main_iPhone.storyboard in Resources */,
 				83BA019F1861BB6C00228543 /* Staff-8.png in Resources */,
@@ -664,6 +679,7 @@
 				521C62271861B1110083D2CC /* 5762508.mp3 in Resources */,
 				521C61DE186080D90083D2CC /* 1476784.mp3 in Resources */,
 				83BA01AD1861BB6C00228543 /* Staff-22.png in Resources */,
+				8366072C1862067F00840984 /* crowdhangers2.png in Resources */,
 				27E86B6A18585F1B00A8E88B /* InfoPlist.strings in Resources */,
 				521C62131860B7450083D2CC /* 14855586.mp3 in Resources */,
 				521C61DF186080D90083D2CC /* 10946818.mp3 in Resources */,

@@ -26,6 +26,7 @@
 @property (nonatomic, strong) AEAudioFilePlayer *player;
 @property (nonatomic) CGPoint position;
 @property (nonatomic, strong) PPEmitterView *musicNoteView;
+@property (nonatomic, strong) UIImageView *crowdHangers;
 
 @property (nonatomic, strong) UIImageView *stageImageView;
 @property (nonatomic, strong) UIImageView *coverImageView;

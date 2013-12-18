@@ -309,6 +309,11 @@
                                          position:CGPointMake(874.0f, 120.0f)
                                          mainUser:NO];
         
+        dustin.crowdHangers.image = [UIImage imageNamed:@"crowdhangers4.png"];
+        luke.crowdHangers.image = [UIImage imageNamed:@"crowdhangers.png"];
+        maciej.crowdHangers.image = [UIImage imageNamed:@"crowdhangers2.png"];
+        michal.crowdHangers.image = [UIImage imageNamed:@"crowdhangers3.png"];
+        
         [self.users addObject:dustin];
         [self.users addObject:luke];
         [self.users addObject:maciej];
