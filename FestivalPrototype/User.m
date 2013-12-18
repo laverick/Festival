@@ -23,7 +23,7 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
 @property (nonatomic) NSTimer *fadeOutTimer;
 @property (nonatomic) AEAudioController *controllerCopy;
 @property (nonatomic) BOOL mainUser;
-@property (nonatomic) BOOL isAnimating;
+
 
 @end
 
@@ -50,7 +50,7 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
         _trackLabel.font = [UIFont boldSystemFontOfSize:18];
         _trackLabel.textColor = [UIColor blackColor];
         _trackLabel.textAlignment = NSTextAlignmentCenter;
-//        _trackLabel.backgroundColor = [UIColor blueColor];
+        //        _trackLabel.backgroundColor = [UIColor blueColor];
         
         _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, -54, UserWidth, UserHeight)];
         _nameLabel.text = name;
@@ -79,6 +79,10 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
         _bandmate2.frame = CGRectMake(80, LeadingBandmateRestingY, 60, 60);
         _bandmate3.frame = CGRectMake(160, BandmateRestingY, 40, 40);
         
+        _musicNoteView = [[PPEmitterView alloc] initWithFrame:CGRectMake(38, 0, 100, 100)];
+        _musicNoteView.clipsToBounds = NO;
+        _musicNoteView.hidden = YES;
+        
         if (_mainUser) {
             // customize main user
         } else {
@@ -90,6 +94,7 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
             [self.view addSubview:_bandmate1];
             [self.view addSubview:_bandmate2];
             [self.view addSubview:_bandmate3];
+            [self.view addSubview:_musicNoteView];
             [self clearStageWithAnimation:NO];
             
             _audioQueue = dispatch_queue_create("audio queue", NULL);
@@ -149,6 +154,7 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
             self.player.currentTime = 0;
             
             [controller addChannels:@[self.player]];
+            
         } else {
             NSLog(@"TRACK NOT FOUND, YO!");
         }
@@ -187,6 +193,9 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
         return;
     }
     [self.view.layer removeAllAnimations];
+    for (UIView *view in self.view.subviews) {
+        [view.layer removeAllAnimations];
+    }
     self.isAnimating = YES;
     if (self.mainUser) {
         [UIView animateWithDuration:0.25f
@@ -202,8 +211,10 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
                          }
                          completion:nil];
     } else {
-    
+        
         NSLog(@"start animating");
+        
+        self.musicNoteView.hidden = NO;
         NSArray *bandmates = @[self.bandmate1, self.bandmate3];
         for (UIImageView *bandmate in bandmates) {
             [UIView animateWithDuration:0.25f
@@ -220,18 +231,19 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
                              completion:nil];
         }
         
-
-    [UIView animateWithDuration:0.25f
-                          delay:0.0f
-                        options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse)
-                     animations:^{
-                         CGRect frame = self.bandmate2.frame;
-                         int jumpHeight = (arc4random() % 5) + 7;
-                         NSLog(@"%u", jumpHeight);
-                         frame.origin.y = LeadingBandmateRestingY - jumpHeight;
-                         self.bandmate2.frame = frame;
-                     }
-                     completion:nil];
+        
+        [UIView animateWithDuration:0.25f
+                              delay:0.0f
+                            options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse)
+                         animations:^{
+                             CGRect frame = self.bandmate2.frame;
+                             int jumpHeight = (arc4random() % 5) + 7;
+                             NSLog(@"%u", jumpHeight);
+                             frame.origin.y = LeadingBandmateRestingY - jumpHeight;
+                             self.bandmate2.frame = frame;
+                         }
+                         completion:nil];
+    }
 
 }
 
@@ -241,10 +253,18 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
         return;
     }
 
+    [self.view.layer removeAllAnimations];
+    for (UIView *view in self.view.subviews) {
+        [view.layer removeAllAnimations];
+    }
+
+
     NSLog(@"Stop animating");
+    self.musicNoteView.hidden = YES;
+    
     if (self.mainUser) {
         UIImageView *imageView = (UIImageView *)[self.view viewWithTag:10];
-        [imageView.layer removeAllAnimations];
+        //[imageView.layer removeAllAnimations];
         CGRect frame = imageView.frame;
         frame.origin.y = 0;
         imageView.frame = frame;
@@ -259,7 +279,11 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
         CGRect frame = self.bandmate2.frame;
         frame.origin.y = LeadingBandmateRestingY;
         self.bandmate2.frame = frame;
+        self.trackLabel.text = nil;
+        self.coverImageView.image = nil;
+        self.coverImageView2.image = nil;
     }
+    
     self.isAnimating = NO;
 }
 
@@ -315,15 +339,15 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
     UIInterpolatingMotionEffect *verticalMotionEffect =
     [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
     
-    verticalMotionEffect.minimumRelativeValue = @(-50);
-    verticalMotionEffect.maximumRelativeValue = @(50);
+    verticalMotionEffect.minimumRelativeValue = @(-20);
+    verticalMotionEffect.maximumRelativeValue = @(20);
     
     UIInterpolatingMotionEffect *horizontalMotionEffect =
     [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
     
-    horizontalMotionEffect.minimumRelativeValue = @(-50);
+    horizontalMotionEffect.minimumRelativeValue = @(-20);
     
-    horizontalMotionEffect.maximumRelativeValue = @(50);
+    horizontalMotionEffect.maximumRelativeValue = @(20);
     
     
     UIMotionEffectGroup *group = [UIMotionEffectGroup new];

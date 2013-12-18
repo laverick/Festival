@@ -69,7 +69,7 @@
     scene.scaleMode = SKSceneScaleModeAspectFill;
     [(SKView *)self.view presentScene:scene];
 #else
-    [self createCrowd];
+//    [self createCrowd];
 #endif
     
 
@@ -177,6 +177,14 @@
     return YES;
 }
 
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    if (motion == UIEventSubtypeMotionShake )
+    {
+        [self getThinner];
+    }
+}
+
 #pragma mark - Users
 
 - (void)createConcessionStand
@@ -222,6 +230,36 @@
                         options:kNilOptions
                      animations:^{
                          self.mainUserImage.transform = CGAffineTransformMakeScale(self.currentFatness*1.4, self.currentFatness*1.2);
+                     }
+                     completion:^(BOOL finished) {
+                         [UIView animateWithDuration:0.15f
+                                          animations:^{
+                                              self.mainUserImage.transform = CGAffineTransformMakeScale(self.currentFatness, self.currentFatness);
+                                          }];
+                     }];
+}
+
+- (void)getThinner
+{
+    NSURL *fileURL = [[NSBundle mainBundle] URLForResource:@"slim" withExtension:@"wav"];
+    if (fileURL) {
+        AEAudioFilePlayer *slim = [AEAudioFilePlayer audioFilePlayerWithURL:fileURL
+                                                            audioController:self.audioController
+                                                                      error:NULL];
+        slim.loop = NO;
+        slim.volume = 0.5f;
+        slim.currentTime = 0;
+        
+        [self.audioController addChannels:@[slim]];
+    }
+    
+    self.currentFatness = 1.0f;
+    NSLog(@"Making Nico thinner: %f", self.currentFatness);
+    [UIView animateWithDuration:0.15f
+                          delay:0.15f
+                        options:kNilOptions
+                     animations:^{
+                         self.mainUserImage.transform = CGAffineTransformMakeScale(self.currentFatness*0.6, self.currentFatness*0.8);
                      }
                      completion:^(BOOL finished) {
                          [UIView animateWithDuration:0.15f
@@ -367,8 +405,9 @@
                          self.mainUser.view.center = position;
                      }
                      completion:^(BOOL finished){
-                         if (finished) {
-                                 if ([self isCloseToAFilledStage:position]) {
+                             if (fabsf(self.mainUser.position.x - self.destination.x) < 0.0001 &&
+                                 fabsf(self.mainUser.position.y - self.destination.y) < 0.0001) {
+                                 if ([self isCloseToAPlayingStage:position]) {
                                      [self.mainUser animate];
                                  } else {
                                      [self.mainUser stopAnimating];
@@ -541,7 +580,7 @@
     [self moveUserToPosition:nextPosition];
 }
 
-- (BOOL)isCloseToAFilledStage:(CGPoint)location
+- (BOOL)isCloseToAPlayingStage:(CGPoint)location
 {
     const CGFloat max = 450;
     
@@ -551,13 +590,13 @@
     User *bottomRight = self.users[2];
     
     return
-    ([self distanceBetween:CGPointMake(0, 0) and:location] < max && topLeft.bandmate1.alpha != 0.0f)
+    ([self distanceBetween:CGPointMake(0, 0) and:location] < max && topLeft.bandmate1.alpha != 0.0f && topLeft.isAnimating)
     ||
-    ([self distanceBetween:CGPointMake(0, self.view.frame.size.width) and:location] < max && topRight.bandmate1.alpha != 0.0f)
+    ([self distanceBetween:CGPointMake(self.view.frame.size.width, 0) and:location] < max && topRight.bandmate1.alpha != 0.0f && topRight.isAnimating)
     ||
-    ([self distanceBetween:CGPointMake(self.view.frame.size.height, 0) and:location] < max && bottomLeft.bandmate1.alpha != 0.0f)
+    ([self distanceBetween:CGPointMake(0, self.view.frame.size.height) and:location] < max && bottomLeft.bandmate1.alpha != 0.0f && bottomLeft.isAnimating)
     ||
-    ([self distanceBetween:CGPointMake(self.view.frame.size.height, self.view.frame.size.width) and:location] < max && bottomRight.bandmate1.alpha != 0.0f)
+    ([self distanceBetween:CGPointMake(self.view.frame.size.width, self.view.frame.size.height) and:location] < max && bottomRight.bandmate1.alpha != 0.0f && bottomRight.isAnimating)
     ;
 }
 
@@ -570,13 +609,13 @@
 {
     self.mainUser.position = position;
     
-//    [self.mainUser stopAnimating];
     [self updateUI];
     
     if (!(fabsf(self.mainUser.position.x - self.destination.x) < 0.0001 &&
         fabsf(self.mainUser.position.y - self.destination.y) < 0.0001)) {
         // stationary
-    [self adjustChannels];
+        [self.mainUser stopAnimating];
+        [self adjustChannels];
     }
 }
 
