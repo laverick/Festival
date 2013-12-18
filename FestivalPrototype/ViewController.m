@@ -61,7 +61,7 @@
     scene.scaleMode = SKSceneScaleModeAspectFill;
     [(SKView *)self.view presentScene:scene];
 #else
-    [self createCrowd];
+//    [self createCrowd];
 #endif
     
 
@@ -107,8 +107,8 @@
         }
         
         if (userToUpdate){
-            [userToUpdate clearStage];
             [userToUpdate stopAnimatingBandmates];
+            [userToUpdate clearStageWithAnimation:YES];
             [self stopTracksFromUser:userToUpdate];
         }
     };
@@ -117,6 +117,8 @@
     [self createUsersSK];
 #else
     [self createUsers];
+    
+    [self createConcessionStand];
 
     [self updateUI];
     
@@ -136,6 +138,25 @@
 }
 
 #pragma mark - Users
+
+- (void)createConcessionStand
+{
+    UIImageView *concession = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"concession"]];
+    concession.userInteractionEnabled = YES;
+    concession.frame = CGRectMake(412, 20, 200, 154);
+    [self.scene addSubview:concession];
+    UITapGestureRecognizer *concessionTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buyWater)];
+    concession.gestureRecognizers = @[concessionTap];
+}
+
+- (void)buyWater
+{
+    [[[UIAlertView alloc] initWithTitle:@"Confirm Your In-App Purchase"
+                                message:@"Do you want to buy one Overpriced Priced Bottle of Water for £4.99?"
+                               delegate:nil
+                      cancelButtonTitle:@"Cancel"
+                      otherButtonTitles:@"Buy", nil] show];
+}
 
 - (void)createUsers
 {
@@ -193,13 +214,13 @@
         [self.animator addBehavior:self.usersBehavior];
         
         User *user1 = self.users[0]; // Dustin, Lower-Left
-        user1.view.transform = CGAffineTransformMakeRotation(6);
+        user1.view.transform = CGAffineTransformMakeRotation(6.2);
         User *user2 = self.users[1]; // Luke, Upper-Left
-        user2.view.transform = CGAffineTransformMakeRotation(6);
+        user2.view.transform = CGAffineTransformMakeRotation(6.2);
         User *user3 = self.users[2]; // Maciej, Lower-Right
-        user3.view.transform = CGAffineTransformMakeRotation(0.25);
+        user3.view.transform = CGAffineTransformMakeRotation(0.05);
         User *user4 = self.users[3]; // Michal, Upper-Right
-        user4.view.transform = CGAffineTransformMakeRotation(0.25);
+        user4.view.transform = CGAffineTransformMakeRotation(0.05);
     }
 }
 
@@ -210,15 +231,15 @@
 
 - (void)createCrowd
 {
-    
+    return;
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
     
     self.collision = [[UICollisionBehavior alloc] init];
     self.collision.translatesReferenceBoundsIntoBoundary = YES;
     
     self.pushers = [NSMutableArray array];
-    for (int i = 0; i< 20; i++) {
-        CrowdMember *person = [[CrowdMember alloc] initWithFrame:CGRectMake(250 + i * 20, 250 + i * 20, 15, 15)];
+    for (int i = 0; i< 8; i++) {
+        CrowdMember *person = [[CrowdMember alloc] initWithFrame:CGRectMake(300 + 15 * (i % 30), 210 + 15 * (i / 30), 15, 15)];
         person.backgroundColor = [UIColor blueColor];
         
         switch (i%4) {
@@ -226,13 +247,13 @@
                 person.targetLoc = CGPointMake(200, 200);
                 break;
             case 1:
-                person.targetLoc = CGPointMake(200, 500);
+                person.targetLoc = CGPointMake(200, 550);
                 break;
             case 2:
                 person.targetLoc = CGPointMake(800, 200);
                 break;
             default:
-                person.targetLoc = CGPointMake(800, 500);
+                person.targetLoc = CGPointMake(800, 550);
                 break;
         }
         
@@ -304,6 +325,19 @@
     self.audioController.allowMixingWithOtherApps = NO;
     
     [self.audioController start:nil];
+    
+    NSURL *fileURL = [[NSBundle mainBundle] URLForResource:@"crowd" withExtension:@"wav"];
+    if (fileURL) {
+        AEAudioFilePlayer *crowd = [AEAudioFilePlayer audioFilePlayerWithURL:fileURL
+                                                             audioController:self.audioController
+                                                                       error:NULL];
+        crowd.loop = YES;
+        crowd.volume = 0.025f;
+        crowd.pan = 0.0f;
+        crowd.currentTime = 0;
+        
+        [self.audioController addChannels:@[crowd]];
+    }
 }
 
 - (void)playTrackFromUser:(User *)user withTrackID:(NSString *)trackID
@@ -331,7 +365,7 @@
 
 - (CGFloat)volumeForUser:(User *)user
 {
-    CGFloat volume = 100 / [self.mainUser distanceFrom:user];
+    CGFloat volume = (100 / [self.mainUser distanceFrom:user]) - 0.15;
     volume = volume < 0 ? 0 : volume;
     volume = volume > 1 ? 1 : volume;
     return volume;

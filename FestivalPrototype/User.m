@@ -11,6 +11,8 @@
 static const CGFloat UserWidth = 233.0f;
 static const CGFloat UserHeight = 135.0f;
 
+static const CGFloat BandmateRestingY = 64.0f;
+
 @interface User ()
 
 @property (nonatomic) NSUInteger currentTrackIndex;
@@ -43,25 +45,34 @@ static const CGFloat UserHeight = 135.0f;
         _stageImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"stage"]];
         _stageImageView.frame = CGRectMake(0, 0, UserWidth, UserHeight);
         
-        _bandmate1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bandmate"]];
+        int bandmate1Pic = arc4random() % 30;
+        int bandmate3Pic = arc4random() % 30;
+        NSString *bandmate1FileName = [NSString stringWithFormat:@"Staff-%d", bandmate1Pic];
+        NSString *bandmate3FileName = [NSString stringWithFormat:@"Staff-%d", bandmate3Pic];
+        
+        _bandmate1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:bandmate1FileName]];
         _bandmate2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[name lowercaseString]]];
-        _bandmate3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bandmate"]];
+        _bandmate3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:bandmate3FileName]];
         
-        _bandmate1.frame = CGRectMake(20, 80, 40, 40);
-        _bandmate2.frame = CGRectMake(88, 80, 60, 60);
-        _bandmate3.frame = CGRectMake(160, 80, 40, 40);
+        _bandmate1.frame = CGRectMake(20, BandmateRestingY, 40, 40);
+        _bandmate2.frame = CGRectMake(80, BandmateRestingY, 60, 60);
+        _bandmate3.frame = CGRectMake(160, BandmateRestingY, 40, 40);
         
-        if (!mainUser) {
+        if (mainUser) {
+            // customize main user
+        } else {
             [self.view addSubview:self.stageImageView];
             [self.view addSubview:self.nameLabel];
             [self.view addSubview:_bandmate1];
             [self.view addSubview:_bandmate2];
             [self.view addSubview:_bandmate3];
-            [self clearStage];
+            [self clearStageWithAnimation:NO];
         }
     }
     return self;
 }
+
+
 
 - (CGFloat)distanceFrom:(User *)user
 {
@@ -89,7 +100,9 @@ static const CGFloat UserHeight = 135.0f;
         }
         
         if (!trackID) {
-            [self stopAnimatingBandmates];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self stopAnimatingBandmates];
+            });
             return;
         }
         
@@ -134,7 +147,8 @@ static const CGFloat UserHeight = 135.0f;
                                 options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse)
                              animations:^{
                                  CGRect frame = bandmate.frame;
-                                 frame.origin.y = 70;
+                                 int jumpHeight = (arc4random() % 5) + 7;
+                                 frame.origin.y = BandmateRestingY + jumpHeight;
                                  bandmate.frame = frame;
                              }
                              completion:nil];
@@ -144,43 +158,47 @@ static const CGFloat UserHeight = 135.0f;
 
 - (void)stopAnimatingBandmates
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
         NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
         for (UIView *bandmate in bandmates) {
             CGRect frame = bandmate.frame;
-            frame.origin.y = 80;
+            frame.origin.y = BandmateRestingY;
             bandmate.frame = frame;
             [bandmate.layer removeAllAnimations];
         }
-    });
 }
 
-- (void)clearStage
+- (void)clearStageWithAnimation:(BOOL)animate
 {
     NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
-    for (UIView *bandmate in bandmates) {
-        [UIView animateWithDuration:0.75f
-                              delay:0.0f
-                            options:kNilOptions
-                         animations:^{
+    
+    CGFloat duration = animate ? 0.75 : 0;
+    
+    [UIView animateWithDuration:duration
+                          delay:0.0f
+                        options:kNilOptions
+                     animations:^{
+                         for (UIView *bandmate in bandmates) {
                              bandmate.alpha = 0.0f;
+                             self.nameLabel.alpha = 0.0f;
                          }
-                         completion:nil];
-    }
+                     }
+                     completion:nil];
 }
 
 - (void)fillStage
 {
     NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
-    for (UIView *bandmate in bandmates) {
-        [UIView animateWithDuration:0.75f
-                              delay:0.0f
-                            options:kNilOptions
-                         animations:^{
+    
+    [UIView animateWithDuration:0.75f
+                          delay:0.0f
+                        options:kNilOptions
+                     animations:^{
+                         for (UIView *bandmate in bandmates) {
                              bandmate.alpha = 1.0f;
+                             self.nameLabel.alpha = 1.0f;
                          }
-                         completion:nil];
-    }
+                     }
+                     completion:nil];
 }
 
 - (void)setVolume:(CGFloat)volume
@@ -191,6 +209,33 @@ static const CGFloat UserHeight = 135.0f;
 - (void)setPan:(CGFloat)pan
 {
     self.player.pan = pan;
+}
+
+
+#pragma mark - Motion Effect
+- (UIView *)viewWithMotionEffect
+{
+    UIView *view = [UIView new];
+    UIInterpolatingMotionEffect *verticalMotionEffect =
+    [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+    
+    verticalMotionEffect.minimumRelativeValue = @(-50);
+    verticalMotionEffect.maximumRelativeValue = @(50);
+    
+    UIInterpolatingMotionEffect *horizontalMotionEffect =
+    [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+    
+    horizontalMotionEffect.minimumRelativeValue = @(-50);
+    
+    horizontalMotionEffect.maximumRelativeValue = @(50);
+    
+    
+    UIMotionEffectGroup *group = [UIMotionEffectGroup new];
+    
+    group.motionEffects = @[horizontalMotionEffect, verticalMotionEffect];
+    
+    [view addMotionEffect:group];
+    return view;
 }
 
 @end
