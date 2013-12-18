@@ -56,7 +56,9 @@ static const CGFloat UserHeight = 135.0f;
         _bandmate2.frame = CGRectMake(80, 80, 60, 60);
         _bandmate3.frame = CGRectMake(160, 80, 40, 40);
         
-        if (!mainUser) {
+        if (mainUser) {
+            // customize main user
+        } else {
             [self.view addSubview:self.stageImageView];
             [self.view addSubview:self.nameLabel];
             [self.view addSubview:_bandmate1];
