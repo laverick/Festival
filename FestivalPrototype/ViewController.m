@@ -17,7 +17,7 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-#define USE_SK 1
+//#define USE_SK
 
 @interface ViewController ()
 
@@ -60,8 +60,11 @@
     SKScene *scene = [MyScene sceneWithSize:self.view.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     [(SKView *)self.view presentScene:scene];
+#else
+    [self createCrowd];
 #endif
     
+
     TracksClient *tracksClient = [TracksClient sharedClient];
 
     tracksClient.updateBlock = ^(NSString *user, NSString *track){
@@ -110,16 +113,15 @@
         }
     };
 
-    [self configurePlayer];
-
 #ifdef USE_SK
     [self createUsersSK];
 #else
-    [self createCrowd];
     [self createUsers];
+
     [self updateUI];
     
-    
+    [self configurePlayer];
+
     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1f
                                                   target:self
                                                 selector:@selector(updateUser)
