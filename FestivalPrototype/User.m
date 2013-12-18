@@ -23,7 +23,7 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
 @property (nonatomic) NSTimer *fadeOutTimer;
 @property (nonatomic) AEAudioController *controllerCopy;
 @property (nonatomic) BOOL mainUser;
-@property (nonatomic) BOOL isAnimating;
+
 
 @end
 
@@ -193,6 +193,9 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
         return;
     }
     [self.view.layer removeAllAnimations];
+    for (UIView *view in self.view.subviews) {
+        [view.layer removeAllAnimations];
+    }
     self.isAnimating = YES;
     if (self.mainUser) {
         [UIView animateWithDuration:0.25f
@@ -241,6 +244,7 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
                          }
                          completion:nil];
     }
+
 }
 
 - (void)stopAnimating
@@ -248,13 +252,19 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
     if (!self.isAnimating) {
         return;
     }
-    
+
+    [self.view.layer removeAllAnimations];
+    for (UIView *view in self.view.subviews) {
+        [view.layer removeAllAnimations];
+    }
+
+
     NSLog(@"Stop animating");
     self.musicNoteView.hidden = YES;
     
     if (self.mainUser) {
         UIImageView *imageView = (UIImageView *)[self.view viewWithTag:10];
-        [imageView.layer removeAllAnimations];
+        //[imageView.layer removeAllAnimations];
         CGRect frame = imageView.frame;
         frame.origin.y = 0;
         imageView.frame = frame;
@@ -273,6 +283,7 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
         self.coverImageView.image = nil;
         self.coverImageView2.image = nil;
     }
+    
     self.isAnimating = NO;
 }
 
@@ -328,15 +339,15 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
     UIInterpolatingMotionEffect *verticalMotionEffect =
     [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
     
-    verticalMotionEffect.minimumRelativeValue = @(-50);
-    verticalMotionEffect.maximumRelativeValue = @(50);
+    verticalMotionEffect.minimumRelativeValue = @(-20);
+    verticalMotionEffect.maximumRelativeValue = @(20);
     
     UIInterpolatingMotionEffect *horizontalMotionEffect =
     [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
     
-    horizontalMotionEffect.minimumRelativeValue = @(-50);
+    horizontalMotionEffect.minimumRelativeValue = @(-20);
     
-    horizontalMotionEffect.maximumRelativeValue = @(50);
+    horizontalMotionEffect.maximumRelativeValue = @(20);
     
     
     UIMotionEffectGroup *group = [UIMotionEffectGroup new];

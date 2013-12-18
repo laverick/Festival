@@ -30,6 +30,7 @@
 @property (nonatomic, strong) UIImageView *stageImageView;
 @property (nonatomic, strong) UIImageView *coverImageView;
 @property (nonatomic, strong) UIImageView *coverImageView2;
+@property (nonatomic) BOOL isAnimating;
 
 - (id)initWithName:(NSString *)name
           playlist:(NSArray *)playlist

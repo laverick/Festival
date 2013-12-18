@@ -399,8 +399,9 @@ static const int numCrowd = 20;
                          self.mainUser.view.center = position;
                      }
                      completion:^(BOOL finished){
-                         if (finished) {
-                                 if ([self isCloseToAFilledStage:position]) {
+                             if (fabsf(self.mainUser.position.x - self.destination.x) < 0.0001 &&
+                                 fabsf(self.mainUser.position.y - self.destination.y) < 0.0001) {
+                                 if ([self isCloseToAPlayingStage:position]) {
                                      [self.mainUser animate];
                                  } else {
                                      [self.mainUser stopAnimating];
@@ -573,7 +574,7 @@ static const int numCrowd = 20;
     [self moveUserToPosition:nextPosition];
 }
 
-- (BOOL)isCloseToAFilledStage:(CGPoint)location
+- (BOOL)isCloseToAPlayingStage:(CGPoint)location
 {
     const CGFloat max = 450;
     
@@ -583,13 +584,13 @@ static const int numCrowd = 20;
     User *bottomRight = self.users[2];
     
     return
-    ([self distanceBetween:CGPointMake(0, 0) and:location] < max && topLeft.bandmate1.alpha != 0.0f)
+    ([self distanceBetween:CGPointMake(0, 0) and:location] < max && topLeft.bandmate1.alpha != 0.0f && topLeft.isAnimating)
     ||
-    ([self distanceBetween:CGPointMake(0, self.view.frame.size.width) and:location] < max && topRight.bandmate1.alpha != 0.0f)
+    ([self distanceBetween:CGPointMake(self.view.frame.size.width, 0) and:location] < max && topRight.bandmate1.alpha != 0.0f && topRight.isAnimating)
     ||
-    ([self distanceBetween:CGPointMake(self.view.frame.size.height, 0) and:location] < max && bottomLeft.bandmate1.alpha != 0.0f)
+    ([self distanceBetween:CGPointMake(0, self.view.frame.size.height) and:location] < max && bottomLeft.bandmate1.alpha != 0.0f && bottomLeft.isAnimating)
     ||
-    ([self distanceBetween:CGPointMake(self.view.frame.size.height, self.view.frame.size.width) and:location] < max && bottomRight.bandmate1.alpha != 0.0f)
+    ([self distanceBetween:CGPointMake(self.view.frame.size.width, self.view.frame.size.height) and:location] < max && bottomRight.bandmate1.alpha != 0.0f && bottomRight.isAnimating)
     ;
 }
 
@@ -602,13 +603,13 @@ static const int numCrowd = 20;
 {
     self.mainUser.position = position;
     
-//    [self.mainUser stopAnimating];
     [self updateUI];
     
     if (!(fabsf(self.mainUser.position.x - self.destination.x) < 0.0001 &&
         fabsf(self.mainUser.position.y - self.destination.y) < 0.0001)) {
         // stationary
-    [self adjustChannels];
+        [self.mainUser stopAnimating];
+        [self adjustChannels];
     }
 }
 
