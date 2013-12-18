@@ -17,6 +17,11 @@
 
 #import <SpriteKit/SpriteKit.h>
 
+
+static const CGPoint targets[] = {(CGPoint){200, 200}, (CGPoint){200, 550}, (CGPoint){800, 200}, (CGPoint){800, 550}};
+
+
+static const int numCrowd = 20;
 //#define USE_SK
 
 @interface ViewController () <UIAlertViewDelegate>
@@ -68,8 +73,6 @@
     SKScene *scene = [MyScene sceneWithSize:self.view.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     [(SKView *)self.view presentScene:scene];
-#else
-//    [self createCrowd];
 #endif
     
 
@@ -126,6 +129,9 @@
     };
 
 #ifndef USE_SK
+    
+    [self createCrowd];
+
     [self createUsers];
     
     [self createConcessionStand];
@@ -345,24 +351,12 @@
     self.collision.translatesReferenceBoundsIntoBoundary = YES;
     
     self.pushers = [NSMutableArray array];
-    for (int i = 0; i< 8; i++) {
-        CrowdMember *person = [[CrowdMember alloc] initWithFrame:CGRectMake(300 + 15 * (i % 30), 210 + 15 * (i / 30), 15, 15)];
-        person.backgroundColor = [UIColor blueColor];
+    for (int i = 0; i< numCrowd; i++) {
+        CrowdMember *person = [[CrowdMember alloc] initWithFrame:CGRectMake(300 + 15 * (i % 30), 210 + 15 * (i / 30), 30, 30)];
+
+        person.image = [UIImage imageNamed:[NSString stringWithFormat:@"Staff-%i.png", i]];
         
-        switch (i%4) {
-            case 0:
-                person.targetLoc = CGPointMake(200, 200);
-                break;
-            case 1:
-                person.targetLoc = CGPointMake(200, 550);
-                break;
-            case 2:
-                person.targetLoc = CGPointMake(800, 200);
-                break;
-            default:
-                person.targetLoc = CGPointMake(800, 550);
-                break;
-        }
+        person.targetLoc = targets[i%4];
         
         [self.view addSubview:person];
         [self.collision addItem:person];

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CrowdMember : UIView
+@interface CrowdMember : UIImageView
 
 @property (nonatomic, assign) CGPoint targetLoc;
 
