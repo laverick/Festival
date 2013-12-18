@@ -8,7 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^TracksClientUpdateBlock)(NSString *user, NSString *track);
+typedef void (^TracksClientUpdateBlock)(NSString *user,
+                                        NSString *track,
+                                        NSString *artist,
+                                        NSString *title,
+                                        NSString *imageURL);
+
 typedef void (^TracksClientExitBlock)(NSString *user);
 
 

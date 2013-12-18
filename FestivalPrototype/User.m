@@ -37,15 +37,27 @@ static const CGFloat BandmateRestingY = 64.0f;
         _currentTrackIndex = 0;
         
         _view = [[UIView alloc] initWithFrame:CGRectMake(self.position.x - UserWidth / 2, self.position.y - UserHeight / 2, UserWidth, UserHeight)];
-        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, -10, UserWidth, UserHeight)];
+        
+        _trackLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 113, UserWidth, 20)];
+        _trackLabel.font = [UIFont boldSystemFontOfSize:18];
+        _trackLabel.textColor = [UIColor blackColor];
+        _trackLabel.textAlignment = NSTextAlignmentCenter;
+//        _trackLabel.backgroundColor = [UIColor blueColor];
+        
+        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 80, UserWidth, UserHeight)];
 
-        _nameLabel.text = [NSString stringWithFormat:@"%@ Stage", name];
+        _nameLabel.text = [NSString stringWithFormat:@"%@'s", name];
         _nameLabel.font = [UIFont boldSystemFontOfSize:18];
-        _nameLabel.textColor = [UIColor blackColor];
+        _nameLabel.textColor = [UIColor whiteColor];
         _nameLabel.textAlignment = NSTextAlignmentCenter;
         
         _stageImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"stage"]];
         _stageImageView.frame = CGRectMake(0, 0, UserWidth, UserHeight);
+        
+        _coverImageView = [UIImageView new];
+        _coverImageView.frame = CGRectMake(92, 47, 48, 48);
+//        _coverImageView.backgroundColor = [UIColor redColor];
+        
         
         int bandmate1Pic = arc4random() % 30;
         int bandmate3Pic = arc4random() % 30;
@@ -64,7 +76,9 @@ static const CGFloat BandmateRestingY = 64.0f;
             // customize main user
         } else {
             [self.view addSubview:self.stageImageView];
+            [self.view addSubview:self.coverImageView];
             [self.view addSubview:self.nameLabel];
+            [self.view addSubview:self.trackLabel];
             [self.view addSubview:_bandmate1];
             [self.view addSubview:_bandmate2];
             [self.view addSubview:_bandmate3];
@@ -145,12 +159,12 @@ static const CGFloat BandmateRestingY = 64.0f;
 
 - (void)animateBandmates
 {
-        NSLog(@"start animating");
+    NSLog(@"Start animating");
     NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
     for (UIImageView *bandmate in bandmates) {
         [UIView animateWithDuration:0.25f
                               delay:0.0f
-                            options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse)
+                            options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionCurveEaseInOut)
                          animations:^{
                              CGRect frame = bandmate.frame;
                              int jumpHeight = (arc4random() % 5) + 7;
@@ -163,7 +177,7 @@ static const CGFloat BandmateRestingY = 64.0f;
 
 - (void)stopAnimatingBandmates
 {
-    NSLog(@"stop animating");
+    NSLog(@"Stop animating");
         NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
         for (UIView *bandmate in bandmates) {
             CGRect frame = bandmate.frame;
