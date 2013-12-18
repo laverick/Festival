@@ -316,7 +316,7 @@
         
         static int direction = 1;
         
-        if ([self isCloseToAStage:position]) {
+        if ([self isCloseToAFilledStage:position]) {
             direction = -direction;
            // position.y += direction * 3;
             position.x += direction * 3;
@@ -452,18 +452,23 @@
     [self moveUserToPosition:nextPosition];
 }
 
-- (BOOL)isCloseToAStage:(CGPoint)location
+- (BOOL)isCloseToAFilledStage:(CGPoint)location
 {
     const CGFloat max = 450;
     
+    User *topLeft = self.users[1];
+    User *topRight = self.users[3];
+    User *bottomLeft = self.users[0];
+    User *bottomRight = self.users[2];
+    
     return
-    [self distanceBetween:CGPointMake(0, 0) and:location] < max
+    ([self distanceBetween:CGPointMake(0, 0) and:location] < max && topLeft.bandmate1.alpha != 0.0f)
     ||
-    [self distanceBetween:CGPointMake(0, self.view.frame.size.width) and:location] < max
+    ([self distanceBetween:CGPointMake(0, self.view.frame.size.width) and:location] < max && topRight.bandmate1.alpha != 0.0f)
     ||
-    [self distanceBetween:CGPointMake(self.view.frame.size.height, 0) and:location] < max
+    ([self distanceBetween:CGPointMake(self.view.frame.size.height, 0) and:location] < max && bottomLeft.bandmate1.alpha != 0.0f)
     ||
-    [self distanceBetween:CGPointMake(self.view.frame.size.height, self.view.frame.size.width) and:location] < max
+    ([self distanceBetween:CGPointMake(self.view.frame.size.height, self.view.frame.size.width) and:location] < max && bottomRight.bandmate1.alpha != 0.0f)
     ;
 }
 
