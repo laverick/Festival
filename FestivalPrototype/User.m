@@ -86,7 +86,7 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
         _musicNoteView.hidden = YES;
         
         _crowdHangers = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"crowdhangers"]];
-        _crowdHangers.frame = CGRectMake(4, 125, 225, 90);
+        _crowdHangers.frame = CGRectMake(4, 132, 225, 90);
         
         if (_mainUser) {
             // customize main user
