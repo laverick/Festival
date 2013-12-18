@@ -56,6 +56,7 @@
 		8387F6CD186092E1003FD39F /* stage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6CC186092E1003FD39F /* stage.png */; };
 		8387F6D418609C95003FD39F /* grass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6D318609C95003FD39F /* grass.jpg */; };
 		8387F6D71860ABF4003FD39F /* bandmate.png in Resources */ = {isa = PBXBuildFile; fileRef = 8387F6D61860ABF4003FD39F /* bandmate.png */; };
+		83BA01741861B98800228543 /* crowd.wav in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01731861B98800228543 /* crowd.wav */; };
 		DA57F8651860683300DCC187 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA57F8641860683300DCC187 /* AudioToolbox.framework */; };
 		DA57F8671860683900DCC187 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA57F8661860683900DCC187 /* CFNetwork.framework */; };
 		DA57F8691860684300DCC187 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA57F8681860684300DCC187 /* CoreLocation.framework */; };
@@ -136,6 +137,7 @@
 		8387F6CC186092E1003FD39F /* stage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stage.png; sourceTree = "<group>"; };
 		8387F6D318609C95003FD39F /* grass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grass.jpg; sourceTree = "<group>"; };
 		8387F6D61860ABF4003FD39F /* bandmate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bandmate.png; sourceTree = "<group>"; };
+		83BA01731861B98800228543 /* crowd.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = crowd.wav; sourceTree = "<group>"; };
 		B08A6521211741BC89EA34F0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		DA57F8641860683300DCC187 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DA57F8661860683900DCC187 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -225,6 +227,7 @@
 		27CD017918587CBA008E034E /* Music */ = {
 			isa = PBXGroup;
 			children = (
+				83BA01731861B98800228543 /* crowd.wav */,
 				521C621F1861B0E90083D2CC /* Dustin */,
 				521C62141860BC9A0083D2CC /* Sven */,
 				521C62091860B72E0083D2CC /* Luke */,
@@ -481,6 +484,7 @@
 				8387F6D418609C95003FD39F /* grass.jpg in Resources */,
 				521C61E0186080D90083D2CC /* 3710048.mp3 in Resources */,
 				521C621D1860BCAA0083D2CC /* 3660642.mp3 in Resources */,
+				83BA01741861B98800228543 /* crowd.wav in Resources */,
 				27E86B7318585F1B00A8E88B /* Main_iPhone.storyboard in Resources */,
 				521C62261861B1110083D2CC /* 5680291.mp3 in Resources */,
 				521C62271861B1110083D2CC /* 5762508.mp3 in Resources */,

@@ -61,7 +61,7 @@
     scene.scaleMode = SKSceneScaleModeAspectFill;
     [(SKView *)self.view presentScene:scene];
 #else
-    [self createCrowd];
+//    [self createCrowd];
 #endif
     
 
@@ -304,6 +304,19 @@
     self.audioController.allowMixingWithOtherApps = NO;
     
     [self.audioController start:nil];
+    
+    NSURL *fileURL = [[NSBundle mainBundle] URLForResource:@"crowd" withExtension:@"wav"];
+    if (fileURL) {
+        AEAudioFilePlayer *crowd = [AEAudioFilePlayer audioFilePlayerWithURL:fileURL
+                                                             audioController:self.audioController
+                                                                       error:NULL];
+        crowd.loop = YES;
+        crowd.volume = 0.05f;
+        crowd.pan = 0.0f;
+        crowd.currentTime = 0;
+        
+        [self.audioController addChannels:@[crowd]];
+    }
 }
 
 - (void)playTrackFromUser:(User *)user withTrackID:(NSString *)trackID
