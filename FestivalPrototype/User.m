@@ -19,6 +19,9 @@ static const CGFloat BandmateRestingY = 64.0f;
 
 @property (nonatomic) dispatch_queue_t audioQueue;
 
+@property (nonatomic) NSTimer *fadeOutTimer;
+@property (nonatomic) AEAudioController *controllerCopy;
+
 @end
 
 @implementation User
@@ -149,12 +152,28 @@ static const CGFloat BandmateRestingY = 64.0f;
 
 - (void)stopTracksInAudioController:(AEAudioController *)controller
 {
-    dispatch_async(self.audioQueue, ^{
-        if (self.player) {
-            [controller removeChannels:@[self.player]];
-            self.player = nil;
-        }
-    });
+    self.fadeOutTimer = [NSTimer scheduledTimerWithTimeInterval:0.05f
+                                                         target:self
+                                                       selector:@selector(fadeOutTick)
+                                                       userInfo:nil
+                                                        repeats:YES];
+}
+
+- (void)fadeOutTick
+{
+    if (self.player.volume >= 0) {
+        NSLog(@"Volume is %f", self.player.volume);
+        self.player.volume -= 0.05f;
+    } else {
+        self.player.volume = 0.0f;
+        [self.fadeOutTimer invalidate];
+        dispatch_async(self.audioQueue, ^{
+            if (self.player) {
+                [self.controllerCopy removeChannels:@[self.player]];
+                self.player = nil;
+            }
+        });
+    }
 }
 
 - (void)animateBandmates

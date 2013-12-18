@@ -851,6 +851,7 @@
 				GCC_PREFIX_HEADER = "FestivalPrototype/FestivalPrototype-Prefix.pch";
 				INFOPLIST_FILE = "FestivalPrototype/FestivalPrototype-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -871,6 +872,7 @@
 				GCC_PREFIX_HEADER = "FestivalPrototype/FestivalPrototype-Prefix.pch";
 				INFOPLIST_FILE = "FestivalPrototype/FestivalPrototype-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

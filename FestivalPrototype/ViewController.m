@@ -161,7 +161,7 @@
 - (void)buyWater
 {
     [[[UIAlertView alloc] initWithTitle:@"Confirm Your In-App Purchase"
-                                message:@"Do you want to buy one Overpriced Hamburger for £4.99?"
+                                message:@"Do you want to buy one Overpriced Hamburger for £12.69?"
                                delegate:self
                       cancelButtonTitle:@"Cancel"
                       otherButtonTitles:@"Buy", nil] show];
@@ -171,7 +171,18 @@
 {
     self.currentFatness += 0.2f;
     NSLog(@"Making Nico fatter: %f", self.currentFatness);
-    self.mainUserImage.transform = CGAffineTransformMakeScale(self.currentFatness, self.currentFatness);
+    [UIView animateWithDuration:0.15f
+                          delay:0.0f
+                        options:kNilOptions
+                     animations:^{
+                         self.mainUserImage.transform = CGAffineTransformMakeScale(self.currentFatness*1.4, self.currentFatness*1.2);
+                     }
+                     completion:^(BOOL finished) {
+                         [UIView animateWithDuration:0.15f
+                                          animations:^{
+                                              self.mainUserImage.transform = CGAffineTransformMakeScale(self.currentFatness, self.currentFatness);
+                                          }];
+                     }];
 }
 
 - (void)createUsers
@@ -179,11 +190,12 @@
     { // Create Listener
         self.mainUser = [[User alloc] initWithName:@"Nico"
                                           playlist:nil
-                                          position:CGPointMake(650.0f, 370.0f)
+                                          position:CGPointMake(512, 384)
                                           mainUser:YES];
         
         self.mainUserImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nico"]];
         self.mainUserImage.frame = CGRectMake(0, 0, 80, 80);
+        self.mainUser.view.frame = self.mainUserImage.frame;
         [self.mainUser.view addSubview:self.mainUserImage];
         [self.scene addSubview:self.mainUser.view];
         [self.scene bringSubviewToFront:self.mainUser.view];
@@ -217,7 +229,7 @@
         [self.users addObject:maciej];
         [self.users addObject:michal];
         
-        self.destination = self.mainUser.view.center;
+        self.destination = CGPointMake(512, 384);
         
         self.usersBehavior = [[UIDynamicItemBehavior alloc] init];
         self.usersBehavior.density = 1000.0;
@@ -462,7 +474,7 @@
 
 - (BOOL)isCloseToAStage:(CGPoint)location
 {
-    const CGFloat max = 300;
+    const CGFloat max = 450;
     
     return
     [self distanceBetween:CGPointMake(0, 0) and:location] < max
@@ -486,7 +498,11 @@
     
     [self updateUI];
     
+    if (!(fabsf(self.mainUser.position.x - self.destination.x) < 0.0001 &&
+        fabsf(self.mainUser.position.y - self.destination.y) < 0.0001)) {
+        // stationary
     [self adjustChannels];
+    }
 }
 
 #pragma mark - UIAlertViewDelegate
