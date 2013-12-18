@@ -57,7 +57,7 @@
             userToUpdate = self.users[1];
         } else if ([user isEqualToString:@"Maciek"]) {
             userToUpdate = self.users[2];
-        } else if ([user isEqualToString:@"Sven"]) {
+        } else if ([user isEqualToString:@"Dustin"]) {
             userToUpdate = self.users[0];
         } else if ([user isEqualToString:@"Michal"]) {
             userToUpdate = self.users[3];
@@ -79,7 +79,7 @@
             userToUpdate = self.users[1];
         } else if ([user isEqualToString:@"Maciek"]) {
             userToUpdate = self.users[2];
-        } else if ([user isEqualToString:@"Sven"]) {
+        } else if ([user isEqualToString:@"Dustin"]) {
             userToUpdate = self.users[0];
         } else if ([user isEqualToString:@"Michal"]) {
             userToUpdate = self.users[3];
@@ -134,7 +134,7 @@
     { // Create and add Stages
         self.users = [@[] mutableCopy];
         
-        User *sven   = [[User alloc] initWithName:@"Sven"
+        User *dustin   = [[User alloc] initWithName:@"Dustin"
                                          playlist:@[@"1"]
                                          position:CGPointMake(150.0f, 618.0f)
                                          mainUser:NO];
@@ -154,7 +154,7 @@
                                          position:CGPointMake(874.0f, 120.0f)
                                          mainUser:NO];
         
-        [self.users addObject:sven];
+        [self.users addObject:dustin];
         [self.users addObject:luke];
         [self.users addObject:maciej];
         [self.users addObject:michal];
@@ -171,7 +171,7 @@
         }
         [self.animator addBehavior:self.usersBehavior];
         
-        User *user1 = self.users[0]; // Sven, Lower-Left
+        User *user1 = self.users[0]; // Dustin, Lower-Left
         user1.view.transform = CGAffineTransformMakeRotation(6);
         User *user2 = self.users[1]; // Luke, Upper-Left
         user2.view.transform = CGAffineTransformMakeRotation(6);
