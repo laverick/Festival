@@ -87,9 +87,6 @@
 		83BA01B21861BB6C00228543 /* Staff-27.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01911861BB6C00228543 /* Staff-27.png */; };
 		83BA01B31861BB6C00228543 /* Staff-28.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01921861BB6C00228543 /* Staff-28.png */; };
 		83BA01B41861BB6C00228543 /* Staff-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01931861BB6C00228543 /* Staff-29.png */; };
-		83BA01B51861BB6C00228543 /* Staff-30.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01941861BB6C00228543 /* Staff-30.png */; };
-		83BA01B61861BB6C00228543 /* Staff-31.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01951861BB6C00228543 /* Staff-31.png */; };
-		83BA01B71861BB6C00228543 /* Staff-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01961861BB6C00228543 /* Staff-32.png */; };
 		83BA01B91861BDBA00228543 /* concession.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BA01B81861BDBA00228543 /* concession.png */; };
 		DA57F8651860683300DCC187 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA57F8641860683300DCC187 /* AudioToolbox.framework */; };
 		DA57F8671860683900DCC187 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA57F8661860683900DCC187 /* CFNetwork.framework */; };
@@ -202,9 +199,6 @@
 		83BA01911861BB6C00228543 /* Staff-27.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Staff-27.png"; path = "FestivalPrototype/Resources/Images/Staff/Staff-27.png"; sourceTree = SOURCE_ROOT; };
 		83BA01921861BB6C00228543 /* Staff-28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Staff-28.png"; path = "FestivalPrototype/Resources/Images/Staff/Staff-28.png"; sourceTree = SOURCE_ROOT; };
 		83BA01931861BB6C00228543 /* Staff-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Staff-29.png"; path = "FestivalPrototype/Resources/Images/Staff/Staff-29.png"; sourceTree = SOURCE_ROOT; };
-		83BA01941861BB6C00228543 /* Staff-30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Staff-30.png"; path = "FestivalPrototype/Resources/Images/Staff/Staff-30.png"; sourceTree = SOURCE_ROOT; };
-		83BA01951861BB6C00228543 /* Staff-31.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Staff-31.png"; path = "FestivalPrototype/Resources/Images/Staff/Staff-31.png"; sourceTree = SOURCE_ROOT; };
-		83BA01961861BB6C00228543 /* Staff-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Staff-32.png"; path = "FestivalPrototype/Resources/Images/Staff/Staff-32.png"; sourceTree = SOURCE_ROOT; };
 		83BA01B81861BDBA00228543 /* concession.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = concession.png; sourceTree = "<group>"; };
 		B08A6521211741BC89EA34F0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		DA57F8641860683300DCC187 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -483,9 +477,6 @@
 				83BA01911861BB6C00228543 /* Staff-27.png */,
 				83BA01921861BB6C00228543 /* Staff-28.png */,
 				83BA01931861BB6C00228543 /* Staff-29.png */,
-				83BA01941861BB6C00228543 /* Staff-30.png */,
-				83BA01951861BB6C00228543 /* Staff-31.png */,
-				83BA01961861BB6C00228543 /* Staff-32.png */,
 			);
 			name = Staff;
 			sourceTree = "<group>";
@@ -590,8 +581,6 @@
 				83BA01A91861BB6C00228543 /* Staff-18.png in Resources */,
 				83BA01AF1861BB6C00228543 /* Staff-24.png in Resources */,
 				521C62291861B1110083D2CC /* 10344949.mp3 in Resources */,
-				83BA01B71861BB6C00228543 /* Staff-32.png in Resources */,
-				83BA01B51861BB6C00228543 /* Staff-30.png in Resources */,
 				83BA01981861BB6C00228543 /* Staff-1.png in Resources */,
 				521C620F1860B7450083D2CC /* 894844.mp3 in Resources */,
 				521C61FE1860A78B0083D2CC /* luke.png in Resources */,
@@ -614,7 +603,6 @@
 				521C62281861B1110083D2CC /* 8001935.mp3 in Resources */,
 				83BA019D1861BB6C00228543 /* Staff-6.png in Resources */,
 				521C62001860A78B0083D2CC /* michal.png in Resources */,
-				83BA01B61861BB6C00228543 /* Staff-31.png in Resources */,
 				83BA01AA1861BB6C00228543 /* Staff-19.png in Resources */,
 				8387F6D418609C95003FD39F /* grass.jpg in Resources */,
 				521C61E0186080D90083D2CC /* 1129057.mp3 in Resources */,

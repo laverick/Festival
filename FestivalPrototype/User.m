@@ -43,8 +43,8 @@ static const CGFloat UserHeight = 135.0f;
         _stageImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"stage"]];
         _stageImageView.frame = CGRectMake(0, 0, UserWidth, UserHeight);
         
-        int bandmate1Pic = arc4random() % 33;
-        int bandmate3Pic = arc4random() % 33;
+        int bandmate1Pic = arc4random() % 30;
+        int bandmate3Pic = arc4random() % 30;
         NSString *bandmate1FileName = [NSString stringWithFormat:@"Staff-%d", bandmate1Pic];
         NSString *bandmate3FileName = [NSString stringWithFormat:@"Staff-%d", bandmate3Pic];
         
