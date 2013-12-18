@@ -58,7 +58,9 @@ static const CGFloat BandmateRestingY = 64.0f;
         _bandmate2.frame = CGRectMake(80, BandmateRestingY, 60, 60);
         _bandmate3.frame = CGRectMake(160, BandmateRestingY, 40, 40);
         
-        if (!mainUser) {
+        if (mainUser) {
+            // customize main user
+        } else {
             [self.view addSubview:self.stageImageView];
             [self.view addSubview:self.nameLabel];
             [self.view addSubview:_bandmate1];
