@@ -339,15 +339,15 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
     UIInterpolatingMotionEffect *verticalMotionEffect =
     [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
     
-    verticalMotionEffect.minimumRelativeValue = @(-50);
-    verticalMotionEffect.maximumRelativeValue = @(50);
+    verticalMotionEffect.minimumRelativeValue = @(-20);
+    verticalMotionEffect.maximumRelativeValue = @(20);
     
     UIInterpolatingMotionEffect *horizontalMotionEffect =
     [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
     
-    horizontalMotionEffect.minimumRelativeValue = @(-50);
+    horizontalMotionEffect.minimumRelativeValue = @(-20);
     
-    horizontalMotionEffect.maximumRelativeValue = @(50);
+    horizontalMotionEffect.maximumRelativeValue = @(20);
     
     
     UIMotionEffectGroup *group = [UIMotionEffectGroup new];
