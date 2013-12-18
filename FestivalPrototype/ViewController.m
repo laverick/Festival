@@ -74,7 +74,7 @@
 
     TracksClient *tracksClient = [TracksClient sharedClient];
 
-    tracksClient.updateBlock = ^(NSString *user, NSString *track){
+    tracksClient.updateBlock = ^(NSString *user, NSString *track, NSString *artist, NSString *title, NSString *imageUrl){
         // Start new track for user
         // If track is nil, stop current track
         NSLog(@"Update %@ \t%@", user, track);
@@ -93,7 +93,11 @@
         
         if (userToUpdate) {
             [userToUpdate fillStage];
-            [self playTrackFromUser:userToUpdate withTrackID:track];
+            [self playTrackFromUser:userToUpdate
+                        withTrackID:track
+                             artist:artist
+                              title:title
+                           imageURL:imageUrl];
         }
     };
     
@@ -360,11 +364,27 @@
 }
 
 - (void)playTrackFromUser:(User *)user withTrackID:(NSString *)trackID
+                   artist:(NSString *)artist
+                   title:(NSString *)title
+                   imageURL:(NSString *)imageURL
 {
     [user playTrackID:trackID
     inAudioController:self.audioController
            withVolume:[self volumeForUser:user]
                   pan:[self panForUser:user]];
+    if (title && artist) {
+        user.trackLabel.text = [NSString stringWithFormat:@"%@ by %@", title, artist];
+    }
+
+    dispatch_async(dispatch_get_global_queue(0,0), ^{
+        NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:imageURL]];
+        if ( data == nil ) {
+            return;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            user.coverImageView.image = [UIImage imageWithData: data];
+        });
+    });
 }
 
 - (void)stopTracksFromUser:(User *)user

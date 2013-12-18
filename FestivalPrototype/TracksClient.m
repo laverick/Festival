@@ -65,7 +65,10 @@ static const NSTimeInterval updateDelay = 0.1f;
                     } else {
                         // user exists, different track, callback with new track
                         if (self.updateBlock) {
-                            self.updateBlock(name, [track isEqualToString:@""] ? nil : track);
+                            self.updateBlock(name, [track isEqualToString:@""] ? nil : track,
+                                             artist,
+                                             title,
+                                             imageUrl);
                         }
                     }
                 }
