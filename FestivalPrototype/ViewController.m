@@ -113,9 +113,7 @@
         }
     };
 
-#ifdef USE_SK
-    [self createUsersSK];
-#else
+#ifndef USE_SK
     [self createUsers];
     
     [self createConcessionStand];
@@ -222,11 +220,6 @@
         User *user4 = self.users[3]; // Michal, Upper-Right
         user4.view.transform = CGAffineTransformMakeRotation(0.05);
     }
-}
-
-- (void)createUsersSK
-{
-    
 }
 
 - (void)createCrowd
