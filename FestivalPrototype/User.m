@@ -48,7 +48,7 @@ static const CGFloat UserHeight = 135.0f;
         _bandmate3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bandmate"]];
         
         _bandmate1.frame = CGRectMake(20, 80, 40, 40);
-        _bandmate2.frame = CGRectMake(88, 68, 60, 60);
+        _bandmate2.frame = CGRectMake(88, 80, 60, 60);
         _bandmate3.frame = CGRectMake(160, 80, 40, 40);
         
         if (!mainUser) {
@@ -81,60 +81,75 @@ static const CGFloat UserHeight = 135.0f;
          withVolume:(CGFloat)volume
                 pan:(CGFloat)pan
 {
-    // Clear the existing player in case we don't catch the null preceding it.
-    if (self.player) {
-        [controller removeChannels:@[self.player]];
-        self.player = nil;
-    }
-    
-    if (!trackID) {
-        return;
-    }
-    
-    NSLog(@"playing %@ by %@", trackID, self.name);
-    
-    NSURL *fileURL = [[NSBundle mainBundle] URLForResource:trackID withExtension:@"mp3"];
-    
-    self.player = [AEAudioFilePlayer audioFilePlayerWithURL:fileURL
-                                            audioController:controller
-                                                      error:NULL];
-    self.player.volume = volume;
-    self.player.pan = pan;
-    self.player.currentTime = 0;
-    
-    [controller addChannels:@[self.player]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        // Clear the existing player in case we don't catch the null preceding it.
+        if (self.player) {
+            [controller removeChannels:@[self.player]];
+            self.player = nil;
+        }
+        
+        if (!trackID) {
+            [self stopAnimatingBandmates];
+            return;
+        }
+        
+        [self animateBandmates];
+        
+        NSLog(@"playing %@ by %@", trackID, self.name);
+        
+        NSURL *fileURL = [[NSBundle mainBundle] URLForResource:trackID withExtension:@"mp3"];
+        
+        
+        self.player = [AEAudioFilePlayer audioFilePlayerWithURL:fileURL
+                                                audioController:controller
+                                                          error:NULL];
+        self.player.volume = volume;
+        self.player.pan = pan;
+        self.player.currentTime = 0;
+        
+        [controller addChannels:@[self.player]];
+    });
 }
 
 - (void)stopTracksInAudioController:(AEAudioController *)controller
 {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
     if (self.player) {
         [controller removeChannels:@[self.player]];
         self.player = nil;
     }
+        });
 }
 
 - (void)animateBandmates
 {
-    NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
-    for (UIImageView *bandmate in bandmates) {
-        [UIView animateWithDuration:0.25f
-                              delay:0.0f
-                            options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse)
-                         animations:^{
-                             CGRect frame = bandmate.frame;
-                             frame.origin.y -= 10;
-                             bandmate.frame = frame;
-                         }
-                         completion:nil];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
+        for (UIImageView *bandmate in bandmates) {
+            [UIView animateWithDuration:0.25f
+                                  delay:0.0f
+                                options:(UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse)
+                             animations:^{
+                                 CGRect frame = bandmate.frame;
+                                 frame.origin.y = 70;
+                                 bandmate.frame = frame;
+                             }
+                             completion:nil];
+        }
+    });
 }
 
 - (void)stopAnimatingBandmates
 {
+        dispatch_async(dispatch_get_main_queue(), ^{
     NSArray *bandmates = @[self.bandmate1, self.bandmate2, self.bandmate3];
     for (UIView *bandmate in bandmates) {
+        CGRect frame = bandmate.frame;
+        frame.origin.y = 80;
+        bandmate.frame = frame;
         [bandmate.layer removeAllAnimations];
     }
+                });
 }
 
 - (void)clearStage

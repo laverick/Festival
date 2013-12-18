@@ -73,7 +73,6 @@
         
         if (userToUpdate) {
             [userToUpdate fillStage];
-            [userToUpdate animateBandmates];
             [self playTrackFromUser:userToUpdate withTrackID:track];
         }
     };
@@ -233,6 +232,7 @@
     
     [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(moveCrowd) userInfo:nil repeats:YES];
 }
+
 
 - (void)moveCrowd
 {
