@@ -50,7 +50,7 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
         _trackLabel.font = [UIFont boldSystemFontOfSize:18];
         _trackLabel.textColor = [UIColor blackColor];
         _trackLabel.textAlignment = NSTextAlignmentCenter;
-//        _trackLabel.backgroundColor = [UIColor blueColor];
+        //        _trackLabel.backgroundColor = [UIColor blueColor];
         
         _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, -54, UserWidth, UserHeight)];
         _nameLabel.text = name;
@@ -79,6 +79,10 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
         _bandmate2.frame = CGRectMake(80, LeadingBandmateRestingY, 60, 60);
         _bandmate3.frame = CGRectMake(160, BandmateRestingY, 40, 40);
         
+        _musicNoteView = [[PPEmitterView alloc] initWithFrame:CGRectMake(38, 0, 100, 100)];
+        _musicNoteView.clipsToBounds = NO;
+        _musicNoteView.hidden = YES;
+        
         if (_mainUser) {
             // customize main user
         } else {
@@ -90,6 +94,7 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
             [self.view addSubview:_bandmate1];
             [self.view addSubview:_bandmate2];
             [self.view addSubview:_bandmate3];
+            [self.view addSubview:_musicNoteView];
             [self clearStageWithAnimation:NO];
             
             _audioQueue = dispatch_queue_create("audio queue", NULL);
@@ -149,6 +154,7 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
             self.player.currentTime = 0;
             
             [controller addChannels:@[self.player]];
+            
         } else {
             NSLog(@"TRACK NOT FOUND, YO!");
         }
@@ -207,6 +213,8 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
     } else {
         
         NSLog(@"start animating");
+        
+        self.musicNoteView.hidden = NO;
         NSArray *bandmates = @[self.bandmate1, self.bandmate3];
         for (UIImageView *bandmate in bandmates) {
             [UIView animateWithDuration:0.25f
@@ -244,12 +252,16 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
     if (!self.isAnimating) {
         return;
     }
+
     [self.view.layer removeAllAnimations];
     for (UIView *view in self.view.subviews) {
         [view.layer removeAllAnimations];
     }
 
+
     NSLog(@"Stop animating");
+    self.musicNoteView.hidden = YES;
+    
     if (self.mainUser) {
         UIImageView *imageView = (UIImageView *)[self.view viewWithTag:10];
         //[imageView.layer removeAllAnimations];
@@ -267,12 +279,9 @@ static const CGFloat LeadingBandmateRestingY = 54.f;
         CGRect frame = self.bandmate2.frame;
         frame.origin.y = LeadingBandmateRestingY;
         self.bandmate2.frame = frame;
-    }
-    
-    [self.view.layer removeAllAnimations];
-    
-    for (UIView *view in self.view.subviews) {
-        [view.layer removeAllAnimations];
+        self.trackLabel.text = nil;
+        self.coverImageView.image = nil;
+        self.coverImageView2.image = nil;
     }
     
     self.isAnimating = NO;
